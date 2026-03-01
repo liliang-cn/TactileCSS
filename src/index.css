@@ -1,16 +1,163 @@
 /**
  * Tactile CSS
- * A physics-based CSS design system with tangible depth
+ * A minimal neumorphic CSS utility library
+ *
+ * Inspired by: https://github.com/costachung/neumorphic
  *
  * @version 0.1.0
  * @license MIT
  */
 
-/* Design Tokens */
-@import '_variables.css';
+/* ========================================
+   Design Tokens (Customizable via CSS Variables)
+   ======================================== */
 
-/* Base Molds */
-@import 'base/_index.css';
+:root {
+  /* Main background/surface color */
+  --tactile-bg: #e0e5ec;
 
-/* Components */
-@import 'components/_index.css';
+  /* Shadow colors - auto-adjusted for light/dark mode */
+  --tactile-light-shadow: rgba(255, 255, 255, 0.8);
+  --tactile-dark-shadow: rgba(163, 177, 198, 0.6);
+
+  /* Shadow parameters */
+  --tactile-offset: 6px;
+  --tactile-blur: 12px;
+
+  /* Animation */
+  --tactile-transition: all 0.2s ease;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tactile-bg: #2d3748;
+    --tactile-light-shadow: rgba(74, 85, 104, 0.5);
+    --tactile-dark-shadow: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========================================
+   Core Utilities: Soft Shadows
+   ======================================== */
+
+/**
+ * Soft Outer Shadow (凸起效果)
+ * Creates a raised, floating appearance
+ */
+.tactile-outer,
+.tactile-raised {
+  background: var(--tactile-bg);
+  box-shadow:
+    calc(var(--tactile-offset) * -1) calc(var(--tactile-offset) * -1) var(--tactile-blur) var(--tactile-light-shadow),
+    var(--tactile-offset) var(--tactile-offset) var(--tactile-blur) var(--tactile-dark-shadow);
+}
+
+/**
+ * Soft Inner Shadow (凹陷效果)
+ * Creates a pressed-in, cavity appearance
+ */
+.tactile-inner,
+.tactile-pressed {
+  background: var(--tactile-bg);
+  box-shadow:
+    inset calc(var(--tactile-offset) * -1) calc(var(--tactile-offset) * -1) var(--tactile-blur) var(--tactile-light-shadow),
+    inset var(--tactile-offset) var(--tactile-offset) var(--tactile-blur) var(--tactile-dark-shadow);
+}
+
+/* ========================================
+   Size Variants (Offset/Blur adjustments)
+   ======================================== */
+
+.tactile-sm {
+  --tactile-offset: 4px;
+  --tactile-blur: 8px;
+}
+
+.tactile-lg {
+  --tactile-offset: 10px;
+  --tactile-blur: 20px;
+}
+
+.tactile-xl {
+  --tactile-offset: 15px;
+  --tactile-blur: 30px;
+}
+
+/* ========================================
+   Pressed Effect (for interactive elements)
+   ======================================== */
+
+.tactile-button {
+  background: var(--tactile-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--tactile-transition);
+  box-shadow:
+    calc(var(--tactile-offset) * -1) calc(var(--tactile-offset) * -1) var(--tactile-blur) var(--tactile-light-shadow),
+    var(--tactile-offset) var(--tactile-offset) var(--tactile-blur) var(--tactile-dark-shadow);
+}
+
+.tactile-button:hover {
+  --tactile-offset: 7px;
+}
+
+.tactile-button:active,
+.tactile-button.tactile-active {
+  box-shadow:
+    inset calc(var(--tactile-offset) * -0.5) calc(var(--tactile-offset) * -0.5) calc(var(--tactile-blur) * 0.5) var(--tactile-light-shadow),
+    inset calc(var(--tactile-offset) * 0.5) calc(var(--tactile-offset) * 0.5) calc(var(--tactile-blur) * 0.5) var(--tactile-dark-shadow);
+}
+
+/* ========================================
+   Color Variants (for colored elements)
+   ======================================== */
+
+.tactile-primary {
+  --tactile-bg: #8B5CF6;
+  --tactile-light-shadow: rgba(139, 92, 246, 0.3);
+  --tactile-dark-shadow: rgba(109, 40, 217, 0.5);
+}
+
+.tactile-success {
+  --tactile-bg: #10B981;
+  --tactile-light-shadow: rgba(16, 185, 129, 0.3);
+  --tactile-dark-shadow: rgba(4, 120, 87, 0.5);
+}
+
+.tactile-danger {
+  --tactile-bg: #EF4444;
+  --tactile-light-shadow: rgba(239, 68, 68, 0.3);
+  --tactile-dark-shadow: rgba(185, 28, 28, 0.5);
+}
+
+.tactile-warning {
+  --tactile-bg: #F59E0B;
+  --tactile-light-shadow: rgba(245, 158, 11, 0.3);
+  --tactile-dark-shadow: rgba(180, 83, 9, 0.5);
+}
+
+/* ========================================
+   Convenience: Base Styles
+   ======================================== */
+
+.tactile {
+  background: var(--tactile-bg);
+  transition: var(--tactile-transition);
+}
+
+/* ========================================
+   Dark Mode Manual Override
+   ======================================== */
+
+.tactile-dark {
+  --tactile-bg: #2d3748;
+  --tactile-light-shadow: rgba(74, 85, 104, 0.5);
+  --tactile-dark-shadow: rgba(0, 0, 0, 0.5);
+}
+
+.tactile-light {
+  --tactile-bg: #e0e5ec;
+  --tactile-light-shadow: rgba(255, 255, 255, 0.8);
+  --tactile-dark-shadow: rgba(163, 177, 198, 0.6);
+}
