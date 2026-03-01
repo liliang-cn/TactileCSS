@@ -1,0 +1,67 @@
+/**
+ * Tactile CSS - Raised (凸起) Base Mold
+ * Creates a physical element that floats above the surface
+ */
+
+/* Base raised state - the element has physical thickness */
+.tac-raised {
+  position: relative;
+  transition:
+    transform var(--tac-duration-normal) var(--tac-spring),
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+  box-shadow:
+    /* Top highlight - light hitting the top face */
+    inset 0 2px 0 var(--tac-highlight),
+    /* Bottom depth shadow - the physical thickness */
+    0 var(--tac-depth-md) 0 var(--tac-shadow-ambient),
+    /* Ambient shadow - soft shadow beneath */
+    0 calc(var(--tac-depth-md) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+/* Size variants */
+.tac-raised-xs {
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 var(--tac-depth-xs) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-ambient);
+}
+
+.tac-raised-sm {
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 var(--tac-depth-sm) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-sm) + 3px) 8px var(--tac-shadow-ambient);
+}
+
+.tac-raised-lg {
+  box-shadow:
+    inset 0 3px 0 var(--tac-highlight),
+    0 var(--tac-depth-lg) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-lg) + 6px) 16px var(--tac-shadow-dark);
+}
+
+.tac-raised-xl {
+  box-shadow:
+    inset 0 4px 0 var(--tac-highlight),
+    0 var(--tac-depth-xl) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-xl) + 8px) 20px var(--tac-shadow-dark);
+}
+
+/* Pressed state - the element is pushed down */
+.tac-pressed,
+.tac-raised:active {
+  transform: translateY(calc(var(--tac-depth-md) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 var(--tac-depth-xs) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Hover lift effect */
+.tac-raised-hover:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px 0 var(--tac-highlight-strong),
+    0 calc(var(--tac-depth-md) + 2px) 0 var(--tac-shadow-ambient),
+    0 calc(var(--tac-depth-md) + 8px) 16px var(--tac-shadow-dark);
+}

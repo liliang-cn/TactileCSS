@@ -1,0 +1,170 @@
+/**
+ * Tactile CSS - Button Component
+ * A physically raised button with press interaction
+ */
+
+/* Base button styles */
+.tac-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--tac-btn-padding-y) var(--tac-btn-padding-x);
+  font-weight: var(--tac-font-weight-bold);
+  font-size: 0.9375rem;
+  border: none;
+  border-radius: var(--tac-btn-radius);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform var(--tac-duration-normal) var(--tac-spring),
+    box-shadow var(--tac-duration-normal) var(--tac-spring),
+    background-color var(--tac-duration-fast) ease;
+}
+
+/* Primary button with physical depth */
+.tac-btn-primary {
+  background-color: var(--tac-primary);
+  color: white;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    0 var(--tac-btn-depth) 0 var(--tac-primary-edge),
+    0 calc(var(--tac-btn-depth) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+.tac-btn-primary:hover {
+  background-color: var(--tac-primary-light);
+}
+
+.tac-btn-primary:active {
+  transform: translateY(calc(var(--tac-btn-depth) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 var(--tac-depth-xs) 0 var(--tac-primary-edge),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Success button */
+.tac-btn-success {
+  background-color: var(--tac-success);
+  color: white;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    0 var(--tac-btn-depth) 0 var(--tac-success-edge),
+    0 calc(var(--tac-btn-depth) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+.tac-btn-success:hover {
+  background-color: var(--tac-success-light);
+}
+
+.tac-btn-success:active {
+  transform: translateY(calc(var(--tac-btn-depth) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 var(--tac-depth-xs) 0 var(--tac-success-edge),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Danger button */
+.tac-btn-danger {
+  background-color: var(--tac-danger);
+  color: white;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    0 var(--tac-btn-depth) 0 var(--tac-danger-edge),
+    0 calc(var(--tac-btn-depth) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+.tac-btn-danger:hover {
+  background-color: var(--tac-danger-light);
+}
+
+.tac-btn-danger:active {
+  transform: translateY(calc(var(--tac-btn-depth) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 var(--tac-depth-xs) 0 var(--tac-danger-edge),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Warning button */
+.tac-btn-warning {
+  background-color: var(--tac-warning);
+  color: white;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    0 var(--tac-btn-depth) 0 var(--tac-warning-edge),
+    0 calc(var(--tac-btn-depth) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+.tac-btn-warning:hover {
+  background-color: var(--tac-warning-light);
+}
+
+.tac-btn-warning:active {
+  transform: translateY(calc(var(--tac-btn-depth) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 var(--tac-depth-xs) 0 var(--tac-warning-edge),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Neutral button */
+.tac-btn-neutral {
+  background-color: var(--tac-neutral-100);
+  color: var(--tac-neutral-700);
+  box-shadow:
+    inset 0 2px 0 var(--tac-highlight),
+    0 var(--tac-btn-depth) 0 var(--tac-neutral-300),
+    0 calc(var(--tac-btn-depth) + 4px) 12px var(--tac-shadow-ambient);
+}
+
+.tac-btn-neutral:hover {
+  background-color: var(--tac-neutral-200);
+}
+
+.tac-btn-neutral:active {
+  transform: translateY(calc(var(--tac-btn-depth) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 var(--tac-depth-xs) 0 var(--tac-neutral-300),
+    0 calc(var(--tac-depth-xs) + 2px) 4px var(--tac-shadow-dark);
+}
+
+/* Size variants */
+.tac-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  --tac-btn-depth: var(--tac-depth-sm);
+}
+
+.tac-btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  --tac-btn-depth: var(--tac-depth-lg);
+}
+
+/* Pill shape */
+.tac-btn-pill {
+  border-radius: var(--tac-radius-full);
+}
+
+/* Full width */
+.tac-btn-block {
+  width: 100%;
+}
+
+/* Disabled state */
+.tac-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Icon-only button (square) */
+.tac-btn-icon {
+  padding: var(--tac-btn-padding-y);
+  aspect-ratio: 1;
+}

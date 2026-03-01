@@ -1,0 +1,121 @@
+/**
+ * Tactile CSS - Input Component
+ * A sculpted input field that looks carved into the surface
+ */
+
+/* Base input styles */
+.tac-input {
+  width: 100%;
+  padding: var(--tac-input-padding-y) var(--tac-input-padding-x);
+  font-size: 0.9375rem;
+  font-weight: var(--tac-font-weight-normal);
+  color: var(--tac-neutral-800);
+  background-color: var(--tac-neutral-100);
+  border: none;
+  border-radius: var(--tac-input-radius);
+  outline: none;
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 4px var(--tac-inner-glow);
+  transition:
+    box-shadow var(--tac-duration-normal) var(--tac-spring),
+    background-color var(--tac-duration-fast) ease;
+}
+
+.tac-input::placeholder {
+  color: var(--tac-neutral-400);
+}
+
+/* Focus state - glowing rim */
+.tac-input:focus {
+  background-color: var(--tac-neutral-50);
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-primary-light);
+}
+
+/* Primary focus variant */
+.tac-input-focus-primary:focus {
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-primary-light);
+}
+
+/* Success focus variant */
+.tac-input-focus-success:focus {
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-success-light);
+}
+
+/* Danger focus variant (for invalid inputs) */
+.tac-input-focus-danger:focus {
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-danger-light);
+}
+
+/* Invalid state */
+.tac-input-invalid,
+.tac-input:invalid:not(:placeholder-shown) {
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 2px var(--tac-danger);
+}
+
+/* Size variants */
+.tac-input-sm {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.tac-input-lg {
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+}
+
+/* Pill shape */
+.tac-input-pill {
+  border-radius: var(--tac-radius-full);
+}
+
+/* Disabled state */
+.tac-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--tac-neutral-200);
+}
+
+/* Input with icon support */
+.tac-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tac-input-wrapper .tac-input {
+  padding-left: 2.75rem;
+}
+
+.tac-input-wrapper .tac-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--tac-neutral-400);
+  pointer-events: none;
+}
+
+.tac-input-wrapper .tac-input:focus + .tac-input-icon,
+.tac-input-wrapper .tac-input:focus ~ .tac-input-icon {
+  color: var(--tac-primary);
+}
+
+/* Textarea */
+.tac-textarea {
+  min-height: 120px;
+  resize: vertical;
+}

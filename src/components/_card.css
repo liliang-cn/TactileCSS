@@ -1,0 +1,92 @@
+/**
+ * Tactile CSS - Card Component
+ * A raised container with physical presence
+ */
+
+/* Base card styles */
+.tac-card {
+  background-color: var(--tac-neutral-100);
+  border-radius: var(--tac-radius-lg);
+  padding: 1.5rem;
+  box-shadow:
+    inset 0 2px 0 var(--tac-highlight),
+    0 var(--tac-depth-md) 0 var(--tac-neutral-300),
+    0 calc(var(--tac-depth-md) + 4px) 16px var(--tac-shadow-ambient);
+}
+
+/* Card with image */
+.tac-card-img-top {
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+  border-radius: var(--tac-radius-lg) var(--tac-radius-lg) 0 0;
+  width: calc(100% + 3rem);
+}
+
+/* Card header */
+.tac-card-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--tac-neutral-300);
+}
+
+.tac-card-title {
+  font-size: 1.25rem;
+  font-weight: var(--tac-font-weight-bold);
+  color: var(--tac-neutral-800);
+  margin: 0;
+}
+
+.tac-card-subtitle {
+  font-size: 0.875rem;
+  color: var(--tac-neutral-500);
+  margin-top: 0.25rem;
+}
+
+/* Card body */
+.tac-card-body {
+  color: var(--tac-neutral-600);
+}
+
+/* Card footer */
+.tac-card-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--tac-neutral-300);
+}
+
+/* Interactive card */
+.tac-card-interactive {
+  cursor: pointer;
+  transition:
+    transform var(--tac-duration-normal) var(--tac-spring),
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+}
+
+.tac-card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px 0 var(--tac-highlight-strong),
+    0 calc(var(--tac-depth-md) + 2px) 0 var(--tac-neutral-300),
+    0 calc(var(--tac-depth-md) + 8px) 20px var(--tac-shadow-dark);
+}
+
+.tac-card-interactive:active {
+  transform: translateY(calc(var(--tac-depth-md) - var(--tac-depth-xs)));
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 var(--tac-depth-xs) 0 var(--tac-neutral-300),
+    0 calc(var(--tac-depth-xs) + 2px) 6px var(--tac-shadow-dark);
+}
+
+/* Flat card variant (no depth) */
+.tac-card-flat {
+  box-shadow: none;
+  border: 1px solid var(--tac-neutral-300);
+}
+
+/* Ghost card variant */
+.tac-card-ghost {
+  background-color: transparent;
+  box-shadow:
+    inset 0 2px 0 var(--tac-highlight),
+    0 var(--tac-depth-md) 0 rgba(0, 0, 0, 0.05);
+}

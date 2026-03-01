@@ -1,0 +1,147 @@
+/**
+ * Tactile CSS - Switch/Toggle Component
+ * Combines sculpted track with raised knob
+ */
+
+/* Switch wrapper */
+.tac-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Hide native checkbox */
+.tac-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Track (sculpted cavity) */
+.tac-switch-track {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background-color: var(--tac-neutral-300);
+  border-radius: var(--tac-radius-full);
+  transition:
+    background-color var(--tac-duration-normal) ease,
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.15),
+    inset 0 -1px 3px var(--tac-inner-glow);
+}
+
+/* Knob (raised element) */
+.tac-switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border-radius: 50%;
+  transition:
+    transform var(--tac-duration-normal) var(--tac-spring),
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 rgba(0, 0, 0, 0.1),
+    0 5px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Checked state */
+.tac-switch input:checked ~ .tac-switch-track {
+  background-color: var(--tac-primary);
+}
+
+.tac-switch input:checked ~ .tac-switch-knob {
+  transform: translateX(24px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 var(--tac-primary-edge),
+    0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus state */
+.tac-switch input:focus-visible ~ .tac-switch-track {
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.15),
+    inset 0 -1px 3px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-primary-light);
+}
+
+/* Active/pressed state */
+.tac-switch:active .tac-switch-knob {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 0 rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled state */
+.tac-switch input:disabled ~ .tac-switch-track {
+  opacity: 0.5;
+}
+
+.tac-switch input:disabled ~ .tac-switch-knob {
+  opacity: 0.5;
+}
+
+/* Color variants */
+.tac-switch-success input:checked ~ .tac-switch-track {
+  background-color: var(--tac-success);
+}
+
+.tac-switch-success input:checked ~ .tac-switch-knob {
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 var(--tac-success-edge),
+    0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tac-switch-danger input:checked ~ .tac-switch-track {
+  background-color: var(--tac-danger);
+}
+
+.tac-switch-danger input:checked ~ .tac-switch-knob {
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 var(--tac-danger-edge),
+    0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Size variants */
+.tac-switch-sm .tac-switch-track {
+  width: 40px;
+  height: 22px;
+}
+
+.tac-switch-sm .tac-switch-knob {
+  width: 16px;
+  height: 16px;
+  top: 3px;
+  left: 3px;
+}
+
+.tac-switch-sm input:checked ~ .tac-switch-knob {
+  transform: translateX(18px);
+}
+
+.tac-switch-lg .tac-switch-track {
+  width: 64px;
+  height: 34px;
+}
+
+.tac-switch-lg .tac-switch-knob {
+  width: 28px;
+  height: 28px;
+  top: 3px;
+  left: 3px;
+}
+
+.tac-switch-lg input:checked ~ .tac-switch-knob {
+  transform: translateX(30px);
+}

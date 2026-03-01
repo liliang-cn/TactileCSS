@@ -1,0 +1,91 @@
+/**
+ * Tactile CSS - Badge Component
+ * Small raised labels for status and counts
+ */
+
+/* Base badge */
+.tac-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: var(--tac-font-weight-bold);
+  line-height: 1;
+  border-radius: var(--tac-radius-sm);
+  white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 2px 0 var(--tac-shadow-ambient),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+/* Color variants */
+.tac-badge-primary {
+  background-color: var(--tac-primary);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 0 var(--tac-primary-edge),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+.tac-badge-success {
+  background-color: var(--tac-success);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 0 var(--tac-success-edge),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+.tac-badge-warning {
+  background-color: var(--tac-warning);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 0 var(--tac-warning-edge),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+.tac-badge-danger {
+  background-color: var(--tac-danger);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 0 var(--tac-danger-edge),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+.tac-badge-neutral {
+  background-color: var(--tac-neutral-200);
+  color: var(--tac-neutral-700);
+  box-shadow:
+    inset 0 1px 0 var(--tac-highlight),
+    0 2px 0 var(--tac-neutral-400),
+    0 3px 4px var(--tac-shadow-ambient);
+}
+
+/* Pill shape */
+.tac-badge-pill {
+  border-radius: var(--tac-radius-full);
+}
+
+/* Dot badge (notification dot) */
+.tac-badge-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* Notification badge (positioned absolute) */
+.tac-badge-notification {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--tac-radius-full);
+}

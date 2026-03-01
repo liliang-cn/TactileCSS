@@ -1,0 +1,54 @@
+/**
+ * Tactile CSS - Sculpted (雕刻/凹陷) Base Mold
+ * Creates a carved-out cavity in the surface
+ */
+
+/* Base sculpted state - the element is recessed into the surface */
+.tac-sculpted {
+  position: relative;
+  transition:
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+  box-shadow:
+    /* Top inner shadow - shadow cast by the rim */
+    inset 0 4px 8px rgba(0, 0, 0, 0.12),
+    /* Bottom inner glow - light bouncing back up */
+    inset 0 -2px 4px var(--tac-inner-glow);
+}
+
+/* Lighter sculpted variant - subtle indent */
+.tac-sculpted-light {
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 2px var(--tac-inner-glow);
+}
+
+/* Deeper sculpted variant - more pronounced cavity */
+.tac-sculpted-deep {
+  box-shadow:
+    inset 0 6px 12px rgba(0, 0, 0, 0.18),
+    inset 0 -3px 6px var(--tac-inner-glow);
+}
+
+/* Inset border effect - adds rim definition */
+.tac-sculpted-rim {
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.12),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Focus state - glowing rim when focused */
+.tac-sculpted-focus:focus {
+  outline: none;
+  box-shadow:
+    inset 0 4px 8px rgba(0, 0, 0, 0.12),
+    inset 0 -2px 4px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-primary-light);
+}
+
+/* Active state - pressed deeper */
+.tac-sculpted:active {
+  box-shadow:
+    inset 0 6px 10px rgba(0, 0, 0, 0.18),
+    inset 0 -1px 2px var(--tac-inner-glow);
+}

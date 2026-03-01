@@ -1,0 +1,104 @@
+/**
+ * Tactile CSS - Checkbox Component
+ * A sculpted checkbox with raised check mark
+ */
+
+/* Checkbox wrapper */
+.tac-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+/* Hide native checkbox */
+.tac-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Checkbox box (sculpted cavity) */
+.tac-checkbox-box {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  background-color: var(--tac-neutral-100);
+  border-radius: var(--tac-radius-sm);
+  transition:
+    background-color var(--tac-duration-normal) ease,
+    box-shadow var(--tac-duration-normal) var(--tac-spring);
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 3px var(--tac-inner-glow);
+}
+
+/* Check mark (hidden by default) */
+.tac-checkbox-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    transform var(--tac-duration-normal) var(--tac-spring);
+  color: white;
+}
+
+/* Checked state */
+.tac-checkbox input:checked ~ .tac-checkbox-box {
+  background-color: var(--tac-primary);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 2px 0 var(--tac-primary-edge),
+    0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.tac-checkbox input:checked ~ .tac-checkbox-box .tac-checkbox-check {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Focus state */
+.tac-checkbox input:focus-visible ~ .tac-checkbox-box {
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 3px var(--tac-inner-glow),
+    0 0 0 3px var(--tac-primary-light);
+}
+
+/* Indeterminate state */
+.tac-checkbox input:indeterminate ~ .tac-checkbox-box {
+  background-color: var(--tac-neutral-400);
+}
+
+/* Disabled state */
+.tac-checkbox input:disabled ~ .tac-checkbox-box {
+  opacity: 0.5;
+}
+
+/* Label */
+.tac-checkbox-label {
+  font-size: 0.9375rem;
+  color: var(--tac-neutral-700);
+  user-select: none;
+}
+
+/* Color variants */
+.tac-checkbox-success input:checked ~ .tac-checkbox-box {
+  background-color: var(--tac-success);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 2px 0 var(--tac-success-edge),
+    0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.tac-checkbox-danger input:checked ~ .tac-checkbox-box {
+  background-color: var(--tac-danger);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 2px 0 var(--tac-danger-edge),
+    0 4px 6px rgba(0, 0, 0, 0.15);
+}

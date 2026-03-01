@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactile CSS - Demo</title>
+  <link rel="stylesheet" href="dist/tactile.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #e0e5ec 0%, #f0f3f8 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+    }
+    .demo-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+    .demo-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 1rem;
+    }
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .demo-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+    .demo-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <header>
+      <h1>Tactile CSS</h1>
+      <p>A physics-based CSS design system with tangible depth</p>
+    </header>
+
+    <!-- Buttons Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Buttons</h2>
+
+      <p class="demo-label">Color Variants</p>
+      <div class="demo-row">
+        <button class="tac-btn tac-btn-primary">Primary</button>
+        <button class="tac-btn tac-btn-success">Success</button>
+        <button class="tac-btn tac-btn-warning">Warning</button>
+        <button class="tac-btn tac-btn-danger">Danger</button>
+        <button class="tac-btn tac-btn-neutral">Neutral</button>
+      </div>
+
+      <p class="demo-label">Sizes</p>
+      <div class="demo-row">
+        <button class="tac-btn tac-btn-primary tac-btn-sm">Small</button>
+        <button class="tac-btn tac-btn-primary">Default</button>
+        <button class="tac-btn tac-btn-primary tac-btn-lg">Large</button>
+      </div>
+
+      <p class="demo-label">Shapes</p>
+      <div class="demo-row">
+        <button class="tac-btn tac-btn-primary tac-btn-pill">Pill Button</button>
+        <button class="tac-btn tac-btn-primary tac-btn-icon">+</button>
+      </div>
+
+      <p class="demo-label">Disabled</p>
+      <div class="demo-row">
+        <button class="tac-btn tac-btn-primary" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <!-- Inputs Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Inputs</h2>
+
+      <div class="demo-input-group">
+        <input type="text" class="tac-input" placeholder="Default input...">
+      </div>
+
+      <div class="demo-input-group">
+        <input type="text" class="tac-input tac-input-pill" placeholder="Pill shaped input...">
+      </div>
+
+      <div class="demo-input-group">
+        <input type="text" class="tac-input tac-input-sm" placeholder="Small input...">
+      </div>
+
+      <div class="demo-input-group">
+        <input type="text" class="tac-input tac-input-lg" placeholder="Large input...">
+      </div>
+
+      <div class="demo-input-group">
+        <textarea class="tac-input tac-textarea" placeholder="Textarea..."></textarea>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Cards</h2>
+
+      <div class="demo-row" style="align-items: stretch;">
+        <div class="tac-card" style="flex: 1;">
+          <h3 style="margin: 0 0 0.5rem 0; color: #374151;">Default Card</h3>
+          <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">A raised card with physical presence.</p>
+        </div>
+
+        <div class="tac-card tac-card-interactive" style="flex: 1;">
+          <h3 style="margin: 0 0 0.5rem 0; color: #374151;">Interactive Card</h3>
+          <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">Hover and click to see the effect.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Switches Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Switches</h2>
+
+      <div class="demo-row">
+        <label class="tac-switch">
+          <input type="checkbox">
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+
+        <label class="tac-switch tac-switch-success">
+          <input type="checkbox" checked>
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+
+        <label class="tac-switch tac-switch-danger">
+          <input type="checkbox">
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+      </div>
+
+      <p class="demo-label">Sizes</p>
+      <div class="demo-row">
+        <label class="tac-switch tac-switch-sm">
+          <input type="checkbox">
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+
+        <label class="tac-switch">
+          <input type="checkbox">
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+
+        <label class="tac-switch tac-switch-lg">
+          <input type="checkbox">
+          <span class="tac-switch-track"></span>
+          <span class="tac-switch-knob"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Checkboxes Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Checkboxes</h2>
+
+      <div class="demo-row" style="flex-direction: column; align-items: flex-start;">
+        <label class="tac-checkbox">
+          <input type="checkbox">
+          <span class="tac-checkbox-box">
+            <svg class="tac-checkbox-check" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 6l3 3 5-6"/>
+            </svg>
+          </span>
+          <span class="tac-checkbox-label">Unchecked</span>
+        </label>
+
+        <label class="tac-checkbox">
+          <input type="checkbox" checked>
+          <span class="tac-checkbox-box">
+            <svg class="tac-checkbox-check" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 6l3 3 5-6"/>
+            </svg>
+          </span>
+          <span class="tac-checkbox-label">Checked</span>
+        </label>
+
+        <label class="tac-checkbox tac-checkbox-success">
+          <input type="checkbox" checked>
+          <span class="tac-checkbox-box">
+            <svg class="tac-checkbox-check" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 6l3 3 5-6"/>
+            </svg>
+          </span>
+          <span class="tac-checkbox-label">Success variant</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Badges Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Badges</h2>
+
+      <div class="demo-row">
+        <span class="tac-badge tac-badge-primary">Primary</span>
+        <span class="tac-badge tac-badge-success">Success</span>
+        <span class="tac-badge tac-badge-warning">Warning</span>
+        <span class="tac-badge tac-badge-danger">Danger</span>
+        <span class="tac-badge tac-badge-neutral">Neutral</span>
+      </div>
+
+      <p class="demo-label">Pill Badges</p>
+      <div class="demo-row">
+        <span class="tac-badge tac-badge-pill tac-badge-primary">Pill</span>
+        <span class="tac-badge tac-badge-pill tac-badge-success">Badge</span>
+      </div>
+
+      <p class="demo-label">Dot Badge</p>
+      <div class="demo-row">
+        <span class="tac-badge tac-badge-dot tac-badge-danger"></span>
+        <span class="tac-badge tac-badge-dot tac-badge-success"></span>
+      </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Progress</h2>
+
+      <div class="tac-progress" style="margin-bottom: 1rem;">
+        <div class="tac-progress-bar" style="width: 65%;"></div>
+      </div>
+
+      <div class="tac-progress tac-progress-success" style="margin-bottom: 1rem;">
+        <div class="tac-progress-bar" style="width: 80%;"></div>
+      </div>
+
+      <div class="tac-progress tac-progress-warning" style="margin-bottom: 1rem;">
+        <div class="tac-progress-bar" style="width: 45%;"></div>
+      </div>
+
+      <div class="tac-progress tac-progress-danger" style="margin-bottom: 1rem;">
+        <div class="tac-progress-bar" style="width: 25%;"></div>
+      </div>
+
+      <p class="demo-label">Sizes</p>
+      <div class="tac-progress tac-progress-sm" style="margin-bottom: 0.5rem;">
+        <div class="tac-progress-bar" style="width: 60%;"></div>
+      </div>
+      <div class="tac-progress tac-progress-lg" style="margin-bottom: 1rem;">
+        <div class="tac-progress-bar" style="width: 60%;"></div>
+      </div>
+
+      <p class="demo-label">Indeterminate</p>
+      <div class="tac-progress tac-progress-indeterminate">
+        <div class="tac-progress-bar"></div>
+      </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Slider</h2>
+
+      <div class="tac-slider" style="margin-bottom: 1rem;">
+        <input type="range" min="0" max="100" value="50">
+      </div>
+
+      <div class="tac-slider tac-slider-success" style="margin-bottom: 1rem;">
+        <input type="range" min="0" max="100" value="70">
+      </div>
+
+      <div class="tac-slider tac-slider-danger" style="margin-bottom: 1rem;">
+        <input type="range" min="0" max="100" value="30">
+      </div>
+    </section>
+
+    <!-- Base Molds Section -->
+    <section class="demo-section">
+      <h2 class="demo-title">Base Molds</h2>
+
+      <p class="demo-label">Raised (凸起)</p>
+      <div class="demo-row">
+        <div class="tac-raised" style="padding: 1rem 2rem; background: white; border-radius: 12px;">Raised</div>
+        <div class="tac-raised tac-raised-sm" style="padding: 1rem 2rem; background: white; border-radius: 12px;">Small</div>
+        <div class="tac-raised tac-raised-lg" style="padding: 1rem 2rem; background: white; border-radius: 12px;">Large</div>
+      </div>
+
+      <p class="demo-label">Sculpted (凹陷)</p>
+      <div class="demo-row">
+        <div class="tac-sculpted" style="padding: 1rem 2rem; background: #f3f4f6; border-radius: 12px;">Sculpted</div>
+        <div class="tac-sculpted tac-sculpted-light" style="padding: 1rem 2rem; background: #f3f4f6; border-radius: 12px;">Light</div>
+        <div class="tac-sculpted tac-sculpted-deep" style="padding: 1rem 2rem; background: #f3f4f6; border-radius: 12px;">Deep</div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
