@@ -13,8 +13,9 @@
       min-height: 100vh;
       margin: 0;
       padding: 2rem;
+      padding-bottom: 100px;
     }
-    .container { max-width: 900px; margin: 0 auto; }
+    .container { max-width: 1000px; margin: 0 auto; }
     .section { margin-bottom: 3rem; }
     .title {
       font-size: 1.25rem;
@@ -49,6 +50,8 @@
       margin-bottom: 0.5rem;
     }
     header p { color: #888; }
+
+    /* Demo helpers */
     .demo-box {
       width: 100px;
       height: 100px;
@@ -84,15 +87,6 @@
       flex: 1;
       min-width: 200px;
     }
-    .demo-card h3 {
-      margin: 0 0 0.5rem 0;
-      color: #555;
-    }
-    .demo-card p {
-      margin: 0;
-      color: #888;
-      font-size: 0.875rem;
-    }
     .demo-btn {
       padding: 0.875rem 2rem;
       border-radius: 50px;
@@ -100,34 +94,7 @@
       font-weight: 600;
       color: #666;
     }
-    .demo-slider-track {
-      width: 100%;
-      max-width: 300px;
-      height: 8px;
-      border-radius: 4px;
-      position: relative;
-    }
-    .demo-slider-thumb {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 30%;
-    }
-    .demo-progress-track {
-      width: 100%;
-      height: 12px;
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-    }
-    .demo-progress-bar {
-      height: 100%;
-      border-radius: 6px;
-      width: 65%;
-    }
+    svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   </style>
 </head>
 <body>
@@ -137,106 +104,125 @@
       <p>A minimal neumorphic CSS utility library</p>
     </header>
 
-    <!-- Basic Shapes: Outer Shadow (凸起) -->
+    <!-- Core: Outer Shadow -->
     <section class="section">
       <h2 class="title">Soft Outer Shadow (凸起效果)</h2>
-
-      <p class="label">Rounded Rectangle</p>
       <div class="row">
         <div class="demo-box tactile-outer">Outer</div>
         <div class="demo-box tactile-outer tactile-sm">Small</div>
         <div class="demo-box tactile-outer tactile-lg">Large</div>
       </div>
-
-      <p class="label">Circle</p>
-      <div class="row">
-        <div class="demo-circle tactile-outer">+</div>
-        <div class="demo-circle tactile-outer tactile-lg">♥</div>
-      </div>
     </section>
 
-    <!-- Basic Shapes: Inner Shadow (凹陷) -->
+    <!-- Core: Inner Shadow -->
     <section class="section">
       <h2 class="title">Soft Inner Shadow (凹陷效果)</h2>
-
-      <p class="label">Rounded Rectangle</p>
       <div class="row">
         <div class="demo-box tactile-inner">Inner</div>
         <div class="demo-box tactile-inner tactile-sm">Small</div>
         <div class="demo-box tactile-inner tactile-lg">Large</div>
       </div>
-
-      <p class="label">Circle</p>
-      <div class="row">
-        <div class="demo-circle tactile-inner">●</div>
-        <div class="demo-circle tactile-inner tactile-lg">●</div>
-      </div>
     </section>
 
     <!-- Interactive Buttons -->
     <section class="section">
-      <h2 class="title">Soft Buttons (点击效果)</h2>
-
-      <p class="label">Default Button Style</p>
+      <h2 class="title">Buttons</h2>
       <div class="row">
         <button class="demo-btn tactile-button">Click Me</button>
         <button class="demo-btn tactile-button tactile-sm">Small</button>
         <button class="demo-btn tactile-button tactile-lg">Large</button>
       </div>
-
-      <p class="label">Circle Buttons</p>
-      <div class="row">
-        <button class="demo-circle tactile-button">♥</button>
-        <button class="demo-circle tactile-button">★</button>
-        <button class="demo-circle tactile-button">+</button>
-      </div>
-
-      <p class="label">Active State (pressed)</p>
-      <div class="row">
-        <button class="demo-btn tactile-button">Normal</button>
-        <button class="demo-btn tactile-button tactile-active">Pressed</button>
-      </div>
     </section>
 
-    <!-- Input Fields -->
+    <!-- Segmented Control -->
     <section class="section">
-      <h2 class="title">Input Fields</h2>
-
-      <p class="label">Search Input</p>
+      <h2 class="title">Segmented Control</h2>
+      <p class="label">View Switcher</p>
       <div class="row">
-        <input type="text" class="demo-input tactile-inner" placeholder="Search...">
-      </div>
-
-      <p class="label">Large Input</p>
-      <div class="row">
-        <input type="text" class="demo-input tactile-inner tactile-lg" placeholder="Enter text...">
-      </div>
-    </section>
-
-    <!-- Cards -->
-    <section class="section">
-      <h2 class="title">Cards</h2>
-
-      <div class="row" style="align-items: stretch;">
-        <div class="demo-card tactile-outer">
-          <h3>Raised Card</h3>
-          <p>This card has a soft outer shadow effect.</p>
+        <div class="tactile-segmented tactile-inner">
+          <button class="tactile-segment tactile-active">日视图</button>
+          <button class="tactile-segment">周视图</button>
+          <button class="tactile-segment">月视图</button>
         </div>
-        <div class="demo-card tactile-inner">
-          <h3>Inset Card</h3>
-          <p>This card has a soft inner shadow effect.</p>
+      </div>
+
+      <p class="label">With Icons</p>
+      <div class="row">
+        <div class="tactile-segmented tactile-inner">
+          <button class="tactile-segment">
+            <svg width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="tactile-segment tactile-active">
+            <svg width="16" height="16" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button class="tactile-segment">
+            <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- Progress Bar -->
+    <!-- Keypad -->
     <section class="section">
-      <h2 class="title">Progress Bar</h2>
-
-      <p class="label">Combined Outer + Inner</p>
+      <h2 class="title">Physical Keypad</h2>
       <div class="row">
-        <div class="demo-progress-track tactile-inner" style="max-width: 300px;">
-          <div class="demo-progress-bar tactile-outer"></div>
+        <div class="tactile-keypad tactile-inner" style="width: 280px;">
+          <button class="tactile-key">1</button>
+          <button class="tactile-key">2</button>
+          <button class="tactile-key">3</button>
+          <button class="tactile-key">4</button>
+          <button class="tactile-key">5</button>
+          <button class="tactile-key">6</button>
+          <button class="tactile-key">7</button>
+          <button class="tactile-key">8</button>
+          <button class="tactile-key">9</button>
+          <button class="tactile-key">.</button>
+          <button class="tactile-key">0</button>
+          <button class="tactile-key tactile-key-action">
+            <svg width="20" height="20" viewBox="0 0 24 24" style="stroke: white;"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Radial Gauge -->
+    <section class="section">
+      <h2 class="title">Radial Progress Gauge</h2>
+      <div class="row" style="gap: 2rem;">
+        <div class="tactile-gauge tactile-inner" style="--progress: 25%;">
+          <div class="tactile-gauge-center">
+            <span class="tactile-gauge-value">25%</span>
+            <span class="tactile-gauge-label">完成</span>
+          </div>
+        </div>
+        <div class="tactile-gauge tactile-inner" style="--progress: 65%;">
+          <div class="tactile-gauge-center">
+            <span class="tactile-gauge-value">65%</span>
+            <span class="tactile-gauge-label">完成</span>
+          </div>
+        </div>
+        <div class="tactile-gauge tactile-inner" style="--progress: 100%;">
+          <div class="tactile-gauge-center">
+            <span class="tactile-gauge-value">100%</span>
+            <span class="tactile-gauge-label">完成</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Track -->
+    <section class="section">
+      <h2 class="title">Progress Track</h2>
+      <p class="label">Inner Track + Raised Fill</p>
+      <div style="max-width: 400px;">
+        <div class="tactile-track tactile-inner" style="margin-bottom: 1rem;">
+          <div class="tactile-track-fill" style="width: 35%;"></div>
+        </div>
+        <div class="tactile-track tactile-inner" style="margin-bottom: 1rem;">
+          <div class="tactile-track-fill" style="width: 65%;"></div>
+        </div>
+        <div class="tactile-track tactile-inner">
+          <div class="tactile-track-fill" style="width: 90%;"></div>
         </div>
       </div>
     </section>
@@ -244,11 +230,55 @@
     <!-- Slider -->
     <section class="section">
       <h2 class="title">Slider</h2>
+      <div style="max-width: 400px;">
+        <div class="tactile-slider">
+          <div class="tactile-slider-track tactile-inner"></div>
+          <div class="tactile-slider-thumb tactile-outer" style="left: 30%;"></div>
+        </div>
+      </div>
+    </section>
 
-      <p class="label">Track (Inner) + Thumb (Outer)</p>
+    <!-- FAB -->
+    <section class="section">
+      <h2 class="title">Floating Action Button (FAB)</h2>
+      <p class="label">Demo (static position, not fixed)</p>
+      <div class="row" style="gap: 2rem;">
+        <button class="tactile-fab tactile-fab-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button class="tactile-fab">
+          <svg width="24" height="24" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button class="tactile-fab tactile-fab-lg">
+          <svg width="32" height="32" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Icon Effects -->
+    <section class="section">
+      <h2 class="title">Icon Effects</h2>
+
+      <p class="label">Raised Icon (on raised button)</p>
       <div class="row">
-        <div class="demo-slider-track tactile-inner">
-          <div class="demo-slider-thumb tactile-outer"></div>
+        <button class="demo-btn tactile-button tactile-primary" style="color: white; padding: 1rem 2rem;">
+          <svg class="tactile-icon-raised" width="20" height="20" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+          <span class="tactile-text-raised" style="margin-left: 8px;">记录重量</span>
+        </button>
+        <button class="demo-circle tactile-button tactile-success" style="color: white;">
+          <svg class="tactile-icon-raised" width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+
+      <p class="label">Sculpted Icon (in recessed area)</p>
+      <div class="row">
+        <div class="demo-card tactile-inner" style="display: flex; align-items: center; gap: 12px; min-width: auto;">
+          <svg class="tactile-icon-sculpted" width="24" height="24" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span class="tactile-text-sculpted" style="font-weight: 600;">搜索记录</span>
+        </div>
+        <div class="demo-card tactile-inner" style="display: flex; align-items: center; gap: 12px; min-width: auto;">
+          <svg class="tactile-icon-sculpted" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="tactile-text-sculpted" style="font-weight: 600;">复习进度</span>
         </div>
       </div>
     </section>
@@ -256,38 +286,66 @@
     <!-- Color Variants -->
     <section class="section">
       <h2 class="title">Color Variants</h2>
-
-      <p class="label">Primary</p>
       <div class="row">
         <div class="demo-box tactile-outer tactile-primary" style="color: white;">Primary</div>
-        <div class="demo-box tactile-inner tactile-primary" style="color: white;">Primary</div>
-      </div>
-
-      <p class="label">Success</p>
-      <div class="row">
         <div class="demo-box tactile-outer tactile-success" style="color: white;">Success</div>
-        <div class="demo-box tactile-inner tactile-success" style="color: white;">Success</div>
-      </div>
-
-      <p class="label">Danger</p>
-      <div class="row">
         <div class="demo-box tactile-outer tactile-danger" style="color: white;">Danger</div>
-        <div class="demo-box tactile-inner tactile-danger" style="color: white;">Danger</div>
+        <div class="demo-box tactile-outer tactile-warning" style="color: white;">Warning</div>
       </div>
     </section>
 
     <!-- Dark Mode -->
     <section class="section">
-      <h2 class="title">Dark Mode</h2>
+      <h2 class="title">Dark Mode (.tactile-dark)</h2>
+      <div class="tactile-dark" style="padding: 2rem; border-radius: 20px;">
+        <div class="row">
+          <div class="demo-box tactile-outer">Outer</div>
+          <div class="demo-box tactile-inner">Inner</div>
+          <button class="demo-btn tactile-button">Button</button>
+        </div>
+      </div>
+    </section>
 
-      <p class="label">Manual Dark Mode (.tactile-dark)</p>
-      <div class="row tactile-dark" style="padding: 2rem; border-radius: 20px;">
-        <div class="demo-box tactile-outer">Outer</div>
-        <div class="demo-box tactile-inner">Inner</div>
-        <button class="demo-btn tactile-button">Button</button>
+    <!-- Input Fields -->
+    <section class="section">
+      <h2 class="title">Input Fields</h2>
+      <div class="row">
+        <input type="text" class="demo-input tactile-inner" placeholder="Search...">
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="section">
+      <h2 class="title">Cards</h2>
+      <div class="row" style="align-items: stretch;">
+        <div class="demo-card tactile-outer">
+          <h3 style="margin: 0 0 0.5rem 0; color: #555;">Raised Card</h3>
+          <p style="margin: 0; color: #888; font-size: 0.875rem;">Soft outer shadow effect.</p>
+        </div>
+        <div class="demo-card tactile-inner">
+          <h3 style="margin: 0 0 0.5rem 0; color: #555;">Inset Card</h3>
+          <p style="margin: 0; color: #888; font-size: 0.875rem;">Soft inner shadow effect.</p>
+        </div>
       </div>
     </section>
 
   </div>
+
+  <!-- Real FAB (fixed position) -->
+  <button class="tactile-fab" style="position: fixed; bottom: 32px; right: 32px;">
+    <svg width="24" height="24" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+
+  <script>
+    // Segmented control interaction
+    document.querySelectorAll('.tactile-segmented').forEach(control => {
+      control.querySelectorAll('.tactile-segment').forEach(btn => {
+        btn.addEventListener('click', () => {
+          control.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));
+          btn.classList.add('tactile-active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -2,21 +2,19 @@
  * Tactile CSS
  * A minimal neumorphic CSS utility library
  *
- * Inspired by: https://github.com/costachung/neumorphic
- *
  * @version 0.1.0
  * @license MIT
  */
 
 /* ========================================
-   Design Tokens (Customizable via CSS Variables)
+   Design Tokens
    ======================================== */
 
 :root {
   /* Main background/surface color */
   --tactile-bg: #e0e5ec;
 
-  /* Shadow colors - auto-adjusted for light/dark mode */
+  /* Shadow colors */
   --tactile-light-shadow: rgba(255, 255, 255, 0.8);
   --tactile-dark-shadow: rgba(163, 177, 198, 0.6);
 
@@ -26,14 +24,37 @@
 
   /* Animation */
   --tactile-transition: all 0.2s ease;
+  --tactile-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Radius */
+  --tactile-radius-sm: 6px;
+  --tactile-radius-md: 12px;
+  --tactile-radius-lg: 20px;
+  --tactile-radius-full: 9999px;
+
+  /* Colors */
+  --tactile-primary: #8B5CF6;
+  --tactile-primary-edge: #6D28D9;
+  --tactile-success: #10B981;
+  --tactile-success-edge: #047857;
+  --tactile-danger: #EF4444;
+  --tactile-danger-edge: #B91C1C;
+  --tactile-warning: #F59E0B;
+  --tactile-warning-edge: #B45309;
+
+  /* Neutral */
+  --tactile-neutral: #e0e5ec;
+  --tactile-neutral-edge: #a3b1c6;
 }
 
-/* Dark mode support */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --tactile-bg: #2d3748;
     --tactile-light-shadow: rgba(74, 85, 104, 0.5);
     --tactile-dark-shadow: rgba(0, 0, 0, 0.5);
+    --tactile-neutral: #2d3748;
+    --tactile-neutral-edge: #4a5568;
   }
 }
 
@@ -41,10 +62,7 @@
    Core Utilities: Soft Shadows
    ======================================== */
 
-/**
- * Soft Outer Shadow (凸起效果)
- * Creates a raised, floating appearance
- */
+/* Outer Shadow (凸起) */
 .tactile-outer,
 .tactile-raised {
   background: var(--tactile-bg);
@@ -53,39 +71,22 @@
     var(--tactile-offset) var(--tactile-offset) var(--tactile-blur) var(--tactile-dark-shadow);
 }
 
-/**
- * Soft Inner Shadow (凹陷效果)
- * Creates a pressed-in, cavity appearance
- */
+/* Inner Shadow (凹陷) */
 .tactile-inner,
-.tactile-pressed {
+.tactile-sculpted {
   background: var(--tactile-bg);
   box-shadow:
     inset calc(var(--tactile-offset) * -1) calc(var(--tactile-offset) * -1) var(--tactile-blur) var(--tactile-light-shadow),
     inset var(--tactile-offset) var(--tactile-offset) var(--tactile-blur) var(--tactile-dark-shadow);
 }
 
-/* ========================================
-   Size Variants (Offset/Blur adjustments)
-   ======================================== */
-
-.tactile-sm {
-  --tactile-offset: 4px;
-  --tactile-blur: 8px;
-}
-
-.tactile-lg {
-  --tactile-offset: 10px;
-  --tactile-blur: 20px;
-}
-
-.tactile-xl {
-  --tactile-offset: 15px;
-  --tactile-blur: 30px;
-}
+/* Size Variants */
+.tactile-sm { --tactile-offset: 4px; --tactile-blur: 8px; }
+.tactile-lg { --tactile-offset: 10px; --tactile-blur: 20px; }
+.tactile-xl { --tactile-offset: 15px; --tactile-blur: 30px; }
 
 /* ========================================
-   Pressed Effect (for interactive elements)
+   Interactive Button
    ======================================== */
 
 .tactile-button {
@@ -110,7 +111,7 @@
 }
 
 /* ========================================
-   Color Variants (for colored elements)
+   Color Variants
    ======================================== */
 
 .tactile-primary {
@@ -138,26 +139,302 @@
 }
 
 /* ========================================
-   Convenience: Base Styles
-   ======================================== */
-
-.tactile {
-  background: var(--tactile-bg);
-  transition: var(--tactile-transition);
-}
-
-/* ========================================
-   Dark Mode Manual Override
+   Dark/Light Mode Override
    ======================================== */
 
 .tactile-dark {
   --tactile-bg: #2d3748;
   --tactile-light-shadow: rgba(74, 85, 104, 0.5);
   --tactile-dark-shadow: rgba(0, 0, 0, 0.5);
+  --tactile-neutral: #2d3748;
+  --tactile-neutral-edge: #4a5568;
 }
 
 .tactile-light {
   --tactile-bg: #e0e5ec;
   --tactile-light-shadow: rgba(255, 255, 255, 0.8);
   --tactile-dark-shadow: rgba(163, 177, 198, 0.6);
+  --tactile-neutral: #e0e5ec;
+  --tactile-neutral-edge: #a3b1c6;
+}
+
+/* ========================================
+   COMPONENT: Segmented Control
+   ======================================== */
+
+.tactile-segmented {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: var(--tactile-radius-lg);
+  gap: 4px;
+}
+
+.tactile-segment {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--tactile-radius-md);
+  background: transparent;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--tactile-transition);
+}
+
+.tactile-segment:hover {
+  color: #374151;
+}
+
+.tactile-segment[active],
+.tactile-segment.tactile-active {
+  color: white;
+  background: var(--tactile-primary);
+  box-shadow:
+    -3px -3px 6px var(--tactile-light-shadow),
+    3px 3px 6px var(--tactile-dark-shadow);
+}
+
+/* ========================================
+   COMPONENT: Keypad
+   ======================================== */
+
+.tactile-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--tactile-radius-lg);
+}
+
+.tactile-key {
+  aspect-ratio: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #374151;
+  border-radius: var(--tactile-radius-md);
+  background: var(--tactile-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--tactile-transition);
+  box-shadow:
+    -4px -4px 8px var(--tactile-light-shadow),
+    4px 4px 8px var(--tactile-dark-shadow);
+}
+
+.tactile-key:hover {
+  background: var(--tactile-bg);
+}
+
+.tactile-key:active {
+  box-shadow:
+    inset -2px -2px 4px var(--tactile-light-shadow),
+    inset 2px 2px 4px var(--tactile-dark-shadow);
+}
+
+.tactile-key-action {
+  background: var(--tactile-primary);
+  color: white;
+}
+
+/* ========================================
+   COMPONENT: Radial Gauge
+   ======================================== */
+
+.tactile-gauge {
+  --progress: 0%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tactile-gauge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--tactile-primary) 0%,
+    var(--tactile-primary) var(--progress),
+    var(--tactile-bg) var(--progress),
+    var(--tactile-bg) 100%
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #fff calc(100% - 14px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #fff calc(100% - 14px));
+}
+
+.tactile-gauge-center {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  background: var(--tactile-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset -3px -3px 6px var(--tactile-light-shadow),
+    inset 3px 3px 6px var(--tactile-dark-shadow);
+}
+
+.tactile-gauge-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #374151;
+}
+
+.tactile-gauge-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* ========================================
+   COMPONENT: Floating Action Button (FAB)
+   ======================================== */
+
+.tactile-fab {
+  --tactile-offset: 10px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  background: var(--tactile-primary);
+  transition: var(--tactile-transition);
+  box-shadow:
+    -6px -6px 12px rgba(139, 92, 246, 0.3),
+    6px 6px 12px rgba(109, 40, 217, 0.5),
+    0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tactile-fab:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    -8px -8px 16px rgba(139, 92, 246, 0.3),
+    8px 8px 16px rgba(109, 40, 217, 0.5),
+    0 28px 50px rgba(0, 0, 0, 0.25);
+}
+
+.tactile-fab:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow:
+    inset -3px -3px 6px rgba(139, 92, 246, 0.3),
+    inset 3px 3px 6px rgba(109, 40, 217, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* FAB Sizes */
+.tactile-fab-sm { width: 48px; height: 48px; font-size: 1.25rem; }
+.tactile-fab-lg { width: 80px; height: 80px; font-size: 2rem; }
+
+/* ========================================
+   COMPONENT: Progress Track
+   ======================================== */
+
+.tactile-track {
+  height: 12px;
+  border-radius: var(--tactile-radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+.tactile-track-fill {
+  height: 100%;
+  border-radius: var(--tactile-radius-full);
+  background: var(--tactile-primary);
+  transition: width 0.3s var(--tactile-spring);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+/* ========================================
+   COMPONENT: Slider
+   ======================================== */
+
+.tactile-slider {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tactile-slider-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--tactile-radius-full);
+}
+
+.tactile-slider-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--tactile-bg);
+  position: absolute;
+  cursor: grab;
+  transition: var(--tactile-transition);
+  box-shadow:
+    -4px -4px 8px var(--tactile-light-shadow),
+    4px 4px 8px var(--tactile-dark-shadow);
+}
+
+.tactile-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.tactile-slider-thumb:active {
+  cursor: grabbing;
+  box-shadow:
+    inset -2px -2px 4px var(--tactile-light-shadow),
+    inset 2px 2px 4px var(--tactile-dark-shadow);
+}
+
+/* ========================================
+   ICON EFFECTS
+   ======================================== */
+
+/* Embossed/Raised Icon - for raised buttons */
+.tactile-icon-raised {
+  color: rgba(255, 255, 255, 0.9);
+  filter:
+    drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.4))
+    drop-shadow(0 2px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* Engraved/Sculpted Icon - for recessed areas */
+.tactile-icon-sculpted {
+  color: #9ca3af;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.8));
+}
+
+/* Engraved Text */
+.tactile-text-sculpted {
+  color: #9ca3af;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.tactile-text-raised {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   Base Class
+   ======================================== */
+
+.tactile {
+  background: var(--tactile-bg);
+  transition: var(--tactile-transition);
 }
