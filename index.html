@@ -77,26 +77,6 @@
     }
     svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .theme-switcher {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .theme-btn {
-      padding: 6px 14px;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .theme-btn:hover { transform: translateY(-1px); }
-    .theme-btn.active {
-      background: var(--tactile-primary);
-      color: white;
-    }
   </style>
 </head>
 <body class="tactile">
@@ -104,13 +84,13 @@
     <header>
       <h1>Tactile CSS</h1>
       <p>Neumorphic UI with physical material themes</p>
-      <div class="theme-switcher">
-        <button class="theme-btn active" data-theme="">Classic</button>
-        <button class="theme-btn" data-theme="mono">Mono</button>
-        <button class="theme-btn" data-theme="iron">Iron</button>
-        <button class="theme-btn" data-theme="paper">Paper</button>
-        <button class="theme-btn" data-theme="terminal">Terminal</button>
-        <button class="theme-btn" data-theme="warm">Warm</button>
+      <div class="tactile-segmented tactile-inner" id="theme-switcher">
+        <button class="tactile-segment tactile-active" data-theme="">Classic</button>
+        <button class="tactile-segment" data-theme="mono">Mono</button>
+        <button class="tactile-segment" data-theme="iron">Iron</button>
+        <button class="tactile-segment" data-theme="paper">Paper</button>
+        <button class="tactile-segment" data-theme="terminal">Terminal</button>
+        <button class="tactile-segment" data-theme="warm">Warm</button>
       </div>
     </header>
 
@@ -266,15 +246,18 @@
   <button class="tactile-fab" style="position: fixed; bottom: 24px; right: 24px;">+</button>
 
   <script>
-    document.querySelectorAll('.theme-btn').forEach(btn => {
+    // Theme switcher (Segmented Control)
+    const themeSwitcher = document.getElementById('theme-switcher');
+    themeSwitcher.querySelectorAll('.tactile-segment').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        themeSwitcher.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));
+        btn.classList.add('tactile-active');
         document.documentElement.setAttribute('data-theme', btn.dataset.theme);
       });
     });
 
-    document.querySelectorAll('.tactile-segmented').forEach(ctrl => {
+    // Other segmented controls on the page
+    document.querySelectorAll('.tactile-segmented:not(#theme-switcher)').forEach(ctrl => {
       ctrl.querySelectorAll('.tactile-segment').forEach(btn => {
         btn.addEventListener('click', () => {
           ctrl.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));

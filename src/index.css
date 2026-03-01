@@ -18,8 +18,8 @@
 
   /* Primary: Violet */
   --tactile-primary: #8B5CF6;
-  --tactile-primary-edge: #6D28D9;
-  --tactile-primary-hover: #A78BFA;
+  --tactile-primary-light: #A78BFA;
+  --tactile-primary-dark: #6D28D9;
 
   /* Text */
   --tactile-text: #374151;
@@ -29,6 +29,10 @@
   /* Light & Shadow - Classic Neumorphic */
   --tactile-light-shadow: rgba(255, 255, 255, 0.8);
   --tactile-dark-shadow: rgba(163, 177, 198, 0.6);
+
+  /* Primary Shadow - for colored buttons */
+  --tactile-primary-light-shadow: rgba(255, 255, 255, 0.25);
+  --tactile-primary-dark-shadow: rgba(109, 40, 217, 0.2);
 
   /* Shadow Parameters */
   --tactile-offset: 6px;
@@ -46,13 +50,9 @@
 
   /* Status Colors */
   --tactile-success: #10B981;
-  --tactile-success-edge: #047857;
   --tactile-danger: #EF4444;
-  --tactile-danger-edge: #B91C1C;
   --tactile-warning: #F59E0B;
-  --tactile-warning-edge: #B45309;
   --tactile-info: #3B82F6;
-  --tactile-info-edge: #1D4ED8;
 }
 
 /* ========================================
@@ -66,8 +66,8 @@
   --tactile-surface: #FFFFFF;
 
   --tactile-primary: #18181B;
-  --tactile-primary-edge: #000000;
-  --tactile-primary-hover: #27272A;
+  --tactile-primary-light: #27272A;
+  --tactile-primary-dark: #000000;
 
   --tactile-text: #09090B;
   --tactile-text-muted: #71717A;
@@ -76,10 +76,11 @@
   --tactile-light-shadow: rgba(255, 255, 255, 0.9);
   --tactile-dark-shadow: rgba(0, 0, 0, 0.1);
 
+  --tactile-primary-light-shadow: rgba(60, 60, 60, 0.2);
+  --tactile-primary-dark-shadow: rgba(0, 0, 0, 0.25);
+
   --tactile-success: #22C55E;
-  --tactile-success-edge: #16A34A;
   --tactile-danger: #EF4444;
-  --tactile-danger-edge: #DC2626;
 }
 
 /* ========================================
@@ -93,8 +94,8 @@
   --tactile-surface: #242424;
 
   --tactile-primary: #F97316;
-  --tactile-primary-edge: #EA580C;
-  --tactile-primary-hover: #FB923C;
+  --tactile-primary-light: #FB923C;
+  --tactile-primary-dark: #C2410C;
 
   --tactile-text: #fafafa;
   --tactile-text-muted: #a1a1aa;
@@ -103,10 +104,11 @@
   --tactile-light-shadow: rgba(60, 60, 60, 0.8);
   --tactile-dark-shadow: rgba(0, 0, 0, 0.6);
 
+  --tactile-primary-light-shadow: rgba(251, 146, 60, 0.3);
+  --tactile-primary-dark-shadow: rgba(194, 65, 12, 0.4);
+
   --tactile-success: #22C55E;
-  --tactile-success-edge: #16A34A;
   --tactile-danger: #EF4444;
-  --tactile-danger-edge: #DC2626;
 }
 
 /* ========================================
@@ -120,8 +122,8 @@
   --tactile-surface: #f7f4ef;
 
   --tactile-primary: #059669;
-  --tactile-primary-edge: #047857;
-  --tactile-primary-hover: #10B981;
+  --tactile-primary-light: #10B981;
+  --tactile-primary-dark: #047857;
 
   --tactile-text: #292524;
   --tactile-text-muted: #78716c;
@@ -130,10 +132,11 @@
   --tactile-light-shadow: rgba(255, 255, 255, 0.9);
   --tactile-dark-shadow: rgba(41, 37, 36, 0.15);
 
+  --tactile-primary-light-shadow: rgba(16, 185, 129, 0.3);
+  --tactile-primary-dark-shadow: rgba(4, 120, 87, 0.4);
+
   --tactile-success: #059669;
-  --tactile-success-edge: #047857;
   --tactile-danger: #DC2626;
-  --tactile-danger-edge: #B91C1C;
 }
 
 /* ========================================
@@ -147,8 +150,8 @@
   --tactile-surface: #161b22;
 
   --tactile-primary: #58a6ff;
-  --tactile-primary-edge: #1f6feb;
-  --tactile-primary-hover: #79c0ff;
+  --tactile-primary-light: #79c0ff;
+  --tactile-primary-dark: #1f6feb;
 
   --tactile-text: #c9d1d9;
   --tactile-text-muted: #8b949e;
@@ -157,12 +160,12 @@
   --tactile-light-shadow: rgba(50, 60, 70, 0.5);
   --tactile-dark-shadow: rgba(0, 0, 0, 0.5);
 
+  --tactile-primary-light-shadow: rgba(121, 192, 255, 0.25);
+  --tactile-primary-dark-shadow: rgba(31, 111, 235, 0.4);
+
   --tactile-success: #3fb950;
-  --tactile-success-edge: #238636;
   --tactile-danger: #f85149;
-  --tactile-danger-edge: #da3633;
   --tactile-warning: #d29922;
-  --tactile-warning-edge: #9e6a03;
 }
 
 /* ========================================
@@ -176,8 +179,8 @@
   --tactile-surface: #ddd0c4;
 
   --tactile-primary: #c2410c;
-  --tactile-primary-edge: #9a3412;
-  --tactile-primary-hover: #ea580c;
+  --tactile-primary-light: #ea580c;
+  --tactile-primary-dark: #9a3412;
 
   --tactile-text: #1c1917;
   --tactile-text-muted: #78716c;
@@ -186,10 +189,11 @@
   --tactile-light-shadow: rgba(255, 255, 255, 0.6);
   --tactile-dark-shadow: rgba(28, 25, 23, 0.2);
 
+  --tactile-primary-light-shadow: rgba(234, 88, 12, 0.3);
+  --tactile-primary-dark-shadow: rgba(154, 52, 18, 0.4);
+
   --tactile-success: #15803d;
-  --tactile-success-edge: #166534;
   --tactile-danger: #b91c1c;
-  --tactile-danger-edge: #991b1b;
 }
 
 /* ========================================
@@ -220,10 +224,11 @@
    CORE: Button
    ======================================== */
 
-.tactile-button {
+.tactile-button{
   background: var(--tactile-surface);
   color: var(--tactile-text);
   border: none;
+  border-color: transparent;
   cursor: pointer;
   transition: var(--tactile-transition);
   box-shadow:
@@ -245,20 +250,22 @@
 .tactile-button-primary {
   background: var(--tactile-primary);
   color: var(--tactile-text-inverse);
+  border: none;
+  border-color: transparent;
   box-shadow:
-    0 var(--tactile-offset) 0 var(--tactile-primary-edge),
-    0 calc(var(--tactile-offset) + 6px) 14px var(--tactile-dark-shadow);
+    0 -3px 0 var(--tactile-primary-dark) inset,
+    0 3px 8px var(--tactile-primary-dark-shadow);
 }
 
 .tactile-button-primary:hover {
-  background: var(--tactile-primary-hover);
+  background: var(--tactile-primary-light);
 }
 
 .tactile-button-primary:active {
-  transform: translateY(var(--tactile-offset));
+  transform: translateY(2px);
   box-shadow:
-    0 2px 0 var(--tactile-primary-edge),
-    0 4px 6px var(--tactile-dark-shadow);
+    0 -1px 0 var(--tactile-primary-dark) inset,
+    0 1px 3px var(--tactile-primary-dark-shadow);
 }
 
 /* ========================================
@@ -400,6 +407,7 @@
   height: 64px;
   border-radius: 50%;
   border: none;
+  border-color: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -409,22 +417,22 @@
   background: var(--tactile-primary);
   transition: var(--tactile-transition);
   box-shadow:
-    0 8px 0 var(--tactile-primary-edge),
-    0 18px 24px var(--tactile-dark-shadow);
+    0 -4px 0 var(--tactile-primary-dark) inset,
+    0 8px 16px var(--tactile-primary-dark-shadow);
 }
 
 .tactile-fab:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow:
-    0 11px 0 var(--tactile-primary-edge),
-    0 24px 30px var(--tactile-dark-shadow);
+    0 -5px 0 var(--tactile-primary-dark) inset,
+    0 12px 24px var(--tactile-primary-dark-shadow);
 }
 
 .tactile-fab:active {
-  transform: translateY(5px);
+  transform: translateY(3px);
   box-shadow:
-    0 3px 0 var(--tactile-primary-edge),
-    0 6px 10px var(--tactile-dark-shadow);
+    0 -1px 0 var(--tactile-primary-dark) inset,
+    0 3px 6px var(--tactile-primary-dark-shadow);
 }
 
 .tactile-fab-sm { width: 48px; height: 48px; font-size: 1.25rem; }
