@@ -7,166 +7,162 @@
   <link rel="stylesheet" href="dist/tactile.css">
   <style>
     * { box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--tactile-bg);
-      min-height: 100vh;
-      margin: 0;
-      padding: 2rem;
-      padding-bottom: 100px;
-    }
-    .container { max-width: 1000px; margin: 0 auto; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem 2rem 100px; }
     .section { margin-bottom: 3rem; }
     .title {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 700;
-      color: #555;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(0,0,0,0.05);
+      border-bottom: 2px solid rgba(128,128,128,0.15);
     }
     .row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
     .label {
       font-size: 0.75rem;
-      color: #888;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.5;
     }
     header {
       text-align: center;
       margin-bottom: 3rem;
+      padding-top: 1rem;
     }
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
-      color: #555;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
-    header p { color: #888; }
+    header p { opacity: 0.5; margin-bottom: 1.5rem; }
 
-    /* Demo helpers */
     .demo-box {
-      width: 100px;
-      height: 100px;
-      border-radius: 20px;
+      width: 90px;
+      height: 90px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      color: #666;
+      font-size: 0.875rem;
     }
     .demo-circle {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      color: #666;
-    }
-    .demo-input {
-      padding: 1rem 1.5rem;
-      border-radius: 30px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      width: 100%;
-      max-width: 300px;
     }
     .demo-card {
-      padding: 2rem;
-      border-radius: 20px;
+      padding: 1.5rem;
+      border-radius: 18px;
       flex: 1;
-      min-width: 200px;
+      min-width: 180px;
     }
+    .demo-card h3 { margin: 0 0 0.25rem 0; font-size: 1rem; }
+    .demo-card p { margin: 0; font-size: 0.8125rem; opacity: 0.5; }
     .demo-btn {
-      padding: 0.875rem 2rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 50px;
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 600;
-      color: #666;
     }
     svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .theme-switcher {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .theme-btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .theme-btn.active {
+      background: var(--tactile-primary);
+      color: white;
+    }
   </style>
 </head>
-<body>
+<body class="tactile">
   <div class="container">
     <header>
       <h1>Tactile CSS</h1>
-      <p>A minimal neumorphic CSS utility library</p>
+      <p>Neumorphic UI with physical material themes</p>
+      <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="">Classic</button>
+        <button class="theme-btn" data-theme="mono">Mono</button>
+        <button class="theme-btn" data-theme="iron">Iron</button>
+        <button class="theme-btn" data-theme="paper">Paper</button>
+        <button class="theme-btn" data-theme="terminal">Terminal</button>
+        <button class="theme-btn" data-theme="warm">Warm</button>
+      </div>
     </header>
 
-    <!-- Core: Outer Shadow -->
+    <!-- Shadows -->
     <section class="section">
-      <h2 class="title">Soft Outer Shadow (凸起效果)</h2>
+      <h2 class="title">Shadows</h2>
       <div class="row">
         <div class="demo-box tactile-outer">Outer</div>
         <div class="demo-box tactile-outer tactile-sm">Small</div>
         <div class="demo-box tactile-outer tactile-lg">Large</div>
-      </div>
-    </section>
-
-    <!-- Core: Inner Shadow -->
-    <section class="section">
-      <h2 class="title">Soft Inner Shadow (凹陷效果)</h2>
-      <div class="row">
         <div class="demo-box tactile-inner">Inner</div>
         <div class="demo-box tactile-inner tactile-sm">Small</div>
-        <div class="demo-box tactile-inner tactile-lg">Large</div>
       </div>
     </section>
 
-    <!-- Interactive Buttons -->
+    <!-- Buttons -->
     <section class="section">
       <h2 class="title">Buttons</h2>
       <div class="row">
-        <button class="demo-btn tactile-button">Click Me</button>
+        <button class="demo-btn tactile-button">Default</button>
+        <button class="demo-btn tactile-button-primary">Primary</button>
         <button class="demo-btn tactile-button tactile-sm">Small</button>
         <button class="demo-btn tactile-button tactile-lg">Large</button>
+        <button class="demo-circle tactile-button">+</button>
       </div>
     </section>
 
-    <!-- Segmented Control -->
+    <!-- Input -->
+    <section class="section">
+      <h2 class="title">Input</h2>
+      <div class="row">
+        <input type="text" class="tactile-input" placeholder="Search..." style="max-width: 280px;">
+      </div>
+    </section>
+
+    <!-- Segmented -->
     <section class="section">
       <h2 class="title">Segmented Control</h2>
-      <p class="label">View Switcher</p>
       <div class="row">
         <div class="tactile-segmented tactile-inner">
-          <button class="tactile-segment tactile-active">日视图</button>
-          <button class="tactile-segment">周视图</button>
-          <button class="tactile-segment">月视图</button>
-        </div>
-      </div>
-
-      <p class="label">With Icons</p>
-      <div class="row">
-        <div class="tactile-segmented tactile-inner">
-          <button class="tactile-segment">
-            <svg width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </button>
-          <button class="tactile-segment tactile-active">
-            <svg width="16" height="16" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          </button>
-          <button class="tactile-segment">
-            <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </button>
+          <button class="tactile-segment">Day</button>
+          <button class="tactile-segment tactile-active">Week</button>
+          <button class="tactile-segment">Month</button>
         </div>
       </div>
     </section>
 
     <!-- Keypad -->
     <section class="section">
-      <h2 class="title">Physical Keypad</h2>
+      <h2 class="title">Keypad</h2>
       <div class="row">
-        <div class="tactile-keypad tactile-inner" style="width: 280px;">
+        <div class="tactile-keypad tactile-inner" style="width: 240px;">
           <button class="tactile-key">1</button>
           <button class="tactile-key">2</button>
           <button class="tactile-key">3</button>
@@ -178,51 +174,42 @@
           <button class="tactile-key">9</button>
           <button class="tactile-key">.</button>
           <button class="tactile-key">0</button>
-          <button class="tactile-key tactile-key-action">
-            <svg width="20" height="20" viewBox="0 0 24 24" style="stroke: white;"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
-          </button>
+          <button class="tactile-key tactile-key-action">→</button>
         </div>
       </div>
     </section>
 
-    <!-- Radial Gauge -->
+    <!-- Gauge -->
     <section class="section">
-      <h2 class="title">Radial Progress Gauge</h2>
-      <div class="row" style="gap: 2rem;">
-        <div class="tactile-gauge tactile-inner" style="--progress: 25%;">
+      <h2 class="title">Radial Gauge</h2>
+      <div class="row" style="gap: 1.5rem;">
+        <div class="tactile-gauge tactile-inner" style="--progress: 30%;">
           <div class="tactile-gauge-center">
-            <span class="tactile-gauge-value">25%</span>
-            <span class="tactile-gauge-label">完成</span>
+            <span class="tactile-gauge-value">30%</span>
           </div>
         </div>
-        <div class="tactile-gauge tactile-inner" style="--progress: 65%;">
+        <div class="tactile-gauge tactile-inner" style="--progress: 70%;">
           <div class="tactile-gauge-center">
-            <span class="tactile-gauge-value">65%</span>
-            <span class="tactile-gauge-label">完成</span>
+            <span class="tactile-gauge-value">70%</span>
           </div>
         </div>
         <div class="tactile-gauge tactile-inner" style="--progress: 100%;">
           <div class="tactile-gauge-center">
             <span class="tactile-gauge-value">100%</span>
-            <span class="tactile-gauge-label">完成</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Progress Track -->
+    <!-- Progress -->
     <section class="section">
-      <h2 class="title">Progress Track</h2>
-      <p class="label">Inner Track + Raised Fill</p>
-      <div style="max-width: 400px;">
-        <div class="tactile-track tactile-inner" style="margin-bottom: 1rem;">
-          <div class="tactile-track-fill" style="width: 35%;"></div>
-        </div>
-        <div class="tactile-track tactile-inner" style="margin-bottom: 1rem;">
-          <div class="tactile-track-fill" style="width: 65%;"></div>
+      <h2 class="title">Progress</h2>
+      <div style="max-width: 350px;">
+        <div class="tactile-track tactile-inner" style="margin-bottom: 0.75rem;">
+          <div class="tactile-track-fill" style="width: 40%;"></div>
         </div>
         <div class="tactile-track tactile-inner">
-          <div class="tactile-track-fill" style="width: 90%;"></div>
+          <div class="tactile-track-fill" style="width: 75%;"></div>
         </div>
       </div>
     </section>
@@ -230,87 +217,21 @@
     <!-- Slider -->
     <section class="section">
       <h2 class="title">Slider</h2>
-      <div style="max-width: 400px;">
+      <div style="max-width: 350px;">
         <div class="tactile-slider">
           <div class="tactile-slider-track tactile-inner"></div>
-          <div class="tactile-slider-thumb tactile-outer" style="left: 30%;"></div>
+          <div class="tactile-slider-thumb tactile-outer" style="left: 35%;"></div>
         </div>
       </div>
     </section>
 
     <!-- FAB -->
     <section class="section">
-      <h2 class="title">Floating Action Button (FAB)</h2>
-      <p class="label">Demo (static position, not fixed)</p>
-      <div class="row" style="gap: 2rem;">
-        <button class="tactile-fab tactile-fab-sm">
-          <svg width="20" height="20" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <button class="tactile-fab">
-          <svg width="24" height="24" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <button class="tactile-fab tactile-fab-lg">
-          <svg width="32" height="32" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-      </div>
-    </section>
-
-    <!-- Icon Effects -->
-    <section class="section">
-      <h2 class="title">Icon Effects</h2>
-
-      <p class="label">Raised Icon (on raised button)</p>
-      <div class="row">
-        <button class="demo-btn tactile-button tactile-primary" style="color: white; padding: 1rem 2rem;">
-          <svg class="tactile-icon-raised" width="20" height="20" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-          <span class="tactile-text-raised" style="margin-left: 8px;">记录重量</span>
-        </button>
-        <button class="demo-circle tactile-button tactile-success" style="color: white;">
-          <svg class="tactile-icon-raised" width="24" height="24" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-      </div>
-
-      <p class="label">Sculpted Icon (in recessed area)</p>
-      <div class="row">
-        <div class="demo-card tactile-inner" style="display: flex; align-items: center; gap: 12px; min-width: auto;">
-          <svg class="tactile-icon-sculpted" width="24" height="24" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <span class="tactile-text-sculpted" style="font-weight: 600;">搜索记录</span>
-        </div>
-        <div class="demo-card tactile-inner" style="display: flex; align-items: center; gap: 12px; min-width: auto;">
-          <svg class="tactile-icon-sculpted" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span class="tactile-text-sculpted" style="font-weight: 600;">复习进度</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Color Variants -->
-    <section class="section">
-      <h2 class="title">Color Variants</h2>
-      <div class="row">
-        <div class="demo-box tactile-outer tactile-primary" style="color: white;">Primary</div>
-        <div class="demo-box tactile-outer tactile-success" style="color: white;">Success</div>
-        <div class="demo-box tactile-outer tactile-danger" style="color: white;">Danger</div>
-        <div class="demo-box tactile-outer tactile-warning" style="color: white;">Warning</div>
-      </div>
-    </section>
-
-    <!-- Dark Mode -->
-    <section class="section">
-      <h2 class="title">Dark Mode (.tactile-dark)</h2>
-      <div class="tactile-dark" style="padding: 2rem; border-radius: 20px;">
-        <div class="row">
-          <div class="demo-box tactile-outer">Outer</div>
-          <div class="demo-box tactile-inner">Inner</div>
-          <button class="demo-btn tactile-button">Button</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Input Fields -->
-    <section class="section">
-      <h2 class="title">Input Fields</h2>
-      <div class="row">
-        <input type="text" class="demo-input tactile-inner" placeholder="Search...">
+      <h2 class="title">FAB</h2>
+      <div class="row" style="gap: 1.5rem;">
+        <button class="tactile-fab tactile-fab-sm">+</button>
+        <button class="tactile-fab">+</button>
+        <button class="tactile-fab tactile-fab-lg">+</button>
       </div>
     </section>
 
@@ -319,29 +240,44 @@
       <h2 class="title">Cards</h2>
       <div class="row" style="align-items: stretch;">
         <div class="demo-card tactile-outer">
-          <h3 style="margin: 0 0 0.5rem 0; color: #555;">Raised Card</h3>
-          <p style="margin: 0; color: #888; font-size: 0.875rem;">Soft outer shadow effect.</p>
+          <h3>Raised</h3>
+          <p>Outer shadow</p>
         </div>
         <div class="demo-card tactile-inner">
-          <h3 style="margin: 0 0 0.5rem 0; color: #555;">Inset Card</h3>
-          <p style="margin: 0; color: #888; font-size: 0.875rem;">Soft inner shadow effect.</p>
+          <h3>Inset</h3>
+          <p>Inner shadow</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <section class="section">
+      <h2 class="title">Colors</h2>
+      <div class="row">
+        <div class="demo-box tactile-outer tactile-primary">Primary</div>
+        <div class="demo-box tactile-outer tactile-success">Success</div>
+        <div class="demo-box tactile-outer tactile-danger">Danger</div>
+        <div class="demo-box tactile-outer tactile-warning">Warning</div>
       </div>
     </section>
 
   </div>
 
-  <!-- Real FAB (fixed position) -->
-  <button class="tactile-fab" style="position: fixed; bottom: 32px; right: 32px;">
-    <svg width="24" height="24" viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-  </button>
+  <button class="tactile-fab" style="position: fixed; bottom: 24px; right: 24px;">+</button>
 
   <script>
-    // Segmented control interaction
-    document.querySelectorAll('.tactile-segmented').forEach(control => {
-      control.querySelectorAll('.tactile-segment').forEach(btn => {
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+      });
+    });
+
+    document.querySelectorAll('.tactile-segmented').forEach(ctrl => {
+      ctrl.querySelectorAll('.tactile-segment').forEach(btn => {
         btn.addEventListener('click', () => {
-          control.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));
+          ctrl.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));
           btn.classList.add('tactile-active');
         });
       });
