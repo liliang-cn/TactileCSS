@@ -1,12 +1,6 @@
 # Dependencies
 node_modules/
 
-# Build output
-dist/*.css
-
-# Keep the directory but ignore contents
-!dist/.gitkeep
-
 # IDE
 .idea/
 .vscode/

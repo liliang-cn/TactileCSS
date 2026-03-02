@@ -217,6 +217,7 @@
 }
 
 /* Clay - 黏土风格：双重内阴影 + 悬浮外投影 */
+
 .tactile-clay {
   background: var(--tactile-surface);
   box-shadow:
@@ -226,7 +227,9 @@
 }
 
 .tactile-sm { --tactile-offset: 4px; --tactile-blur: 8px; }
+
 .tactile-lg { --tactile-offset: 10px; --tactile-blur: 20px; }
+
 .tactile-xl { --tactile-offset: 15px; --tactile-blur: 30px; }
 
 /* ========================================
@@ -278,6 +281,7 @@
 }
 
 /* Clay Button */
+
 .tactile-button-clay {
   background: var(--tactile-surface);
   color: var(--tactile-text);
@@ -364,6 +368,7 @@
 }
 
 /* Clay Segmented */
+
 .tactile-segmented-clay {
   display: inline-flex;
   padding: 8px;
@@ -436,6 +441,7 @@
 }
 
 /* Clay Keypad */
+
 .tactile-keypad-clay {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -540,6 +546,7 @@
 }
 
 /* Clay Keyboard */
+
 .tactile-keyboard-clay {
   display: flex;
   flex-direction: column;
@@ -661,6 +668,7 @@
 }
 
 /* Clay Gauge */
+
 .tactile-gauge-clay {
   --progress: 0%;
   width: 140px;
@@ -744,9 +752,11 @@
 }
 
 .tactile-fab-sm { width: 48px; height: 48px; font-size: 1.25rem; }
+
 .tactile-fab-lg { width: 80px; height: 80px; font-size: 2rem; }
 
 /* Clay FAB */
+
 .tactile-fab-clay {
   width: 64px;
   height: 64px;
@@ -783,6 +793,7 @@
 }
 
 .tactile-fab-clay-sm { width: 48px; height: 48px; font-size: 1.25rem; }
+
 .tactile-fab-clay-lg { width: 80px; height: 80px; font-size: 2rem; }
 
 /* ========================================
@@ -804,6 +815,7 @@
 }
 
 /* Clay Track */
+
 .tactile-track-clay {
   height: 14px;
   border-radius: var(--tactile-radius-full);
@@ -864,6 +876,7 @@
 }
 
 /* Clay Slider */
+
 .tactile-slider-clay {
   width: 100%;
   height: 28px;
@@ -940,6 +953,7 @@
 }
 
 /* Clay Input */
+
 .tactile-input-clay {
   width: 100%;
   padding: 1rem 1.5rem;
@@ -979,6 +993,7 @@
 }
 
 /* Clay Card */
+
 .tactile-card-clay {
   padding: 1.5rem;
   border-radius: var(--tactile-radius-xl, 24px);
@@ -1175,6 +1190,7 @@
 }
 
 /* Toast variants */
+
 .tactile-toast-success .tactile-toast-icon {
   background: var(--tactile-success);
 }
@@ -1216,9 +1232,13 @@
    ======================================== */
 
 .tactile-primary { background: var(--tactile-primary); color: var(--tactile-text-inverse); }
+
 .tactile-success { background: var(--tactile-success); color: var(--tactile-text-inverse); }
+
 .tactile-danger { background: var(--tactile-danger); color: var(--tactile-text-inverse); }
+
 .tactile-warning { background: var(--tactile-warning); color: var(--tactile-text-inverse); }
+
 .tactile-info { background: var(--tactile-info); color: var(--tactile-text-inverse); }
 
 /* ========================================

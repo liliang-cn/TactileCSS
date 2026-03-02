@@ -1,10 +1,24 @@
 {
   "name": "tactile-css",
   "version": "0.1.0",
-  "description": "A minimal neumorphic CSS utility library - soft outer/inner shadows for any element",
+  "description": "A minimal neumorphic CSS library with outer, inner, and clay shadow styles",
   "main": "dist/tactile.css",
   "style": "dist/tactile.min.css",
-  "files": ["dist"],
+  "homepage": "https://yourusername.github.io/tactile-css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/tactile-css.git"
+  },
+  "exports": {
+    ".": "./dist/tactile.css",
+    "./css": "./dist/tactile.css",
+    "./css.min": "./dist/tactile.min.css",
+    "./tailwind": "./src/tailwind-plugin.js"
+  },
+  "files": [
+    "dist",
+    "src/tailwind-plugin.js"
+  ],
   "scripts": {
     "build": "postcss src/index.css -o dist/tactile.css && cleancss -o dist/tactile.min.css dist/tactile.css",
     "watch": "postcss src/index.css -o dist/tactile.css -w"
@@ -15,13 +29,24 @@
     "neumorphic",
     "soft-ui",
     "shadow",
-    "ui"
+    "ui",
+    "claymorphism",
+    "clay",
+    "tailwind",
+    "tailwindcss",
+    "design-system"
   ],
   "author": "",
   "license": "MIT",
+  "peerDependencies": {
+    "tailwindcss": ">=3.0.0"
+  },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
     "postcss": "^8.4.35",
-    "postcss-cli": "^11.0.0"
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.1",
+    "postcss-nested": "^7.0.2",
+    "tailwindcss": "^4.2.1"
   }
 }

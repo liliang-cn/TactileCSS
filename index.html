@@ -77,6 +77,38 @@
     }
     svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+    /* Color info section */
+    .color-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem;
+      border-radius: 12px;
+    }
+    .color-swatch-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .color-swatch-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+    .color-swatch-code {
+      font-size: 0.75rem;
+      font-family: 'SF Mono', Monaco, monospace;
+      opacity: 0.5;
+    }
   </style>
 </head>
 <body class="tactile">
@@ -92,6 +124,9 @@
         <button class="tactile-segment" data-theme="terminal">Terminal</button>
         <button class="tactile-segment" data-theme="warm">Warm</button>
       </div>
+
+      <!-- Color Info -->
+      <div class="color-info" id="color-info"></div>
     </header>
 
     <!-- Shadows -->
@@ -103,6 +138,12 @@
         <div class="demo-box tactile-outer tactile-lg">Large</div>
         <div class="demo-box tactile-inner">Inner</div>
         <div class="demo-box tactile-inner tactile-sm">Small</div>
+      </div>
+      <div class="label" style="margin-top: 1rem;">Clay (Claymorphism)</div>
+      <div class="row">
+        <div class="demo-box tactile-clay" style="border-radius: 20px;">Clay</div>
+        <div class="demo-box tactile-clay tactile-sm" style="border-radius: 16px;">Small</div>
+        <div class="demo-box tactile-clay tactile-lg" style="border-radius: 24px;">Large</div>
       </div>
     </section>
 
@@ -116,6 +157,13 @@
         <button class="demo-btn tactile-button tactile-lg">Large</button>
         <button class="demo-circle tactile-button">+</button>
       </div>
+      <div class="label" style="margin-top: 1rem;">Clay</div>
+      <div class="row">
+        <button class="demo-btn tactile-button-clay">Clay</button>
+        <button class="demo-btn tactile-button-clay-primary">Primary</button>
+        <button class="demo-btn tactile-button-clay tactile-sm">Small</button>
+        <button class="demo-btn tactile-button-clay tactile-lg">Large</button>
+      </div>
     </section>
 
     <!-- Input -->
@@ -123,6 +171,7 @@
       <h2 class="title">Input</h2>
       <div class="row">
         <input type="text" class="tactile-input" placeholder="Search..." style="max-width: 280px;">
+        <input type="text" class="tactile-input-clay" placeholder="Clay input..." style="max-width: 280px;">
       </div>
     </section>
 
@@ -131,6 +180,11 @@
       <h2 class="title">Segmented Control</h2>
       <div class="row">
         <div class="tactile-segmented tactile-inner">
+          <button class="tactile-segment">Day</button>
+          <button class="tactile-segment tactile-active">Week</button>
+          <button class="tactile-segment">Month</button>
+        </div>
+        <div class="tactile-segmented-clay">
           <button class="tactile-segment">Day</button>
           <button class="tactile-segment tactile-active">Week</button>
           <button class="tactile-segment">Month</button>
@@ -156,6 +210,108 @@
           <button class="tactile-key">0</button>
           <button class="tactile-key tactile-key-action">→</button>
         </div>
+        <div class="tactile-keypad-clay" style="width: 240px;">
+          <button class="tactile-key-clay">1</button>
+          <button class="tactile-key-clay">2</button>
+          <button class="tactile-key-clay">3</button>
+          <button class="tactile-key-clay">4</button>
+          <button class="tactile-key-clay">5</button>
+          <button class="tactile-key-clay">6</button>
+          <button class="tactile-key-clay">7</button>
+          <button class="tactile-key-clay">8</button>
+          <button class="tactile-key-clay">9</button>
+          <button class="tactile-key-clay">.</button>
+          <button class="tactile-key-clay">0</button>
+          <button class="tactile-key-clay tactile-key-clay-action">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keyboard -->
+    <section class="section">
+      <h2 class="title">Keyboard</h2>
+      <div class="tactile-keyboard tactile-inner" style="width: fit-content; margin-bottom: 1.5rem;">
+        <div class="tactile-keyboard-row">
+          <button class="tactile-keyboard-key">Q</button>
+          <button class="tactile-keyboard-key">W</button>
+          <button class="tactile-keyboard-key">E</button>
+          <button class="tactile-keyboard-key">R</button>
+          <button class="tactile-keyboard-key">T</button>
+          <button class="tactile-keyboard-key">Y</button>
+          <button class="tactile-keyboard-key">U</button>
+          <button class="tactile-keyboard-key">I</button>
+          <button class="tactile-keyboard-key">O</button>
+          <button class="tactile-keyboard-key">P</button>
+        </div>
+        <div class="tactile-keyboard-row">
+          <button class="tactile-keyboard-key">A</button>
+          <button class="tactile-keyboard-key">S</button>
+          <button class="tactile-keyboard-key">D</button>
+          <button class="tactile-keyboard-key">F</button>
+          <button class="tactile-keyboard-key">G</button>
+          <button class="tactile-keyboard-key">H</button>
+          <button class="tactile-keyboard-key">J</button>
+          <button class="tactile-keyboard-key">K</button>
+          <button class="tactile-keyboard-key">L</button>
+        </div>
+        <div class="tactile-keyboard-row">
+          <button class="tactile-keyboard-key tactile-keyboard-key-wide">⇧</button>
+          <button class="tactile-keyboard-key">Z</button>
+          <button class="tactile-keyboard-key">X</button>
+          <button class="tactile-keyboard-key">C</button>
+          <button class="tactile-keyboard-key">V</button>
+          <button class="tactile-keyboard-key">B</button>
+          <button class="tactile-keyboard-key">N</button>
+          <button class="tactile-keyboard-key">M</button>
+          <button class="tactile-keyboard-key tactile-keyboard-key-wide">⌫</button>
+        </div>
+        <div class="tactile-keyboard-row">
+          <button class="tactile-keyboard-key tactile-keyboard-key-primary tactile-keyboard-key-xwide">ABC</button>
+          <button class="tactile-keyboard-key tactile-keyboard-key-space">space</button>
+          <button class="tactile-keyboard-key tactile-keyboard-key-primary tactile-keyboard-key-xwide">⏎</button>
+        </div>
+      </div>
+      <div class="label" style="margin-bottom: 0.75rem;">Clay</div>
+      <div class="tactile-keyboard-clay" style="width: fit-content;">
+        <div class="tactile-keyboard-clay-row">
+          <button class="tactile-keyboard-clay-key">Q</button>
+          <button class="tactile-keyboard-clay-key">W</button>
+          <button class="tactile-keyboard-clay-key">E</button>
+          <button class="tactile-keyboard-clay-key">R</button>
+          <button class="tactile-keyboard-clay-key">T</button>
+          <button class="tactile-keyboard-clay-key">Y</button>
+          <button class="tactile-keyboard-clay-key">U</button>
+          <button class="tactile-keyboard-clay-key">I</button>
+          <button class="tactile-keyboard-clay-key">O</button>
+          <button class="tactile-keyboard-clay-key">P</button>
+        </div>
+        <div class="tactile-keyboard-clay-row">
+          <button class="tactile-keyboard-clay-key">A</button>
+          <button class="tactile-keyboard-clay-key">S</button>
+          <button class="tactile-keyboard-clay-key">D</button>
+          <button class="tactile-keyboard-clay-key">F</button>
+          <button class="tactile-keyboard-clay-key">G</button>
+          <button class="tactile-keyboard-clay-key">H</button>
+          <button class="tactile-keyboard-clay-key">J</button>
+          <button class="tactile-keyboard-clay-key">K</button>
+          <button class="tactile-keyboard-clay-key">L</button>
+        </div>
+        <div class="tactile-keyboard-clay-row">
+          <button class="tactile-keyboard-clay-key tactile-keyboard-clay-key-wide">⇧</button>
+          <button class="tactile-keyboard-clay-key">Z</button>
+          <button class="tactile-keyboard-clay-key">X</button>
+          <button class="tactile-keyboard-clay-key">C</button>
+          <button class="tactile-keyboard-clay-key">V</button>
+          <button class="tactile-keyboard-clay-key">B</button>
+          <button class="tactile-keyboard-clay-key">N</button>
+          <button class="tactile-keyboard-clay-key">M</button>
+          <button class="tactile-keyboard-clay-key tactile-keyboard-clay-key-wide">⌫</button>
+        </div>
+        <div class="tactile-keyboard-clay-row">
+          <button class="tactile-keyboard-clay-key tactile-keyboard-clay-key-primary tactile-keyboard-clay-key-xwide">ABC</button>
+          <button class="tactile-keyboard-clay-key tactile-keyboard-clay-key-space">space</button>
+          <button class="tactile-keyboard-clay-key tactile-keyboard-clay-key-primary tactile-keyboard-clay-key-xwide">⏎</button>
+        </div>
       </div>
     </section>
 
@@ -178,6 +334,11 @@
             <span class="tactile-gauge-value">100%</span>
           </div>
         </div>
+        <div class="tactile-gauge-clay" style="--progress: 60%;">
+          <div class="tactile-gauge-clay-center">
+            <span class="tactile-gauge-value">60%</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -188,8 +349,15 @@
         <div class="tactile-track tactile-inner" style="margin-bottom: 0.75rem;">
           <div class="tactile-track-fill" style="width: 40%;"></div>
         </div>
-        <div class="tactile-track tactile-inner">
+        <div class="tactile-track tactile-inner" style="margin-bottom: 1rem;">
           <div class="tactile-track-fill" style="width: 75%;"></div>
+        </div>
+        <div class="label">Clay</div>
+        <div class="tactile-track-clay" style="margin-bottom: 0.75rem;">
+          <div class="tactile-track-clay-fill" style="width: 40%;"></div>
+        </div>
+        <div class="tactile-track-clay">
+          <div class="tactile-track-clay-fill" style="width: 75%;"></div>
         </div>
       </div>
     </section>
@@ -202,6 +370,11 @@
           <div class="tactile-slider-track tactile-inner"></div>
           <div class="tactile-slider-thumb tactile-outer" style="left: 35%;"></div>
         </div>
+        <div class="label" style="margin-top: 1rem;">Clay</div>
+        <div class="tactile-slider-clay">
+          <div class="tactile-slider-clay-track"></div>
+          <div class="tactile-slider-clay-thumb" style="left: 60%;"></div>
+        </div>
       </div>
     </section>
 
@@ -212,6 +385,12 @@
         <button class="tactile-fab tactile-fab-sm">+</button>
         <button class="tactile-fab">+</button>
         <button class="tactile-fab tactile-fab-lg">+</button>
+      </div>
+      <div class="label" style="margin-top: 1rem;">Clay</div>
+      <div class="row" style="gap: 1.5rem;">
+        <button class="tactile-fab-clay tactile-fab-clay-sm">+</button>
+        <button class="tactile-fab-clay">+</button>
+        <button class="tactile-fab-clay tactile-fab-clay-lg">+</button>
       </div>
     </section>
 
@@ -227,6 +406,10 @@
           <h3>Inset</h3>
           <p>Inner shadow</p>
         </div>
+        <div class="demo-card tactile-card-clay" style="border-radius: 24px;">
+          <h3>Clay</h3>
+          <p>Fluffy feel</p>
+        </div>
       </div>
     </section>
 
@@ -239,13 +422,87 @@
         <div class="demo-box tactile-outer tactile-danger">Danger</div>
         <div class="demo-box tactile-outer tactile-warning">Warning</div>
       </div>
+      <div class="label" style="margin-top: 1rem;">Clay</div>
+      <div class="row">
+        <div class="demo-box tactile-clay tactile-primary" style="border-radius: 20px;">Primary</div>
+        <div class="demo-box tactile-clay tactile-success" style="border-radius: 20px;">Success</div>
+        <div class="demo-box tactile-clay tactile-danger" style="border-radius: 20px;">Danger</div>
+        <div class="demo-box tactile-clay tactile-warning" style="border-radius: 20px;">Warning</div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <section class="section">
+      <h2 class="title">Modal</h2>
+      <div class="row">
+        <button class="demo-btn tactile-button" onclick="openModal()">Open Modal</button>
+      </div>
+    </section>
+
+    <!-- Toast -->
+    <section class="section">
+      <h2 class="title">Toast</h2>
+      <div class="row" style="gap: 0.75rem;">
+        <button class="demo-btn tactile-button" onclick="showToast('success')">Success</button>
+        <button class="demo-btn tactile-button" onclick="showToast('danger')">Danger</button>
+        <button class="demo-btn tactile-button" onclick="showToast('warning')">Warning</button>
+        <button class="demo-btn tactile-button" onclick="showToast('info')">Info</button>
+      </div>
     </section>
 
   </div>
 
+  <!-- Modal -->
+  <div class="tactile-modal-overlay" id="demo-modal" onclick="closeModal(event)">
+    <div class="tactile-modal tactile-outer" onclick="event.stopPropagation()">
+      <h3 class="tactile-modal-title">Modal Title</h3>
+      <p class="tactile-modal-body">This is a neumorphic modal with soft shadows. Click outside or the button below to close.</p>
+      <div class="tactile-modal-footer">
+        <button class="demo-btn tactile-button tactile-sm" onclick="closeModal()">Cancel</button>
+        <button class="demo-btn tactile-button-primary tactile-sm" onclick="closeModal()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="tactile-toast-container" id="toast-container"></div>
+
   <button class="tactile-fab" style="position: fixed; bottom: 24px; right: 24px;">+</button>
 
   <script>
+    // Theme colors data
+    const themeColors = {
+      '': { name: 'Classic', bg: '#e0e5ec', surface: '#e0e5ec', primary: '#8B5CF6', text: '#374151', success: '#10B981', danger: '#EF4444' },
+      'mono': { name: 'Mono', bg: '#F4F4F5', surface: '#FFFFFF', primary: '#18181B', text: '#09090B', success: '#22C55E', danger: '#EF4444' },
+      'iron': { name: 'Iron', bg: '#1a1a1a', surface: '#242424', primary: '#F97316', text: '#fafafa', success: '#22C55E', danger: '#EF4444' },
+      'paper': { name: 'Paper', bg: '#f0ebe3', surface: '#f7f4ef', primary: '#059669', text: '#292524', success: '#059669', danger: '#DC2626' },
+      'terminal': { name: 'Terminal', bg: '#0d1117', surface: '#161b22', primary: '#58a6ff', text: '#c9d1d9', success: '#3fb950', danger: '#f85149' },
+      'warm': { name: 'Warm', bg: '#d4c4b5', surface: '#ddd0c4', primary: '#c2410c', text: '#1c1917', success: '#15803d', danger: '#b91c1c' },
+    };
+
+    // Update color info display
+    function updateColorInfo(theme) {
+      const colors = themeColors[theme] || themeColors[''];
+      const container = document.getElementById('color-info');
+
+      const items = [
+        { label: 'Background', color: colors.bg },
+        { label: 'Surface', color: colors.surface },
+        { label: 'Primary', color: colors.primary },
+        { label: 'Text', color: colors.text },
+        { label: 'Success', color: colors.success },
+        { label: 'Danger', color: colors.danger },
+      ];
+
+      container.innerHTML = items.map(item => `
+        <div class="color-swatch tactile-inner">
+          <div class="color-swatch-box" style="background: ${item.color};"></div>
+          <div class="color-swatch-label">${item.label}</div>
+          <div class="color-swatch-code">${item.color}</div>
+        </div>
+      `).join('');
+    }
+
     // Theme switcher (Segmented Control)
     const themeSwitcher = document.getElementById('theme-switcher');
     themeSwitcher.querySelectorAll('.tactile-segment').forEach(btn => {
@@ -253,8 +510,12 @@
         themeSwitcher.querySelectorAll('.tactile-segment').forEach(b => b.classList.remove('tactile-active'));
         btn.classList.add('tactile-active');
         document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+        updateColorInfo(btn.dataset.theme);
       });
     });
+
+    // Initialize color info
+    updateColorInfo('');
 
     // Other segmented controls on the page
     document.querySelectorAll('.tactile-segmented:not(#theme-switcher)').forEach(ctrl => {
@@ -265,6 +526,55 @@
         });
       });
     });
+
+    // Modal functions
+    function openModal() {
+      document.getElementById('demo-modal').classList.add('tactile-open');
+    }
+
+    function closeModal(event) {
+      if (!event || event.target.classList.contains('tactile-modal-overlay')) {
+        document.getElementById('demo-modal').classList.remove('tactile-open');
+      }
+    }
+
+    // Toast function
+    function showToast(type) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `tactile-toast tactile-outer tactile-toast-${type}`;
+      toast.innerHTML = `
+        <div class="tactile-toast-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            ${type === 'success' ? '<path d="M20 6L9 17l-5-5"/>' : ''}
+            ${type === 'danger' ? '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>' : ''}
+            ${type === 'warning' ? '<path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>' : ''}
+            ${type === 'info' ? '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' : ''}
+          </svg>
+        </div>
+        <div class="tactile-toast-content">
+          <div class="tactile-toast-title">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+          <div class="tactile-toast-message">This is a ${type} toast message.</div>
+        </div>
+        <button class="tactile-toast-close" onclick="this.parentElement.remove()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      `;
+      container.appendChild(toast);
+
+      // Trigger show animation
+      requestAnimationFrame(() => {
+        toast.classList.add('tactile-toast-show');
+      });
+
+      // Auto remove after 3s
+      setTimeout(() => {
+        toast.classList.remove('tactile-toast-show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
   </script>
 </body>
 </html>

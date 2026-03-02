@@ -1,0 +1,13 @@
+# Source files
+src/
+index.html
+with-tailwindcss.html
+
+# Development
+.github/
+node_modules/
+.gitignore
+*.log
+
+# Docs (keep dist only)
+doc/
