@@ -4,10 +4,14 @@
   "description": "A minimal neumorphic CSS library with outer, inner, and clay shadow styles",
   "main": "dist/tactile.css",
   "style": "dist/tactile.min.css",
-  "homepage": "https://yourusername.github.io/tactile-css",
+  "homepage": "https://liliang-cn.github.io/TactileCSS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/tactile-css.git"
+    "url": "git+https://github.com/liliang-cn/TactileCSS.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "exports": {
     ".": "./dist/tactile.css",
