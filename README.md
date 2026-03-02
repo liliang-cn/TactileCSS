@@ -2,6 +2,12 @@
 
 A minimal neumorphic CSS library with outer, inner, and clay shadow styles. Physical material themes included.
 
+<p align="center">
+  <img src="images/1.png" width="32%" alt="Tactile CSS Preview 1" />
+  <img src="images/2.png" width="32%" alt="Tactile CSS Preview 2" />
+  <img src="images/3.png" width="32%" alt="Tactile CSS Preview 3" />
+</p>
+
 ## Features
 
 - **Three Shadow Styles**: Outer (raised), Inner (sculpted), and Clay (fluffy claymorphism)
@@ -32,8 +38,8 @@ npm install tactile-css
 
 ### Download
 
-- [tactile.css](https://github.com/yourusername/tactile-css/blob/main/dist/tactile.css)
-- [tactile.min.css](https://github.com/yourusername/tactile-css/blob/main/dist/tactile.min.css)
+- [tactile.css](https://github.com/liliang-cn/TactileCSS/blob/main/dist/tactile.css)
+- [tactile.min.css](https://github.com/liliang-cn/TactileCSS/blob/main/dist/tactile.min.css)
 
 ## Quick Start
 
