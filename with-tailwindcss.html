@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactile CSS - Tailwind Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="dist/tactile.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tactile: {
+              bg: 'var(--tactile-bg)',
+              surface: 'var(--tactile-surface)',
+              primary: 'var(--tactile-primary)',
+              'primary-light': 'var(--tactile-primary-light)',
+              'primary-dark': 'var(--tactile-primary-dark)',
+              text: 'var(--tactile-text)',
+              'text-muted': 'var(--tactile-text-muted)',
+              success: 'var(--tactile-success)',
+              danger: 'var(--tactile-danger)',
+              warning: 'var(--tactile-warning)',
+              info: 'var(--tactile-info)',
+            },
+          },
+          borderRadius: {
+            'tactile-sm': 'var(--tactile-radius-sm)',
+            'tactile-md': 'var(--tactile-radius-md)',
+            'tactile-lg': 'var(--tactile-radius-lg)',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .section { margin-bottom: 2rem; }
+    .title { font-size: 1.125rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid rgba(128,128,128,0.15); }
+    .color-swatch-box { width: 48px; height: 48px; border-radius: 10px; }
+  </style>
+</head>
+<body class="tactile min-h-screen">
+  <div class="container">
+    <header class="text-center mb-12">
+      <h1 class="text-3xl font-extrabold mb-2">Tactile CSS + Tailwind</h1>
+      <p class="opacity-50 mb-6">Neumorphic components with Tailwind utilities</p>
+
+      <!-- Theme Switcher -->
+      <div class="tactile-segmented tactile-inner inline-flex" id="theme-switcher">
+        <button class="tactile-segment tactile-active" data-theme="">Classic</button>
+        <button class="tactile-segment" data-theme="mono">Mono</button>
+        <button class="tactile-segment" data-theme="iron">Iron</button>
+        <button class="tactile-segment" data-theme="paper">Paper</button>
+        <button class="tactile-segment" data-theme="terminal">Terminal</button>
+        <button class="tactile-segment" data-theme="warm">Warm</button>
+      </div>
+
+      <!-- Color Info -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-6" id="color-info"></div>
+    </header>
+
+    <!-- Shadows with Tailwind sizing -->
+    <section class="section">
+      <h2 class="title">Shadows + Tailwind Spacing</h2>
+      <div class="flex flex-wrap gap-5 items-center">
+        <div class="tactile-outer p-6 rounded-tactile-lg">Outer</div>
+        <div class="tactile-outer tactile-sm p-4 rounded-tactile-md">Small</div>
+        <div class="tactile-outer tactile-lg p-8 rounded-tactile-lg">Large</div>
+        <div class="tactile-inner p-6 rounded-tactile-lg">Inner</div>
+        <div class="tactile-clay p-6 rounded-2xl">Clay</div>
+        <div class="tactile-clay tactile-lg p-8 rounded-3xl">Clay LG</div>
+      </div>
+    </section>
+
+    <!-- Buttons with Tailwind -->
+    <section class="section">
+      <h2 class="title">Buttons + Tailwind</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <button class="tactile-button px-6 py-3 rounded-full text-sm font-semibold">
+          Default + Tailwind
+        </button>
+        <button class="tactile-button-primary px-6 py-3 rounded-full">
+          Primary
+        </button>
+        <button class="tactile-button-clay px-6 py-3 rounded-2xl">
+          Clay Button
+        </button>
+        <button class="tactile-button-clay-primary px-6 py-3 rounded-2xl">
+          Clay Primary
+        </button>
+      </div>
+    </section>
+
+    <!-- Cards with Tailwind Grid -->
+    <section class="section">
+      <h2 class="title">Cards + Tailwind Grid</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="tactile-card tactile-outer">
+          <h3 class="text-lg font-bold mb-2">Raised Card</h3>
+          <p class="text-tactile-text-muted text-sm">Using tactile-outer with Tailwind grid layout</p>
+        </div>
+        <div class="tactile-card tactile-inner">
+          <h3 class="text-lg font-bold mb-2">Inset Card</h3>
+          <p class="text-tactile-text-muted text-sm">Using tactile-inner for sculpted look</p>
+        </div>
+        <div class="tactile-card-clay">
+          <h3 class="text-lg font-bold mb-2">Clay Card</h3>
+          <p class="text-tactile-text-muted text-sm">Fluffy claymorphism style</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form with Tailwind -->
+    <section class="section">
+      <h2 class="title">Form + Tailwind</h2>
+      <div class="max-w-md space-y-4">
+        <input type="text" class="tactile-input w-full" placeholder="Neumorphic input">
+        <input type="text" class="tactile-input-clay w-full" placeholder="Clay input">
+        <div class="flex gap-3">
+          <button class="tactile-button flex-1 py-3 rounded-xl">Cancel</button>
+          <button class="tactile-button-primary flex-1 py-3 rounded-xl">Submit</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colors with Tailwind -->
+    <section class="section">
+      <h2 class="title">Colors + Tailwind</h2>
+      <div class="flex flex-wrap gap-4">
+        <div class="tactile-outer tactile-primary px-6 py-4 rounded-tactile-lg font-semibold">Primary</div>
+        <div class="tactile-outer tactile-success px-6 py-4 rounded-tactile-lg font-semibold">Success</div>
+        <div class="tactile-outer tactile-danger px-6 py-4 rounded-tactile-lg font-semibold">Danger</div>
+        <div class="tactile-outer tactile-warning px-6 py-4 rounded-tactile-lg font-semibold">Warning</div>
+        <div class="tactile-clay tactile-primary px-6 py-4 rounded-2xl font-semibold">Clay Primary</div>
+      </div>
+    </section>
+
+    <!-- FAB with Tailwind positioning -->
+    <section class="section">
+      <h2 class="title">FAB</h2>
+      <div class="flex gap-6">
+        <button class="tactile-fab text-2xl">+</button>
+        <button class="tactile-fab-clay text-2xl">+</button>
+      </div>
+    </section>
+
+    <!-- Flex utilities demo -->
+    <section class="section">
+      <h2 class="title">Tailwind Flex + Tactile</h2>
+      <div class="tactile-inner p-6 rounded-tactile-lg">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="tactile-outer w-12 h-12 rounded-full flex items-center justify-center font-bold">A</div>
+            <div>
+              <div class="font-semibold">User Name</div>
+              <div class="text-sm text-tactile-text-muted">user@example.com</div>
+            </div>
+          </div>
+          <button class="tactile-button-clay px-4 py-2 rounded-xl text-sm">Follow</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="tactile-fab fixed bottom-6 right-6">+</button>
+
+  <script>
+    // Theme colors data
+    const themeColors = {
+      '': { name: 'Classic', bg: '#e0e5ec', surface: '#e0e5ec', primary: '#8B5CF6', text: '#374151', success: '#10B981', danger: '#EF4444' },
+      'mono': { name: 'Mono', bg: '#F4F4F5', surface: '#FFFFFF', primary: '#18181B', text: '#09090B', success: '#22C55E', danger: '#EF4444' },
+      'iron': { name: 'Iron', bg: '#1a1a1a', surface: '#242424', primary: '#F97316', text: '#fafafa', success: '#22C55E', danger: '#EF4444' },
+      'paper': { name: 'Paper', bg: '#f0ebe3', surface: '#f7f4ef', primary: '#059669', text: '#292524', success: '#059669', danger: '#DC2626' },
+      'terminal': { name: 'Terminal', bg: '#0d1117', surface: '#161b22', primary: '#58a6ff', text: '#c9d1d9', success: '#3fb950', danger: '#f85149' },
+      'warm': { name: 'Warm', bg: '#d4c4b5', surface: '#ddd0c4', primary: '#c2410c', text: '#1c1917', success: '#15803d', danger: '#b91c1c' },
+    };
+
+    // Update color info display
+    function updateColorInfo(theme) {
+      const colors = themeColors[theme] || themeColors[''];
+      const container = document.getElementById('color-info');
+
+      const items = [
+        { label: 'Background', color: colors.bg },
+        { label: 'Surface', color: colors.surface },
+        { label: 'Primary', color: colors.primary },
+        { label: 'Text', color: colors.text },
+        { label: 'Success', color: colors.success },
+        { label: 'Danger', color: colors.danger },
+      ];
+
+      container.innerHTML = items.map(item => `
+        <div class="tactile-inner p-3 rounded-xl flex flex-col items-center">
+          <div class="color-swatch-box mb-2" style="background: ${item.color};"></div>
+          <div class="text-[10px] font-semibold uppercase tracking-wide opacity-70">${item.label}</div>
+          <div class="text-xs font-mono opacity-50">${item.color}</div>
+        </div>
+      `).join('');
+    }
+
+    // Theme switcher
+    document.querySelectorAll('#theme-switcher .tactile-segment').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#theme-switcher .tactile-segment').forEach(b => b.classList.remove('tactile-active'));
+        btn.classList.add('tactile-active');
+        document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+        updateColorInfo(btn.dataset.theme);
+      });
+    });
+
+    // Initialize color info
+    updateColorInfo('');
+  </script>
+</body>
+</html>
