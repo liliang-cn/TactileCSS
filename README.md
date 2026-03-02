@@ -3,9 +3,31 @@
 A minimal neumorphic CSS library with outer, inner, and clay shadow styles. Physical material themes included.
 
 <p align="center">
-  <img src="images/1.png" width="32%" alt="Tactile CSS Preview 1" />
-  <img src="images/2.png" width="32%" alt="Tactile CSS Preview 2" />
-  <img src="images/3.png" width="32%" alt="Tactile CSS Preview 3" />
+  <img src="images/1.png" alt="Tactile CSS Preview 1" />
+</p>
+
+<p align="center">
+  <img src="images/2.png" alt="Tactile CSS Preview 2" />
+</p>
+
+<p align="center">
+  <img src="images/3.png" alt="Tactile CSS Preview 3" />
+</p>
+
+<p align="center">
+  <img src="images/4.png" alt="Tactile CSS Preview 4" />
+</p>
+
+<p align="center">
+  <img src="images/5.png" alt="Tactile CSS Preview 5" />
+</p>
+
+<p align="center">
+  <img src="images/6.png" alt="Tactile CSS Preview 6" />
+</p>
+
+<p align="center">
+  <img src="images/7.png" alt="Tactile CSS Preview 7" />
 </p>
 
 ## Features
