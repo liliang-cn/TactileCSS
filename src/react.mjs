@@ -12,6 +12,22 @@ function clampPercentage(value, max = 100) {
   return Math.min(100, Math.max(0, (value / max) * 100));
 }
 
+function clampNumber(value, min = 0, max = 100) {
+  if (!Number.isFinite(value)) {
+    return min;
+  }
+
+  return Math.min(max, Math.max(min, value));
+}
+
+function calculateRangePercentage(value, min = 0, max = 100) {
+  if (!Number.isFinite(min) || !Number.isFinite(max) || max <= min) {
+    return 0;
+  }
+
+  return ((clampNumber(value, min, max) - min) / (max - min)) * 100;
+}
+
 const surfaceVariantClass = {
   outer: 'tactile-outer',
   inner: 'tactile-inner',
@@ -89,6 +105,19 @@ const toastToneClass = {
   info: 'tactile-toast-info',
 };
 
+const iconVariantClass = {
+  raised: 'tactile-icon-raised',
+  sculpted: 'tactile-icon-sculpted',
+};
+
+const utilityToneClass = {
+  primary: 'tactile-primary',
+  success: 'tactile-success',
+  danger: 'tactile-danger',
+  warning: 'tactile-warning',
+  info: 'tactile-info',
+};
+
 export const TactileTheme = forwardRef(function TactileTheme(
   { as: Component = 'div', theme = 'classic', className, ...props },
   ref
@@ -154,6 +183,28 @@ export const TactileField = forwardRef(function TactileField(
     children,
     hint ? React.createElement('div', { className: cx('tactile-field-hint', hintClassName) }, hint) : null
   );
+});
+
+export const TactileFieldLabel = forwardRef(function TactileFieldLabel(
+  { as: Component = 'label', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-field-label', className),
+    ...props,
+  });
+});
+
+export const TactileFieldHint = forwardRef(function TactileFieldHint(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-field-hint', className),
+    ...props,
+  });
 });
 
 export const TactileSelect = forwardRef(function TactileSelect(
@@ -277,6 +328,96 @@ export const TactileTabPanel = forwardRef(function TactileTabPanel(
     role: props.role ?? 'tabpanel',
     ...props,
   });
+});
+
+export const TactileSlider = forwardRef(function TactileSlider(
+  {
+    clay = false,
+    className,
+    defaultValue,
+    disabled = false,
+    inputProps,
+    max = 100,
+    min = 0,
+    onChange,
+    onValueChange,
+    step = 1,
+    thumbClassName,
+    trackClassName,
+    value,
+    ...props
+  },
+  ref
+) {
+  const isControlled = value != null;
+  const [internalValue, setInternalValue] = React.useState(() =>
+    clampNumber(defaultValue ?? value ?? min, min, max)
+  );
+
+  React.useEffect(() => {
+    if (!isControlled) {
+      setInternalValue((currentValue) => clampNumber(currentValue, min, max));
+    }
+  }, [isControlled, min, max]);
+
+  const currentValue = clampNumber(isControlled ? value : internalValue, min, max);
+  const percentage = calculateRangePercentage(currentValue, min, max);
+  const thumbSize = clay ? 32 : 28;
+  const thumbStyle = {
+    left: `calc(${percentage}% - ${thumbSize / 2}px)`,
+    marginTop: `${thumbSize / -2}px`,
+  };
+  const inputStyle = {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    margin: 0,
+    opacity: 0,
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    ...inputProps?.style,
+  };
+
+  function handleChange(event) {
+    const nextValue = clampNumber(Number(event.target.value), min, max);
+
+    if (!isControlled) {
+      setInternalValue(nextValue);
+    }
+
+    onChange?.(event);
+    onValueChange?.(nextValue);
+  }
+
+  return React.createElement(
+    'div',
+    {
+      ref,
+      className: cx(clay ? 'tactile-slider-clay' : 'tactile-slider', className),
+      'aria-disabled': disabled || undefined,
+      ...props,
+    },
+    React.createElement('div', {
+      className: cx(clay ? 'tactile-slider-clay-track' : 'tactile-slider-track tactile-inner', trackClassName),
+      'aria-hidden': true,
+    }),
+    React.createElement('div', {
+      className: cx(clay ? 'tactile-slider-clay-thumb' : 'tactile-slider-thumb', thumbClassName),
+      style: thumbStyle,
+      'aria-hidden': true,
+    }),
+    React.createElement('input', {
+      ...inputProps,
+      disabled,
+      max,
+      min,
+      onChange: handleChange,
+      step,
+      style: inputStyle,
+      type: 'range',
+      value: currentValue,
+    })
+  );
 });
 
 export const TactileProgress = forwardRef(function TactileProgress(
@@ -458,6 +599,85 @@ export const TactileSwitch = forwardRef(function TactileSwitch(
   });
 });
 
+export const TactileTone = forwardRef(function TactileTone(
+  { as: Component = 'span', tone = 'primary', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx(utilityToneClass[tone] || utilityToneClass.primary, className),
+    ...props,
+  });
+});
+
+export const TactileModalOverlay = forwardRef(function TactileModalOverlay(
+  { open = false, className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-modal-overlay', open && 'tactile-open', className),
+    'aria-hidden': !open,
+    ...props,
+  });
+});
+
+export const TactileModalHeader = forwardRef(function TactileModalHeader(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-modal-header', className),
+    ...props,
+  });
+});
+
+export const TactileModalTitle = forwardRef(function TactileModalTitle(
+  { as: Component = 'h3', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-modal-title', className),
+    ...props,
+  });
+});
+
+export const TactileModalClose = forwardRef(function TactileModalClose(
+  { className, type = 'button', ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    type,
+    className: cx('tactile-modal-close', className),
+    ...props,
+  });
+});
+
+export const TactileModalBody = forwardRef(function TactileModalBody(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-modal-body', className),
+    ...props,
+  });
+});
+
+export const TactileModalFooter = forwardRef(function TactileModalFooter(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-modal-footer', className),
+    ...props,
+  });
+});
+
 export const TactileModal = forwardRef(function TactileModal(
   {
     open = false,
@@ -474,10 +694,10 @@ export const TactileModal = forwardRef(function TactileModal(
   ref
 ) {
   return React.createElement(
-    'div',
+    TactileModalOverlay,
     {
-      className: cx('tactile-modal-overlay', open && 'tactile-open', overlayClassName),
-      'aria-hidden': !open,
+      className: overlayClassName,
+      open,
     },
     React.createElement(
       'div',
@@ -490,18 +710,18 @@ export const TactileModal = forwardRef(function TactileModal(
       },
       (title || !hideClose) &&
         React.createElement(
-          'div',
-          { className: 'tactile-modal-header' },
-          title ? React.createElement('h3', { className: 'tactile-modal-title' }, title) : React.createElement('span'),
+          TactileModalHeader,
+          null,
+          title ? React.createElement(TactileModalTitle, null, title) : React.createElement('span'),
           !hideClose &&
             React.createElement(
-              'button',
-              { type: 'button', className: 'tactile-modal-close', onClick: onClose, 'aria-label': closeLabel },
+              TactileModalClose,
+              { onClick: onClose, 'aria-label': closeLabel },
               '×'
             )
         ),
-      children ? React.createElement('div', { className: 'tactile-modal-body' }, children) : null,
-      footer ? React.createElement('div', { className: 'tactile-modal-footer' }, footer) : null
+      children ? React.createElement(TactileModalBody, null, children) : null,
+      footer ? React.createElement(TactileModalFooter, null, footer) : null
     )
   );
 });
@@ -528,17 +748,17 @@ export const TactileToast = forwardRef(function TactileToast(
       role: 'status',
       ...props,
     },
-    React.createElement('div', { className: 'tactile-toast-icon', 'aria-hidden': true }, icon ?? '•'),
+    React.createElement(TactileToastIcon, null, icon ?? '•'),
     React.createElement(
-      'div',
-      { className: 'tactile-toast-content' },
-      title ? React.createElement('div', { className: 'tactile-toast-title' }, title) : null,
-      message ? React.createElement('div', { className: 'tactile-toast-message' }, message) : null
+      TactileToastContent,
+      null,
+      title ? React.createElement(TactileToastTitle, null, title) : null,
+      message ? React.createElement(TactileToastMessage, null, message) : null
     ),
     !hideClose &&
       React.createElement(
-        'button',
-        { type: 'button', className: 'tactile-toast-close', onClick: onClose, 'aria-label': 'Close notification' },
+        TactileToastClose,
+        { onClick: onClose, 'aria-label': 'Close notification' },
         '×'
       )
   );
@@ -551,6 +771,63 @@ export const TactileToastContainer = forwardRef(function TactileToastContainer(
   return React.createElement('div', {
     ref,
     className: cx('tactile-toast-container', className),
+    ...props,
+  });
+});
+
+export const TactileToastIcon = forwardRef(function TactileToastIcon(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-toast-icon', className),
+    'aria-hidden': props['aria-hidden'] ?? true,
+    ...props,
+  });
+});
+
+export const TactileToastContent = forwardRef(function TactileToastContent(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('div', {
+    ref,
+    className: cx('tactile-toast-content', className),
+    ...props,
+  });
+});
+
+export const TactileToastTitle = forwardRef(function TactileToastTitle(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-toast-title', className),
+    ...props,
+  });
+});
+
+export const TactileToastMessage = forwardRef(function TactileToastMessage(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-toast-message', className),
+    ...props,
+  });
+});
+
+export const TactileToastClose = forwardRef(function TactileToastClose(
+  { className, type = 'button', ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    type,
+    className: cx('tactile-toast-close', className),
     ...props,
   });
 });
@@ -599,12 +876,36 @@ export const TactileAccordionContent = forwardRef(function TactileAccordionConte
   });
 });
 
+export const TactileIcon = forwardRef(function TactileIcon(
+  { as: Component = 'span', variant = 'raised', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx(iconVariantClass[variant] || iconVariantClass.raised, className),
+    ...props,
+  });
+});
+
+export const TactileText = forwardRef(function TactileText(
+  { as: Component = 'span', sculpted = true, className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx(sculpted && 'tactile-text-sculpted', className),
+    ...props,
+  });
+});
+
 export default {
   TactileTheme,
   TactileSurface,
   TactileButton,
   TactileInput,
   TactileField,
+  TactileFieldLabel,
+  TactileFieldHint,
   TactileSelect,
   TactileTextarea,
   TactileCard,
@@ -615,6 +916,7 @@ export default {
   TactileTabList,
   TactileTab,
   TactileTabPanel,
+  TactileSlider,
   TactileProgress,
   TactileGauge,
   TactileKeypad,
@@ -627,11 +929,25 @@ export default {
   TactileDivider,
   TactileCheckbox,
   TactileSwitch,
+  TactileTone,
+  TactileModalOverlay,
+  TactileModalHeader,
+  TactileModalTitle,
+  TactileModalClose,
+  TactileModalBody,
+  TactileModalFooter,
   TactileModal,
   TactileToast,
   TactileToastContainer,
+  TactileToastIcon,
+  TactileToastContent,
+  TactileToastTitle,
+  TactileToastMessage,
+  TactileToastClose,
   TactileAccordion,
   TactileAccordionItem,
   TactileAccordionTrigger,
   TactileAccordionContent,
+  TactileIcon,
+  TactileText,
 };

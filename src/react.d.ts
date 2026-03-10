@@ -9,6 +9,13 @@ type FabSize = 'sm' | 'md' | 'lg';
 type KeyWidth = 'normal' | 'wide' | 'xwide' | 'space';
 type BadgeTone = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info';
 type ToastTone = 'success' | 'danger' | 'warning' | 'info';
+type UtilityTone = 'primary' | 'success' | 'danger' | 'warning' | 'info';
+type IconVariant = 'raised' | 'sculpted';
+
+type SliderInputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'max' | 'min' | 'onChange' | 'step' | 'type' | 'value'
+>;
 
 type PolymorphicProps<T extends React.ElementType, P> = P &
   Omit<React.ComponentPropsWithoutRef<T>, keyof P | 'as'> & {
@@ -55,6 +62,18 @@ export declare const TactileField: <T extends React.ElementType = 'div'>(
       labelClassName?: string;
     }
   > & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileFieldLabel: <T extends React.ElementType = 'label'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileFieldHint: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
     ref?: React.Ref<Element>;
   }
 ) => React.ReactElement | null;
@@ -123,6 +142,24 @@ export declare const TactileTab: React.ForwardRefExoticComponent<
 export declare const TactileTabPanel: React.ForwardRefExoticComponent<
   React.HTMLAttributes<HTMLDivElement> & {
     className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileSlider: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    clay?: boolean;
+    className?: string;
+    defaultValue?: number;
+    disabled?: boolean;
+    inputProps?: SliderInputProps;
+    max?: number;
+    min?: number;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onValueChange?: (value: number) => void;
+    step?: number;
+    thumbClassName?: string;
+    trackClassName?: string;
+    value?: number;
   } & React.RefAttributes<HTMLDivElement>
 >;
 
@@ -228,6 +265,49 @@ export declare const TactileSwitch: React.ForwardRefExoticComponent<
   } & React.RefAttributes<HTMLInputElement>
 >;
 
+export declare const TactileTone: <T extends React.ElementType = 'span'>(
+  props: PolymorphicProps<T, { className?: string; tone?: UtilityTone }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileModalOverlay: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+    open?: boolean;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileModalHeader: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileModalTitle: <T extends React.ElementType = 'h3'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileModalClose: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
+export declare const TactileModalBody: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileModalFooter: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
 export declare const TactileModal: React.ForwardRefExoticComponent<
   React.HTMLAttributes<HTMLDivElement> & {
     className?: string;
@@ -260,6 +340,36 @@ export declare const TactileToastContainer: React.ForwardRefExoticComponent<
   } & React.RefAttributes<HTMLDivElement>
 >;
 
+export declare const TactileToastIcon: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileToastContent: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileToastTitle: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileToastMessage: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileToastClose: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
 export declare const TactileAccordion: React.ForwardRefExoticComponent<
   React.HTMLAttributes<HTMLDivElement> & {
     className?: string;
@@ -284,12 +394,26 @@ export declare const TactileAccordionContent: React.ForwardRefExoticComponent<
   } & React.RefAttributes<HTMLDivElement>
 >;
 
+export declare const TactileIcon: <T extends React.ElementType = 'span'>(
+  props: PolymorphicProps<T, { className?: string; variant?: IconVariant }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileText: <T extends React.ElementType = 'span'>(
+  props: PolymorphicProps<T, { className?: string; sculpted?: boolean }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
 declare const _default: {
   TactileTheme: typeof TactileTheme;
   TactileSurface: typeof TactileSurface;
   TactileButton: typeof TactileButton;
   TactileInput: typeof TactileInput;
   TactileField: typeof TactileField;
+  TactileFieldLabel: typeof TactileFieldLabel;
+  TactileFieldHint: typeof TactileFieldHint;
   TactileSelect: typeof TactileSelect;
   TactileTextarea: typeof TactileTextarea;
   TactileCard: typeof TactileCard;
@@ -300,6 +424,7 @@ declare const _default: {
   TactileTabList: typeof TactileTabList;
   TactileTab: typeof TactileTab;
   TactileTabPanel: typeof TactileTabPanel;
+  TactileSlider: typeof TactileSlider;
   TactileProgress: typeof TactileProgress;
   TactileGauge: typeof TactileGauge;
   TactileKeypad: typeof TactileKeypad;
@@ -312,13 +437,27 @@ declare const _default: {
   TactileDivider: typeof TactileDivider;
   TactileCheckbox: typeof TactileCheckbox;
   TactileSwitch: typeof TactileSwitch;
+  TactileTone: typeof TactileTone;
+  TactileModalOverlay: typeof TactileModalOverlay;
+  TactileModalHeader: typeof TactileModalHeader;
+  TactileModalTitle: typeof TactileModalTitle;
+  TactileModalClose: typeof TactileModalClose;
+  TactileModalBody: typeof TactileModalBody;
+  TactileModalFooter: typeof TactileModalFooter;
   TactileModal: typeof TactileModal;
   TactileToast: typeof TactileToast;
   TactileToastContainer: typeof TactileToastContainer;
+  TactileToastIcon: typeof TactileToastIcon;
+  TactileToastContent: typeof TactileToastContent;
+  TactileToastTitle: typeof TactileToastTitle;
+  TactileToastMessage: typeof TactileToastMessage;
+  TactileToastClose: typeof TactileToastClose;
   TactileAccordion: typeof TactileAccordion;
   TactileAccordionItem: typeof TactileAccordionItem;
   TactileAccordionTrigger: typeof TactileAccordionTrigger;
   TactileAccordionContent: typeof TactileAccordionContent;
+  TactileIcon: typeof TactileIcon;
+  TactileText: typeof TactileText;
 };
 
 export default _default;

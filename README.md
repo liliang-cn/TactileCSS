@@ -130,6 +130,8 @@ Initial React exports:
 - `TactileButton`
 - `TactileInput`
 - `TactileField`
+- `TactileFieldLabel`
+- `TactileFieldHint`
 - `TactileSelect`
 - `TactileTextarea`
 - `TactileCard`
@@ -140,6 +142,7 @@ Initial React exports:
 - `TactileTabList`
 - `TactileTab`
 - `TactileTabPanel`
+- `TactileSlider`
 - `TactileProgress`
 - `TactileGauge`
 - `TactileKeypad`
@@ -147,20 +150,176 @@ Initial React exports:
 - `TactileKeyboard`
 - `TactileKeyboardRow`
 - `TactileKeyboardKey`
-
-The first React release focuses on the core surfaces, inputs, controls, and keyboard primitives. More wrappers for patterns such as sliders, modals, and toasts will be added incrementally after the initial publish.
 - `TactileBadge`
 - `TactileAvatar`
 - `TactileDivider`
 - `TactileCheckbox`
 - `TactileSwitch`
+- `TactileTone`
+- `TactileModalOverlay`
+- `TactileModalHeader`
+- `TactileModalTitle`
+- `TactileModalClose`
+- `TactileModalBody`
+- `TactileModalFooter`
 - `TactileModal`
 - `TactileToast`
 - `TactileToastContainer`
+- `TactileToastIcon`
+- `TactileToastContent`
+- `TactileToastTitle`
+- `TactileToastMessage`
+- `TactileToastClose`
 - `TactileAccordion`
 - `TactileAccordionItem`
 - `TactileAccordionTrigger`
 - `TactileAccordionContent`
+- `TactileIcon`
+- `TactileText`
+
+The React package now covers the core surfaces, forms, navigation, feedback, and visual effect primitives that already exist in the CSS library. Future releases can keep expanding into higher-level composed patterns on top of this base layer.
+
+It also exposes composition primitives for field, modal, and toast layouts, so you can either use the bundled `TactileModal` / `TactileToast` helpers or assemble your own structures from the same class-backed parts.
+
+```jsx
+import {
+  TactileButton,
+  TactileField,
+  TactileFieldHint,
+  TactileFieldLabel,
+  TactileInput,
+  TactileModalBody,
+  TactileModalClose,
+  TactileModalFooter,
+  TactileModalHeader,
+  TactileModalOverlay,
+  TactileModalTitle,
+  TactileToast,
+  TactileTone,
+} from 'tactile-css/react';
+
+export function ComposedDemo() {
+  return (
+    <>
+      <TactileField>
+        <TactileFieldLabel htmlFor="name">Name</TactileFieldLabel>
+        <TactileInput id="name" placeholder="Ada Lovelace" />
+        <TactileFieldHint>Shown on your public profile.</TactileFieldHint>
+      </TactileField>
+
+      <TactileModalOverlay open>
+        <div className="tactile-modal" role="dialog" aria-modal="true">
+          <TactileModalHeader>
+            <TactileModalTitle>Upgrade plan</TactileModalTitle>
+            <TactileModalClose aria-label="Close">×</TactileModalClose>
+          </TactileModalHeader>
+          <TactileModalBody>
+            <TactileTone className="tactile-badge" tone="success">Live</TactileTone>
+          </TactileModalBody>
+          <TactileModalFooter>
+            <TactileButton variant="primary">Continue</TactileButton>
+          </TactileModalFooter>
+        </div>
+      </TactileModalOverlay>
+
+      <TactileToast tone="success" title="Saved" message="Preferences updated." />
+    </>
+  );
+}
+```
+
+## Vue
+
+Install the CSS package and Vue peer dependency:
+
+```bash
+npm install tactile-css vue
+```
+
+Import the stylesheet once, then use the Vue wrappers from `tactile-css/vue`:
+
+```vue
+<script setup>
+import 'tactile-css/css'
+import {
+  TactileButton,
+  TactileCard,
+  TactileGauge,
+  TactileInput,
+  TactileSegment,
+  TactileSegmented,
+  TactileTheme,
+} from 'tactile-css/vue'
+
+const focus = 72
+</script>
+
+<template>
+  <TactileTheme theme="paper" style="padding: 24px;">
+    <TactileCard variant="clay" style="padding: 24px; border-radius: 24px;">
+      <TactileSegmented>
+        <TactileSegment>Day</TactileSegment>
+        <TactileSegment active>Week</TactileSegment>
+        <TactileSegment>Month</TactileSegment>
+      </TactileSegmented>
+
+      <TactileInput placeholder="Search..." style="margin-top: 16px;" />
+
+      <div style="display: flex; gap: 16px; margin-top: 16px; align-items: center;">
+        <TactileButton variant="primary">Save</TactileButton>
+        <TactileGauge :value="focus" label="Focus" />
+      </div>
+    </TactileCard>
+  </TactileTheme>
+</template>
+```
+
+The Vue package mirrors the React export surface, including the field, modal, toast, accordion, keyboard, slider, icon, and text primitives. Use `v-model` on `TactileInput`, `TactileTextarea`, `TactileSelect`, `TactileCheckbox`, `TactileSwitch`, and `TactileSlider` where it makes sense.
+
+```vue
+<script setup>
+import {
+  TactileButton,
+  TactileField,
+  TactileFieldHint,
+  TactileFieldLabel,
+  TactileInput,
+  TactileModalBody,
+  TactileModalClose,
+  TactileModalFooter,
+  TactileModalHeader,
+  TactileModalOverlay,
+  TactileModalTitle,
+  TactileTone,
+} from 'tactile-css/vue'
+import { ref } from 'vue'
+
+const name = ref('Ada Lovelace')
+</script>
+
+<template>
+  <TactileField>
+    <TactileFieldLabel for="name">Name</TactileFieldLabel>
+    <TactileInput id="name" v-model="name" />
+    <TactileFieldHint>Shown on your public profile.</TactileFieldHint>
+  </TactileField>
+
+  <TactileModalOverlay open>
+    <div class="tactile-modal" role="dialog" aria-modal="true">
+      <TactileModalHeader>
+        <TactileModalTitle>Upgrade plan</TactileModalTitle>
+        <TactileModalClose aria-label="Close">×</TactileModalClose>
+      </TactileModalHeader>
+      <TactileModalBody>
+        <TactileTone class="tactile-badge" tone="success">Live</TactileTone>
+      </TactileModalBody>
+      <TactileModalFooter>
+        <TactileButton variant="primary">Continue</TactileButton>
+      </TactileModalFooter>
+    </div>
+  </TactileModalOverlay>
+</template>
+```
 
 ## Shadow Styles
 
@@ -361,6 +520,14 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
   <div class="tactile-slider-track tactile-inner"></div>
   <div class="tactile-slider-thumb tactile-outer" style="left: 40%;"></div>
 </div>
+```
+
+### Icon & Text Effects
+
+```html
+<span class="tactile-icon-raised">★</span>
+<span class="tactile-icon-sculpted">★</span>
+<p class="tactile-text-sculpted">Soft engraved label</p>
 ```
 
 ### Radial Gauge
