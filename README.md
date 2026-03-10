@@ -79,6 +79,89 @@ npm install tactile-css
 </html>
 ```
 
+## React
+
+Install the CSS package and React peer dependency:
+
+```bash
+npm install tactile-css react
+```
+
+Import the stylesheet once, then use the React wrappers from `tactile-css/react`:
+
+```jsx
+import 'tactile-css/css';
+import {
+  TactileButton,
+  TactileCard,
+  TactileGauge,
+  TactileInput,
+  TactileSegment,
+  TactileSegmented,
+  TactileTheme,
+} from 'tactile-css/react';
+
+export function Demo() {
+  return (
+    <TactileTheme theme="paper" style={{ padding: 24 }}>
+      <TactileCard variant="clay" style={{ padding: 24, borderRadius: 24 }}>
+        <TactileSegmented>
+          <TactileSegment>Day</TactileSegment>
+          <TactileSegment active>Week</TactileSegment>
+          <TactileSegment>Month</TactileSegment>
+        </TactileSegmented>
+
+        <TactileInput placeholder="Search..." style={{ marginTop: 16 }} />
+
+        <div style={{ display: 'flex', gap: 16, marginTop: 16, alignItems: 'center' }}>
+          <TactileButton variant="primary">Save</TactileButton>
+          <TactileGauge value={72} label="Focus" />
+        </div>
+      </TactileCard>
+    </TactileTheme>
+  );
+}
+```
+
+Initial React exports:
+
+- `TactileTheme`
+- `TactileSurface`
+- `TactileButton`
+- `TactileInput`
+- `TactileField`
+- `TactileSelect`
+- `TactileTextarea`
+- `TactileCard`
+- `TactileFab`
+- `TactileSegmented`
+- `TactileSegment`
+- `TactileTabs`
+- `TactileTabList`
+- `TactileTab`
+- `TactileTabPanel`
+- `TactileProgress`
+- `TactileGauge`
+- `TactileKeypad`
+- `TactileKey`
+- `TactileKeyboard`
+- `TactileKeyboardRow`
+- `TactileKeyboardKey`
+
+The first React release focuses on the core surfaces, inputs, controls, and keyboard primitives. More wrappers for patterns such as sliders, modals, and toasts will be added incrementally after the initial publish.
+- `TactileBadge`
+- `TactileAvatar`
+- `TactileDivider`
+- `TactileCheckbox`
+- `TactileSwitch`
+- `TactileModal`
+- `TactileToast`
+- `TactileToastContainer`
+- `TactileAccordion`
+- `TactileAccordionItem`
+- `TactileAccordionTrigger`
+- `TactileAccordionContent`
+
 ## Shadow Styles
 
 ### Outer (Raised)
@@ -144,6 +227,53 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
 <input type="text" class="tactile-input-clay" placeholder="Clay input...">
 ```
 
+### Field / Select / Textarea
+
+```html
+<div class="tactile-field">
+  <label class="tactile-field-label">Theme</label>
+  <select class="tactile-select">
+    <option>Classic</option>
+    <option>Paper</option>
+  </select>
+  <div class="tactile-field-hint">Use tactile inputs for forms.</div>
+</div>
+
+<textarea class="tactile-textarea" placeholder="Write something..."></textarea>
+```
+
+### Badge
+
+```html
+<span class="tactile-badge">Default</span>
+<span class="tactile-badge tactile-badge-primary">Primary</span>
+<span class="tactile-badge-clay tactile-badge-success">Success</span>
+```
+
+### Avatar
+
+```html
+<div class="tactile-avatar">AL</div>
+<div class="tactile-avatar tactile-avatar-lg tactile-avatar-clay">AL</div>
+```
+
+### Checkbox & Switch
+
+```html
+<input type="checkbox" class="tactile-checkbox" checked>
+<input type="checkbox" class="tactile-checkbox tactile-checkbox-clay">
+
+<input type="checkbox" role="switch" class="tactile-switch" checked>
+<input type="checkbox" role="switch" class="tactile-switch tactile-switch-clay">
+```
+
+### Divider
+
+```html
+<hr class="tactile-divider">
+<div class="tactile-divider-vertical"></div>
+```
+
 ### Cards
 
 ```html
@@ -174,6 +304,21 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
   <button class="tactile-segment tactile-active">Day</button>
   <button class="tactile-segment">Week</button>
   <button class="tactile-segment">Month</button>
+</div>
+```
+
+### Tabs
+
+```html
+<div class="tactile-tabs">
+  <div class="tactile-tab-list tactile-inner">
+    <button class="tactile-tab tactile-active" aria-selected="true">Overview</button>
+    <button class="tactile-tab">Usage</button>
+    <button class="tactile-tab">Tokens</button>
+  </div>
+  <div class="tactile-tab-panel">
+    Tactile tabs reuse the same soft, pressed state.
+  </div>
 </div>
 ```
 
@@ -225,6 +370,51 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
   <div class="tactile-gauge-center">
     <span class="tactile-gauge-value">70%</span>
   </div>
+</div>
+```
+
+### Modal
+
+```html
+<div class="tactile-modal-overlay tactile-open">
+  <div class="tactile-modal">
+    <div class="tactile-modal-header">
+      <h3 class="tactile-modal-title">Delete item?</h3>
+      <button class="tactile-modal-close">×</button>
+    </div>
+    <div class="tactile-modal-body">This action cannot be undone.</div>
+    <div class="tactile-modal-footer">
+      <button class="tactile-button">Cancel</button>
+      <button class="tactile-button-primary">Delete</button>
+    </div>
+  </div>
+</div>
+```
+
+### Toast
+
+```html
+<div class="tactile-toast-container">
+  <div class="tactile-toast tactile-toast-success tactile-toast-show">
+    <div class="tactile-toast-icon">✓</div>
+    <div class="tactile-toast-content">
+      <div class="tactile-toast-title">Saved</div>
+      <div class="tactile-toast-message">Changes have been written.</div>
+    </div>
+  </div>
+</div>
+```
+
+### Accordion
+
+```html
+<div class="tactile-accordion">
+  <details class="tactile-accordion-item" open>
+    <summary class="tactile-accordion-trigger">What is Tactile CSS?</summary>
+    <div class="tactile-accordion-content">
+      A neumorphic component library with theme tokens and React wrappers.
+    </div>
+  </details>
 </div>
 ```
 

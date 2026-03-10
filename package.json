@@ -1,6 +1,6 @@
 {
   "name": "tactile-css",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A minimal neumorphic CSS library with outer, inner, and clay shadow styles",
   "main": "dist/tactile.css",
   "style": "dist/tactile.min.css",
@@ -17,11 +17,18 @@
     ".": "./dist/tactile.css",
     "./css": "./dist/tactile.css",
     "./css.min": "./dist/tactile.min.css",
-    "./tailwind": "./src/tailwind-plugin.js"
+    "./tailwind": "./src/tailwind-plugin.js",
+    "./react": {
+      "types": "./src/react.d.ts",
+      "import": "./src/react.mjs",
+      "default": "./src/react.mjs"
+    }
   },
   "files": [
     "dist",
-    "src/tailwind-plugin.js"
+    "src/tailwind-plugin.js",
+    "src/react.mjs",
+    "src/react.d.ts"
   ],
   "scripts": {
     "build": "postcss src/index.css -o dist/tactile.css && cleancss -o dist/tactile.min.css dist/tactile.css",
@@ -29,6 +36,7 @@
   },
   "keywords": [
     "css",
+    "react",
     "neumorphism",
     "neumorphic",
     "soft-ui",
@@ -43,6 +51,7 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
+    "react": ">=18.0.0",
     "tailwindcss": ">=3.0.0"
   },
   "devDependencies": {

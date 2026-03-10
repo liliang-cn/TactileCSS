@@ -205,6 +205,44 @@
         <input type="text" class="tactile-input" placeholder="Search..." style="max-width: 280px;">
         <input type="text" class="tactile-input-clay" placeholder="Clay input..." style="max-width: 280px;">
       </div>
+      <div class="row" style="margin-top: 1rem; align-items: flex-start;">
+        <div class="tactile-field" style="width: 280px;">
+          <label class="tactile-field-label">Theme</label>
+          <select class="tactile-select">
+            <option>Classic</option>
+            <option>Paper</option>
+            <option>Terminal</option>
+          </select>
+          <div class="tactile-field-hint">Select and field styles now ship with the library.</div>
+        </div>
+        <textarea class="tactile-textarea" placeholder="Write something tactile..." style="max-width: 360px;"></textarea>
+      </div>
+    </section>
+
+    <!-- Badges / Avatars / Toggles -->
+    <section class="section">
+      <h2 class="title">Basics</h2>
+      <div class="label">Badge</div>
+      <div class="row">
+        <span class="tactile-badge">Default</span>
+        <span class="tactile-badge tactile-badge-primary">Primary</span>
+        <span class="tactile-badge tactile-badge-warning">Warning</span>
+        <span class="tactile-badge-clay tactile-badge-success">Success</span>
+      </div>
+      <div class="label" style="margin-top: 1rem;">Avatar</div>
+      <div class="row">
+        <div class="tactile-avatar">AL</div>
+        <div class="tactile-avatar tactile-avatar-clay tactile-avatar-lg">TK</div>
+        <div class="tactile-avatar tactile-avatar-xl">UI</div>
+      </div>
+      <div class="label" style="margin-top: 1rem;">Checkbox & Switch</div>
+      <div class="row">
+        <input type="checkbox" class="tactile-checkbox" checked>
+        <input type="checkbox" class="tactile-checkbox tactile-checkbox-clay">
+        <input type="checkbox" role="switch" class="tactile-switch" checked>
+        <input type="checkbox" role="switch" class="tactile-switch tactile-switch-clay">
+      </div>
+      <div class="tactile-divider" style="margin-top: 1.5rem;"></div>
     </section>
 
     <!-- Segmented -->
@@ -220,6 +258,21 @@
           <button class="tactile-segment">Day</button>
           <button class="tactile-segment tactile-active">Week</button>
           <button class="tactile-segment">Month</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <section class="section">
+      <h2 class="title">Tabs</h2>
+      <div class="tactile-tabs" style="max-width: 680px;">
+        <div class="tactile-tab-list tactile-inner">
+          <button class="tactile-tab tactile-active" aria-selected="true">Overview</button>
+          <button class="tactile-tab">Usage</button>
+          <button class="tactile-tab">Tokens</button>
+        </div>
+        <div class="tactile-tab-panel">
+          Tabs share the same pressed neumorphic interaction pattern while keeping content blocks readable.
         </div>
       </div>
     </section>
@@ -256,6 +309,57 @@
           <button class="tactile-key-clay">0</button>
           <button class="tactile-key-clay tactile-key-clay-action">→</button>
         </div>
+      </div>
+    </section>
+
+    <!-- Overlay -->
+    <section class="section">
+      <h2 class="title">Overlay</h2>
+      <div class="row" style="align-items: stretch;">
+        <div class="tactile-card tactile-outer" style="padding: 1rem; flex: 1; min-width: 280px;">
+          <div class="tactile-toast tactile-toast-success tactile-toast-show" style="position: static; transform: none; opacity: 1;">
+            <div class="tactile-toast-icon">✓</div>
+            <div class="tactile-toast-content">
+              <div class="tactile-toast-title">Saved</div>
+              <div class="tactile-toast-message">Everything is in sync.</div>
+            </div>
+            <button class="tactile-toast-close">×</button>
+          </div>
+        </div>
+        <div class="tactile-card tactile-outer" style="padding: 1rem; flex: 1; min-width: 280px;">
+          <div class="tactile-modal-overlay tactile-open" style="position: static; opacity: 1; visibility: visible; padding: 0; background: transparent; backdrop-filter: none;">
+            <div class="tactile-modal" style="transform: none; box-shadow: -6px -6px 16px var(--tactile-light-shadow), 6px 6px 16px var(--tactile-dark-shadow);">
+              <div class="tactile-modal-header">
+                <h3 class="tactile-modal-title">Delete note?</h3>
+                <button class="tactile-modal-close">×</button>
+              </div>
+              <div class="tactile-modal-body">This action cannot be undone.</div>
+              <div class="tactile-modal-footer">
+                <button class="demo-btn tactile-button">Cancel</button>
+                <button class="demo-btn tactile-button-primary">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion -->
+    <section class="section">
+      <h2 class="title">Accordion</h2>
+      <div class="tactile-accordion" style="max-width: 720px;">
+        <details class="tactile-accordion-item" open>
+          <summary class="tactile-accordion-trigger">What is included now?</summary>
+          <div class="tactile-accordion-content">
+            Buttons, inputs, tabs, overlay patterns, keyboard primitives, and a growing React wrapper set.
+          </div>
+        </details>
+        <details class="tactile-accordion-item">
+          <summary class="tactile-accordion-trigger">Can I use these with React?</summary>
+          <div class="tactile-accordion-content">
+            Yes. Import the CSS once and use the components from <code>tactile-css/react</code>.
+          </div>
+        </details>
       </div>
     </section>
 
