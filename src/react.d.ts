@@ -11,6 +11,8 @@ type BadgeTone = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'inf
 type ToastTone = 'success' | 'danger' | 'warning' | 'info';
 type UtilityTone = 'primary' | 'success' | 'danger' | 'warning' | 'info';
 type IconVariant = 'raised' | 'sculpted';
+type AIMessageRole = 'assistant' | 'user' | 'system';
+type AIStatusState = 'idle' | 'streaming' | 'ready' | 'error';
 
 type SliderInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -394,6 +396,170 @@ export declare const TactileAccordionContent: React.ForwardRefExoticComponent<
   } & React.RefAttributes<HTMLDivElement>
 >;
 
+export declare const TactileAIChat: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIMessage: <T extends React.ElementType = 'article'>(
+  props: PolymorphicProps<T, { className?: string; role?: AIMessageRole }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIMessageMeta: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIMessageBody: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIToolbar: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIAction: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
+export declare const TactileAISuggestions: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAISuggestion: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
+export declare const TactileAIComposer: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIComposerRow: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileAIPrompt: React.ForwardRefExoticComponent<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLTextAreaElement>
+>;
+
+export declare const TactileAIStatus: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string; state?: AIStatusState }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileDateInput: React.ForwardRefExoticComponent<
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLInputElement>
+>;
+
+export declare const TactileTimeInput: React.ForwardRefExoticComponent<
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLInputElement>
+>;
+
+export declare const TactileCalendar: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarHeader: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarTitle: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarNav: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
+export declare const TactileCalendarWeekdays: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarWeekday: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarGrid: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileCalendarDay: React.ForwardRefExoticComponent<
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    className?: string;
+    muted?: boolean;
+    selected?: boolean;
+    today?: boolean;
+  } & React.RefAttributes<HTMLButtonElement>
+>;
+
+export declare const TactileTimeCard: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileTimeLabel: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileTimeValue: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileClock: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+    faceClassName?: string;
+    hour?: number;
+    minute?: number;
+    second?: number;
+    size?: number | string;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
 export declare const TactileIcon: <T extends React.ElementType = 'span'>(
   props: PolymorphicProps<T, { className?: string; variant?: IconVariant }> & {
     ref?: React.Ref<Element>;
@@ -456,6 +622,32 @@ declare const _default: {
   TactileAccordionItem: typeof TactileAccordionItem;
   TactileAccordionTrigger: typeof TactileAccordionTrigger;
   TactileAccordionContent: typeof TactileAccordionContent;
+  TactileAIChat: typeof TactileAIChat;
+  TactileAIMessage: typeof TactileAIMessage;
+  TactileAIMessageMeta: typeof TactileAIMessageMeta;
+  TactileAIMessageBody: typeof TactileAIMessageBody;
+  TactileAIToolbar: typeof TactileAIToolbar;
+  TactileAIAction: typeof TactileAIAction;
+  TactileAISuggestions: typeof TactileAISuggestions;
+  TactileAISuggestion: typeof TactileAISuggestion;
+  TactileAIComposer: typeof TactileAIComposer;
+  TactileAIComposerRow: typeof TactileAIComposerRow;
+  TactileAIPrompt: typeof TactileAIPrompt;
+  TactileAIStatus: typeof TactileAIStatus;
+  TactileDateInput: typeof TactileDateInput;
+  TactileTimeInput: typeof TactileTimeInput;
+  TactileCalendar: typeof TactileCalendar;
+  TactileCalendarHeader: typeof TactileCalendarHeader;
+  TactileCalendarTitle: typeof TactileCalendarTitle;
+  TactileCalendarNav: typeof TactileCalendarNav;
+  TactileCalendarWeekdays: typeof TactileCalendarWeekdays;
+  TactileCalendarWeekday: typeof TactileCalendarWeekday;
+  TactileCalendarGrid: typeof TactileCalendarGrid;
+  TactileCalendarDay: typeof TactileCalendarDay;
+  TactileTimeCard: typeof TactileTimeCard;
+  TactileTimeLabel: typeof TactileTimeLabel;
+  TactileTimeValue: typeof TactileTimeValue;
+  TactileClock: typeof TactileClock;
   TactileIcon: typeof TactileIcon;
   TactileText: typeof TactileText;
 };

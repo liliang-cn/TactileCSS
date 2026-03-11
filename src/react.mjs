@@ -28,6 +28,18 @@ function calculateRangePercentage(value, min = 0, max = 100) {
   return ((clampNumber(value, min, max) - min) / (max - min)) * 100;
 }
 
+function getClockAngles(hour = 0, minute = 0, second = 0) {
+  const normalizedHour = ((hour % 12) + 12) % 12;
+  const normalizedMinute = ((minute % 60) + 60) % 60;
+  const normalizedSecond = ((second % 60) + 60) % 60;
+
+  return {
+    hour: normalizedHour * 30 + normalizedMinute * 0.5,
+    minute: normalizedMinute * 6 + normalizedSecond * 0.1,
+    second: normalizedSecond * 6,
+  };
+}
+
 const surfaceVariantClass = {
   outer: 'tactile-outer',
   inner: 'tactile-inner',
@@ -116,6 +128,19 @@ const utilityToneClass = {
   danger: 'tactile-danger',
   warning: 'tactile-warning',
   info: 'tactile-info',
+};
+
+const aiMessageRoleClass = {
+  assistant: 'tactile-ai-message-assistant',
+  user: 'tactile-ai-message-user',
+  system: 'tactile-ai-message-system',
+};
+
+const aiStatusStateClass = {
+  idle: '',
+  streaming: 'tactile-ai-status-streaming',
+  ready: 'tactile-ai-status-ready',
+  error: 'tactile-ai-status-error',
 };
 
 export const TactileTheme = forwardRef(function TactileTheme(
@@ -876,6 +901,335 @@ export const TactileAccordionContent = forwardRef(function TactileAccordionConte
   });
 });
 
+export const TactileAIChat = forwardRef(function TactileAIChat(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-chat', className),
+    ...props,
+  });
+});
+
+export const TactileAIMessage = forwardRef(function TactileAIMessage(
+  { as: Component = 'article', role = 'assistant', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-message', aiMessageRoleClass[role] || aiMessageRoleClass.assistant, className),
+    'data-role': role,
+    ...props,
+  });
+});
+
+export const TactileAIMessageMeta = forwardRef(function TactileAIMessageMeta(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-message-meta', className),
+    ...props,
+  });
+});
+
+export const TactileAIMessageBody = forwardRef(function TactileAIMessageBody(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-message-body', className),
+    ...props,
+  });
+});
+
+export const TactileAIToolbar = forwardRef(function TactileAIToolbar(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-toolbar', className),
+    ...props,
+  });
+});
+
+export const TactileAIAction = forwardRef(function TactileAIAction(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    className: cx('tactile-ai-action', className),
+    type: props.type ?? 'button',
+    ...props,
+  });
+});
+
+export const TactileAISuggestions = forwardRef(function TactileAISuggestions(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-suggestions', className),
+    ...props,
+  });
+});
+
+export const TactileAISuggestion = forwardRef(function TactileAISuggestion(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    className: cx('tactile-ai-suggestion', className),
+    type: props.type ?? 'button',
+    ...props,
+  });
+});
+
+export const TactileAIComposer = forwardRef(function TactileAIComposer(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-composer', className),
+    ...props,
+  });
+});
+
+export const TactileAIComposerRow = forwardRef(function TactileAIComposerRow(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-composer-row', className),
+    ...props,
+  });
+});
+
+export const TactileAIPrompt = forwardRef(function TactileAIPrompt(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('textarea', {
+    ref,
+    className: cx('tactile-ai-prompt', className),
+    ...props,
+  });
+});
+
+export const TactileAIStatus = forwardRef(function TactileAIStatus(
+  { as: Component = 'div', state = 'idle', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-ai-status', aiStatusStateClass[state] || '', className),
+    'data-state': state,
+    ...props,
+  });
+});
+
+export const TactileDateInput = forwardRef(function TactileDateInput(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('input', {
+    ref,
+    type: props.type ?? 'date',
+    className: cx('tactile-date-input', className),
+    ...props,
+  });
+});
+
+export const TactileTimeInput = forwardRef(function TactileTimeInput(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('input', {
+    ref,
+    type: props.type ?? 'time',
+    className: cx('tactile-time-input', className),
+    ...props,
+  });
+});
+
+export const TactileCalendar = forwardRef(function TactileCalendar(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarHeader = forwardRef(function TactileCalendarHeader(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar-header', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarTitle = forwardRef(function TactileCalendarTitle(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar-title', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarNav = forwardRef(function TactileCalendarNav(
+  { className, ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    type: props.type ?? 'button',
+    className: cx('tactile-calendar-nav', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarWeekdays = forwardRef(function TactileCalendarWeekdays(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar-weekdays', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarWeekday = forwardRef(function TactileCalendarWeekday(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar-weekday', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarGrid = forwardRef(function TactileCalendarGrid(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-calendar-grid', className),
+    ...props,
+  });
+});
+
+export const TactileCalendarDay = forwardRef(function TactileCalendarDay(
+  { muted = false, selected = false, today = false, className, ...props },
+  ref
+) {
+  return React.createElement('button', {
+    ref,
+    type: props.type ?? 'button',
+    className: cx(
+      'tactile-calendar-day',
+      muted && 'tactile-calendar-day-muted',
+      today && 'tactile-calendar-day-today',
+      selected && 'tactile-calendar-day-selected',
+      className
+    ),
+    'aria-pressed': props['aria-pressed'] ?? selected,
+    ...props,
+  });
+});
+
+export const TactileTimeCard = forwardRef(function TactileTimeCard(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-time-card', className),
+    ...props,
+  });
+});
+
+export const TactileTimeLabel = forwardRef(function TactileTimeLabel(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-time-label', className),
+    ...props,
+  });
+});
+
+export const TactileTimeValue = forwardRef(function TactileTimeValue(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-time-value', className),
+    ...props,
+  });
+});
+
+export const TactileClock = forwardRef(function TactileClock(
+  { hour = 10, minute = 10, second = 30, size = 280, className, faceClassName, ...props },
+  ref
+) {
+  const angles = getClockAngles(hour, minute, second);
+  const marks = Array.from({ length: 12 }, (_, index) =>
+    React.createElement('span', {
+      key: index,
+      className: cx('tactile-clock-mark', index % 3 === 0 && 'tactile-clock-mark-major'),
+      style: { '--tactile-clock-mark-angle': `${index * 30}deg` },
+      'aria-hidden': true,
+    })
+  );
+
+  return React.createElement(
+    'div',
+    {
+      ref,
+      className: cx('tactile-clock', className),
+      style: {
+        '--tactile-clock-size': typeof size === 'number' ? `${size}px` : size,
+        '--tactile-clock-hour-angle': `${angles.hour}deg`,
+        '--tactile-clock-minute-angle': `${angles.minute}deg`,
+        '--tactile-clock-second-angle': `${angles.second}deg`,
+      },
+      ...props,
+    },
+    React.createElement(
+      'div',
+      { className: cx('tactile-clock-face', faceClassName) },
+      marks,
+      React.createElement('span', { className: 'tactile-clock-hand tactile-clock-hour', 'aria-hidden': true }),
+      React.createElement('span', { className: 'tactile-clock-hand tactile-clock-minute', 'aria-hidden': true }),
+      React.createElement('span', { className: 'tactile-clock-hand tactile-clock-second', 'aria-hidden': true }),
+      React.createElement('span', { className: 'tactile-clock-center', 'aria-hidden': true })
+    )
+  );
+});
+
 export const TactileIcon = forwardRef(function TactileIcon(
   { as: Component = 'span', variant = 'raised', className, ...props },
   ref
@@ -948,6 +1302,32 @@ export default {
   TactileAccordionItem,
   TactileAccordionTrigger,
   TactileAccordionContent,
+  TactileAIChat,
+  TactileAIMessage,
+  TactileAIMessageMeta,
+  TactileAIMessageBody,
+  TactileAIToolbar,
+  TactileAIAction,
+  TactileAISuggestions,
+  TactileAISuggestion,
+  TactileAIComposer,
+  TactileAIComposerRow,
+  TactileAIPrompt,
+  TactileAIStatus,
+  TactileDateInput,
+  TactileTimeInput,
+  TactileCalendar,
+  TactileCalendarHeader,
+  TactileCalendarTitle,
+  TactileCalendarNav,
+  TactileCalendarWeekdays,
+  TactileCalendarWeekday,
+  TactileCalendarGrid,
+  TactileCalendarDay,
+  TactileTimeCard,
+  TactileTimeLabel,
+  TactileTimeValue,
+  TactileClock,
   TactileIcon,
   TactileText,
 };

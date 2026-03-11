@@ -28,6 +28,18 @@ function calculateRangePercentage(value, min = 0, max = 100) {
   return ((clampNumber(value, min, max) - min) / (max - min)) * 100;
 }
 
+function getClockAngles(hour = 0, minute = 0, second = 0) {
+  const normalizedHour = ((hour % 12) + 12) % 12;
+  const normalizedMinute = ((minute % 60) + 60) % 60;
+  const normalizedSecond = ((second % 60) + 60) % 60;
+
+  return {
+    hour: normalizedHour * 30 + normalizedMinute * 0.5,
+    minute: normalizedMinute * 6 + normalizedSecond * 0.1,
+    second: normalizedSecond * 6,
+  };
+}
+
 const elementType = [String, Object, Function];
 
 const surfaceVariantClass = {
@@ -118,6 +130,19 @@ const utilityToneClass = {
   danger: 'tactile-danger',
   warning: 'tactile-warning',
   info: 'tactile-info',
+};
+
+const aiMessageRoleClass = {
+  assistant: 'tactile-ai-message-assistant',
+  user: 'tactile-ai-message-user',
+  system: 'tactile-ai-message-system',
+};
+
+const aiStatusStateClass = {
+  idle: '',
+  streaming: 'tactile-ai-status-streaming',
+  ready: 'tactile-ai-status-ready',
+  error: 'tactile-ai-status-error',
 };
 
 function renderSlot(slots, name = 'default', fallback = null) {
@@ -1114,6 +1139,398 @@ export const TactileAccordionContent = defineComponent({
   },
 });
 
+export const TactileAIChat = defineComponent({
+  name: 'TactileAIChat',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-chat' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIMessage = defineComponent({
+  name: 'TactileAIMessage',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'article' },
+    role: { type: String, default: 'assistant' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h(props.as, mergeProps(attrs, {
+        class: cx('tactile-ai-message', aiMessageRoleClass[props.role] || aiMessageRoleClass.assistant),
+        'data-role': props.role,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileAIMessageMeta = defineComponent({
+  name: 'TactileAIMessageMeta',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-message-meta' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIMessageBody = defineComponent({
+  name: 'TactileAIMessageBody',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-message-body' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIToolbar = defineComponent({
+  name: 'TactileAIToolbar',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-toolbar' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIAction = defineComponent({
+  name: 'TactileAIAction',
+  inheritAttrs: false,
+  props: {
+    type: { type: String, default: 'button' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h('button', mergeProps(attrs, {
+        class: 'tactile-ai-action',
+        type: props.type,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileAISuggestions = defineComponent({
+  name: 'TactileAISuggestions',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-suggestions' }), renderSlot(slots));
+  },
+});
+
+export const TactileAISuggestion = defineComponent({
+  name: 'TactileAISuggestion',
+  inheritAttrs: false,
+  props: {
+    type: { type: String, default: 'button' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h('button', mergeProps(attrs, {
+        class: 'tactile-ai-suggestion',
+        type: props.type,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileAIComposer = defineComponent({
+  name: 'TactileAIComposer',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-composer' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIComposerRow = defineComponent({
+  name: 'TactileAIComposerRow',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-ai-composer-row' }), renderSlot(slots));
+  },
+});
+
+export const TactileAIPrompt = defineComponent({
+  name: 'TactileAIPrompt',
+  inheritAttrs: false,
+  props: {
+    modelValue: { type: String, default: undefined },
+  },
+  emits: ['update:modelValue', 'input', 'change'],
+  setup(props, { attrs, emit }) {
+    function handleInput(event) {
+      emit('update:modelValue', event.target.value);
+      emit('input', event.target.value);
+    }
+
+    return () =>
+      h('textarea', mergeProps(attrs, {
+        class: 'tactile-ai-prompt',
+        value: props.modelValue ?? attrs.value,
+        onInput: handleInput,
+        onChange: (event) => emit('change', event),
+      }));
+  },
+});
+
+export const TactileAIStatus = defineComponent({
+  name: 'TactileAIStatus',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+    state: { type: String, default: 'idle' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h(props.as, mergeProps(attrs, {
+        class: cx('tactile-ai-status', aiStatusStateClass[props.state] || ''),
+        'data-state': props.state,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileDateInput = defineComponent({
+  name: 'TactileDateInput',
+  inheritAttrs: false,
+  props: {
+    modelValue: { type: String, default: undefined },
+    type: { type: String, default: 'date' },
+  },
+  emits: ['update:modelValue', 'input', 'change'],
+  setup(props, { attrs, emit }) {
+    function handleInput(event) {
+      emit('update:modelValue', event.target.value);
+      emit('input', event.target.value);
+    }
+
+    return () =>
+      h('input', mergeProps(attrs, {
+        class: 'tactile-date-input',
+        type: props.type,
+        value: props.modelValue ?? attrs.value,
+        onInput: handleInput,
+        onChange: (event) => emit('change', event),
+      }));
+  },
+});
+
+export const TactileTimeInput = defineComponent({
+  name: 'TactileTimeInput',
+  inheritAttrs: false,
+  props: {
+    modelValue: { type: String, default: undefined },
+    type: { type: String, default: 'time' },
+  },
+  emits: ['update:modelValue', 'input', 'change'],
+  setup(props, { attrs, emit }) {
+    function handleInput(event) {
+      emit('update:modelValue', event.target.value);
+      emit('input', event.target.value);
+    }
+
+    return () =>
+      h('input', mergeProps(attrs, {
+        class: 'tactile-time-input',
+        type: props.type,
+        value: props.modelValue ?? attrs.value,
+        onInput: handleInput,
+        onChange: (event) => emit('change', event),
+      }));
+  },
+});
+
+export const TactileCalendar = defineComponent({
+  name: 'TactileCalendar',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarHeader = defineComponent({
+  name: 'TactileCalendarHeader',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar-header' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarTitle = defineComponent({
+  name: 'TactileCalendarTitle',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar-title' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarNav = defineComponent({
+  name: 'TactileCalendarNav',
+  inheritAttrs: false,
+  props: {
+    type: { type: String, default: 'button' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h('button', mergeProps(attrs, {
+        class: 'tactile-calendar-nav',
+        type: props.type,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarWeekdays = defineComponent({
+  name: 'TactileCalendarWeekdays',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar-weekdays' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarWeekday = defineComponent({
+  name: 'TactileCalendarWeekday',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar-weekday' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarGrid = defineComponent({
+  name: 'TactileCalendarGrid',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-calendar-grid' }), renderSlot(slots));
+  },
+});
+
+export const TactileCalendarDay = defineComponent({
+  name: 'TactileCalendarDay',
+  inheritAttrs: false,
+  props: {
+    muted: { type: Boolean, default: false },
+    selected: { type: Boolean, default: false },
+    today: { type: Boolean, default: false },
+    type: { type: String, default: 'button' },
+  },
+  setup(props, { attrs, slots }) {
+    return () =>
+      h('button', mergeProps(attrs, {
+        class: cx(
+          'tactile-calendar-day',
+          props.muted && 'tactile-calendar-day-muted',
+          props.today && 'tactile-calendar-day-today',
+          props.selected && 'tactile-calendar-day-selected'
+        ),
+        type: props.type,
+        'aria-pressed': attrs['aria-pressed'] ?? props.selected,
+      }), renderSlot(slots));
+  },
+});
+
+export const TactileTimeCard = defineComponent({
+  name: 'TactileTimeCard',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-time-card' }), renderSlot(slots));
+  },
+});
+
+export const TactileTimeLabel = defineComponent({
+  name: 'TactileTimeLabel',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-time-label' }), renderSlot(slots));
+  },
+});
+
+export const TactileTimeValue = defineComponent({
+  name: 'TactileTimeValue',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-time-value' }), renderSlot(slots));
+  },
+});
+
+export const TactileClock = defineComponent({
+  name: 'TactileClock',
+  inheritAttrs: false,
+  props: {
+    faceClass: { type: String, default: '' },
+    hour: { type: Number, default: 10 },
+    minute: { type: Number, default: 10 },
+    second: { type: Number, default: 30 },
+    size: { type: [Number, String], default: 280 },
+  },
+  setup(props, { attrs }) {
+    return () => {
+      const angles = getClockAngles(props.hour, props.minute, props.second);
+      const marks = Array.from({ length: 12 }, (_, index) =>
+        h('span', {
+          class: cx('tactile-clock-mark', index % 3 === 0 && 'tactile-clock-mark-major'),
+          style: { '--tactile-clock-mark-angle': `${index * 30}deg` },
+          'aria-hidden': true,
+        })
+      );
+
+      return h('div', mergeProps(attrs, {
+        class: 'tactile-clock',
+        style: {
+          '--tactile-clock-size': typeof props.size === 'number' ? `${props.size}px` : props.size,
+          '--tactile-clock-hour-angle': `${angles.hour}deg`,
+          '--tactile-clock-minute-angle': `${angles.minute}deg`,
+          '--tactile-clock-second-angle': `${angles.second}deg`,
+        },
+      }), [
+        h('div', { class: cx('tactile-clock-face', props.faceClass) }, [
+          ...marks,
+          h('span', { class: 'tactile-clock-hand tactile-clock-hour', 'aria-hidden': true }),
+          h('span', { class: 'tactile-clock-hand tactile-clock-minute', 'aria-hidden': true }),
+          h('span', { class: 'tactile-clock-hand tactile-clock-second', 'aria-hidden': true }),
+          h('span', { class: 'tactile-clock-center', 'aria-hidden': true }),
+        ]),
+      ]);
+    };
+  },
+});
+
 export const TactileIcon = defineComponent({
   name: 'TactileIcon',
   inheritAttrs: false,
@@ -1194,6 +1611,32 @@ export default {
   TactileAccordionItem,
   TactileAccordionTrigger,
   TactileAccordionContent,
+  TactileAIChat,
+  TactileAIMessage,
+  TactileAIMessageMeta,
+  TactileAIMessageBody,
+  TactileAIToolbar,
+  TactileAIAction,
+  TactileAISuggestions,
+  TactileAISuggestion,
+  TactileAIComposer,
+  TactileAIComposerRow,
+  TactileAIPrompt,
+  TactileAIStatus,
+  TactileDateInput,
+  TactileTimeInput,
+  TactileCalendar,
+  TactileCalendarHeader,
+  TactileCalendarTitle,
+  TactileCalendarNav,
+  TactileCalendarWeekdays,
+  TactileCalendarWeekday,
+  TactileCalendarGrid,
+  TactileCalendarDay,
+  TactileTimeCard,
+  TactileTimeLabel,
+  TactileTimeValue,
+  TactileClock,
   TactileIcon,
   TactileText,
 };

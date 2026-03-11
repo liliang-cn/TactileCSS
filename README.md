@@ -174,12 +174,38 @@ Initial React exports:
 - `TactileAccordionItem`
 - `TactileAccordionTrigger`
 - `TactileAccordionContent`
+- `TactileAIChat`
+- `TactileAIMessage`
+- `TactileAIMessageMeta`
+- `TactileAIMessageBody`
+- `TactileAIToolbar`
+- `TactileAIAction`
+- `TactileAISuggestions`
+- `TactileAISuggestion`
+- `TactileAIComposer`
+- `TactileAIComposerRow`
+- `TactileAIPrompt`
+- `TactileAIStatus`
+- `TactileDateInput`
+- `TactileTimeInput`
+- `TactileCalendar`
+- `TactileCalendarHeader`
+- `TactileCalendarTitle`
+- `TactileCalendarNav`
+- `TactileCalendarWeekdays`
+- `TactileCalendarWeekday`
+- `TactileCalendarGrid`
+- `TactileCalendarDay`
+- `TactileTimeCard`
+- `TactileTimeLabel`
+- `TactileTimeValue`
+- `TactileClock`
 - `TactileIcon`
 - `TactileText`
 
-The React package now covers the core surfaces, forms, navigation, feedback, and visual effect primitives that already exist in the CSS library. Future releases can keep expanding into higher-level composed patterns on top of this base layer.
+The React package now covers the core surfaces, forms, navigation, feedback, AI, and time primitives that already exist in the CSS library. Future releases can keep expanding into higher-level composed patterns on top of this base layer.
 
-It also exposes composition primitives for field, modal, and toast layouts, so you can either use the bundled `TactileModal` / `TactileToast` helpers or assemble your own structures from the same class-backed parts.
+It also exposes composition primitives for field, modal, toast, and AI chat layouts, so you can either use the bundled helpers or assemble your own structures from the same class-backed parts.
 
 ```jsx
 import {
@@ -274,7 +300,7 @@ const focus = 72
 </template>
 ```
 
-The Vue package mirrors the React export surface, including the field, modal, toast, accordion, keyboard, slider, icon, and text primitives. Use `v-model` on `TactileInput`, `TactileTextarea`, `TactileSelect`, `TactileCheckbox`, `TactileSwitch`, and `TactileSlider` where it makes sense.
+The Vue package mirrors the React export surface, including the field, modal, toast, accordion, keyboard, slider, AI, date, calendar, clock, icon, and text primitives. Use `v-model` on `TactileInput`, `TactileTextarea`, `TactileSelect`, `TactileCheckbox`, `TactileSwitch`, `TactileSlider`, `TactileAIPrompt`, `TactileDateInput`, and `TactileTimeInput` where it makes sense.
 
 ```vue
 <script setup>
@@ -582,6 +608,108 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
       A neumorphic component library with theme tokens and React wrappers.
     </div>
   </details>
+</div>
+```
+
+### Generative AI
+
+```html
+<section class="tactile-ai-chat">
+  <article class="tactile-ai-message tactile-ai-message-system">
+    <div class="tactile-ai-message-meta">Context</div>
+    <div class="tactile-ai-message-body">
+      You are a product copilot. Keep answers concise and actionable.
+    </div>
+  </article>
+
+  <article class="tactile-ai-message tactile-ai-message-assistant">
+    <div class="tactile-ai-message-meta">Assistant · 9:41</div>
+    <div class="tactile-ai-message-body">
+      <p>I found three onboarding drop-offs worth fixing first.</p>
+    </div>
+    <div class="tactile-ai-toolbar">
+      <button class="tactile-ai-action">Regenerate</button>
+      <button class="tactile-ai-action">Copy</button>
+    </div>
+  </article>
+
+  <div class="tactile-ai-suggestions">
+    <button class="tactile-ai-suggestion">Summarize changes</button>
+    <button class="tactile-ai-suggestion">Write release notes</button>
+  </div>
+
+  <form class="tactile-ai-composer">
+    <textarea class="tactile-ai-prompt" placeholder="Ask the model anything..."></textarea>
+    <div class="tactile-ai-composer-row">
+      <div class="tactile-ai-status tactile-ai-status-streaming">Streaming</div>
+      <div class="tactile-ai-toolbar">
+        <button class="tactile-ai-action">Attach context</button>
+        <button class="tactile-button-primary">Send</button>
+      </div>
+    </div>
+  </form>
+</section>
+```
+
+### Date, Time & Clock
+
+```html
+<div class="tactile-field" style="max-width: 340px;">
+  <label class="tactile-field-label">Publish at</label>
+  <input type="date" class="tactile-date-input">
+  <input type="time" class="tactile-time-input">
+</div>
+
+<section class="tactile-calendar" style="max-width: 360px; margin-top: 16px;">
+  <div class="tactile-calendar-header">
+    <button class="tactile-calendar-nav">‹</button>
+    <div class="tactile-calendar-title">March 2026</div>
+    <button class="tactile-calendar-nav">›</button>
+  </div>
+  <div class="tactile-calendar-weekdays">
+    <div class="tactile-calendar-weekday">Mo</div>
+    <div class="tactile-calendar-weekday">Tu</div>
+    <div class="tactile-calendar-weekday">We</div>
+    <div class="tactile-calendar-weekday">Th</div>
+    <div class="tactile-calendar-weekday">Fr</div>
+    <div class="tactile-calendar-weekday">Sa</div>
+    <div class="tactile-calendar-weekday">Su</div>
+  </div>
+  <div class="tactile-calendar-grid">
+    <button class="tactile-calendar-day tactile-calendar-day-muted">24</button>
+    <button class="tactile-calendar-day tactile-calendar-day-muted">25</button>
+    <button class="tactile-calendar-day">26</button>
+    <button class="tactile-calendar-day">27</button>
+    <button class="tactile-calendar-day">28</button>
+    <button class="tactile-calendar-day tactile-calendar-day-today">11</button>
+    <button class="tactile-calendar-day tactile-calendar-day-selected">12</button>
+  </div>
+</section>
+
+<div class="tactile-time-card" style="max-width: 220px; margin-top: 16px;">
+  <div class="tactile-time-label">Local Time</div>
+  <div class="tactile-time-value">09:41</div>
+</div>
+
+<div class="tactile-clock" style="--tactile-clock-size: 280px; --tactile-clock-hour-angle: 295deg; --tactile-clock-minute-angle: 246deg; --tactile-clock-second-angle: 180deg; margin-top: 20px;">
+  <div class="tactile-clock-face">
+    <span class="tactile-clock-mark tactile-clock-mark-major" style="--tactile-clock-mark-angle: 0deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 30deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 60deg;"></span>
+    <span class="tactile-clock-mark tactile-clock-mark-major" style="--tactile-clock-mark-angle: 90deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 120deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 150deg;"></span>
+    <span class="tactile-clock-mark tactile-clock-mark-major" style="--tactile-clock-mark-angle: 180deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 210deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 240deg;"></span>
+    <span class="tactile-clock-mark tactile-clock-mark-major" style="--tactile-clock-mark-angle: 270deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 300deg;"></span>
+    <span class="tactile-clock-mark" style="--tactile-clock-mark-angle: 330deg;"></span>
+    <span class="tactile-clock-hand tactile-clock-hour"></span>
+    <span class="tactile-clock-hand tactile-clock-minute"></span>
+    <span class="tactile-clock-hand tactile-clock-second"></span>
+    <span class="tactile-clock-center"></span>
+  </div>
 </div>
 ```
 
