@@ -199,6 +199,12 @@ Initial React exports:
 - `TactileAIComposerRow`
 - `TactileAIPrompt`
 - `TactileAIStatus`
+- `TactileDisplay`
+- `TactileDisplayLabel`
+- `TactileDisplayValue`
+- `TactileDisplayMeta`
+- `TactileKnob`
+- `TactileMeter`
 - `TactileDateInput`
 - `TactileTimeInput`
 - `TactileCalendar`
@@ -313,7 +319,7 @@ const focus = 72
 </template>
 ```
 
-The Vue package mirrors the React export surface, including the field, modal, toast, accordion, keyboard, slider, AI, date, calendar, clock, icon, and text primitives. Use `v-model` on `TactileInput`, `TactileTextarea`, `TactileSelect`, `TactileCheckbox`, `TactileSwitch`, `TactileSlider`, `TactileAIPrompt`, `TactileDateInput`, and `TactileTimeInput` where it makes sense.
+The Vue package mirrors the React export surface, including the field, modal, toast, accordion, keyboard, slider, AI, display, knob, meter, date, calendar, clock, icon, and text primitives. Use `v-model` on `TactileInput`, `TactileTextarea`, `TactileSelect`, `TactileCheckbox`, `TactileSwitch`, `TactileSlider`, `TactileAIPrompt`, `TactileDateInput`, and `TactileTimeInput` where it makes sense.
 
 ```vue
 <script setup>
@@ -629,7 +635,7 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
 ```html
 <section class="tactile-ai-chat">
   <article class="tactile-ai-message tactile-ai-message-system">
-    <div class="tactile-ai-message-meta">Context</div>
+    <div class="tactile-ai-message-meta">Pinned context</div>
     <div class="tactile-ai-message-body">
       You are a product copilot. Keep answers concise and actionable.
     </div>
@@ -662,6 +668,50 @@ Switch themes by adding `data-theme` attribute to `<html>` or any parent element
     </div>
   </form>
 </section>
+```
+
+### Control Objects
+
+```html
+<div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: end;">
+  <div class="tactile-display" style="max-width: 260px;">
+    <div class="tactile-display-screen">
+      <div class="tactile-display-label">Output</div>
+      <div class="tactile-display-value">24.8 dB</div>
+      <div class="tactile-display-meta">Warm bus / live</div>
+    </div>
+  </div>
+
+  <div class="tactile-knob">
+    <div class="tactile-knob-dial" style="--tactile-knob-size: 148px; --tactile-knob-angle: 38deg;">
+      <div class="tactile-knob-scale">
+        <span class="tactile-knob-tick tactile-knob-tick-major" style="--tactile-knob-tick-angle: -140deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: -112deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: -84deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: -56deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: -28deg;"></span>
+        <span class="tactile-knob-tick tactile-knob-tick-major" style="--tactile-knob-tick-angle: 0deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: 28deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: 56deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: 84deg;"></span>
+        <span class="tactile-knob-tick" style="--tactile-knob-tick-angle: 112deg;"></span>
+        <span class="tactile-knob-tick tactile-knob-tick-major" style="--tactile-knob-tick-angle: 140deg;"></span>
+      </div>
+      <span class="tactile-knob-indicator"></span>
+      <span class="tactile-knob-cap"></span>
+    </div>
+    <div class="tactile-knob-value">64%</div>
+    <div class="tactile-knob-label">Drive</div>
+  </div>
+
+  <div class="tactile-meter">
+    <div class="tactile-meter-track">
+      <div class="tactile-meter-fill" style="--tactile-meter-fill: 74%;"></div>
+    </div>
+    <div class="tactile-meter-value">74%</div>
+    <div class="tactile-meter-label">Level</div>
+  </div>
+</div>
 ```
 
 ### Date, Time & Clock

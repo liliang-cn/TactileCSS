@@ -468,6 +468,65 @@ export declare const TactileAIStatus: <T extends React.ElementType = 'div'>(
   }
 ) => React.ReactElement | null;
 
+export declare const TactileDisplay: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<
+    T,
+    {
+      children?: React.ReactNode;
+      className?: string;
+      label?: React.ReactNode;
+      meta?: React.ReactNode;
+      screenClassName?: string;
+      value?: React.ReactNode;
+    }
+  > & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileDisplayLabel: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileDisplayValue: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileDisplayMeta: <T extends React.ElementType = 'div'>(
+  props: PolymorphicProps<T, { className?: string }> & {
+    ref?: React.Ref<Element>;
+  }
+) => React.ReactElement | null;
+
+export declare const TactileKnob: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+    dialClassName?: string;
+    label?: React.ReactNode;
+    max?: number;
+    min?: number;
+    showValue?: boolean;
+    size?: number | string;
+    value?: number;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
+export declare const TactileMeter: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & {
+    className?: string;
+    fillClassName?: string;
+    label?: React.ReactNode;
+    max?: number;
+    showValue?: boolean;
+    trackClassName?: string;
+    value?: number;
+  } & React.RefAttributes<HTMLDivElement>
+>;
+
 export declare const TactileDateInput: React.ForwardRefExoticComponent<
   React.InputHTMLAttributes<HTMLInputElement> & {
     className?: string;
@@ -634,6 +693,12 @@ declare const _default: {
   TactileAIComposerRow: typeof TactileAIComposerRow;
   TactileAIPrompt: typeof TactileAIPrompt;
   TactileAIStatus: typeof TactileAIStatus;
+  TactileDisplay: typeof TactileDisplay;
+  TactileDisplayLabel: typeof TactileDisplayLabel;
+  TactileDisplayValue: typeof TactileDisplayValue;
+  TactileDisplayMeta: typeof TactileDisplayMeta;
+  TactileKnob: typeof TactileKnob;
+  TactileMeter: typeof TactileMeter;
   TactileDateInput: typeof TactileDateInput;
   TactileTimeInput: typeof TactileTimeInput;
   TactileCalendar: typeof TactileCalendar;

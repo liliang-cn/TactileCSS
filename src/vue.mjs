@@ -28,6 +28,12 @@ function calculateRangePercentage(value, min = 0, max = 100) {
   return ((clampNumber(value, min, max) - min) / (max - min)) * 100;
 }
 
+function calculateKnobAngle(value, min = 0, max = 100, start = -140, end = 140) {
+  const percentage = calculateRangePercentage(value, min, max);
+
+  return start + ((end - start) * percentage) / 100;
+}
+
 function getClockAngles(hour = 0, minute = 0, second = 0) {
   const normalizedHour = ((hour % 12) + 12) % 12;
   const normalizedMinute = ((minute % 60) + 60) % 60;
@@ -1301,6 +1307,153 @@ export const TactileAIStatus = defineComponent({
   },
 });
 
+export const TactileDisplay = defineComponent({
+  name: 'TactileDisplay',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+    label: { type: [String, Number, Boolean, Object, Array], default: null },
+    meta: { type: [String, Number, Boolean, Object, Array], default: null },
+    screenClass: { type: String, default: '' },
+    value: { type: [String, Number, Boolean, Object, Array], default: null },
+  },
+  setup(props, { attrs, slots }) {
+    return () => {
+      const screenContent = props.value != null ? props.value : renderSlot(slots);
+
+      return h(
+        props.as,
+        mergeProps(attrs, {
+          class: 'tactile-display',
+        }),
+        [
+          h('div', { class: cx('tactile-display-screen', props.screenClass) }, [
+            props.label != null ? h('div', { class: 'tactile-display-label' }, props.label) : null,
+            screenContent != null ? h('div', { class: 'tactile-display-value' }, screenContent) : null,
+            props.meta != null ? h('div', { class: 'tactile-display-meta' }, props.meta) : null,
+          ]),
+        ]
+      );
+    };
+  },
+});
+
+export const TactileDisplayLabel = defineComponent({
+  name: 'TactileDisplayLabel',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-display-label' }), renderSlot(slots));
+  },
+});
+
+export const TactileDisplayValue = defineComponent({
+  name: 'TactileDisplayValue',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-display-value' }), renderSlot(slots));
+  },
+});
+
+export const TactileDisplayMeta = defineComponent({
+  name: 'TactileDisplayMeta',
+  inheritAttrs: false,
+  props: {
+    as: { type: elementType, default: 'div' },
+  },
+  setup(props, { attrs, slots }) {
+    return () => h(props.as, mergeProps(attrs, { class: 'tactile-display-meta' }), renderSlot(slots));
+  },
+});
+
+export const TactileKnob = defineComponent({
+  name: 'TactileKnob',
+  inheritAttrs: false,
+  props: {
+    dialClass: { type: String, default: '' },
+    label: { type: [String, Number, Boolean, Object, Array], default: null },
+    max: { type: Number, default: 100 },
+    min: { type: Number, default: 0 },
+    showValue: { type: Boolean, default: true },
+    size: { type: [Number, String], default: 152 },
+    value: { type: Number, default: 0 },
+  },
+  setup(props, { attrs, slots }) {
+    return () => {
+      const angle = calculateKnobAngle(props.value, props.min, props.max);
+      const percentage = calculateRangePercentage(props.value, props.min, props.max);
+      const marks = Array.from({ length: 11 }, (_, index) =>
+        h('span', {
+          class: cx('tactile-knob-tick', (index === 0 || index === 5 || index === 10) && 'tactile-knob-tick-major'),
+          style: { '--tactile-knob-tick-angle': `${-140 + index * 28}deg` },
+          'aria-hidden': true,
+        })
+      );
+      const labelContent = renderSlot(slots, 'label', props.label);
+
+      return h('div', mergeProps(attrs, {
+        class: 'tactile-knob',
+      }), [
+        h('div', {
+          class: cx('tactile-knob-dial', props.dialClass),
+          style: {
+            '--tactile-knob-size': typeof props.size === 'number' ? `${props.size}px` : props.size,
+            '--tactile-knob-angle': `${angle}deg`,
+          },
+          'aria-valuemax': props.max,
+          'aria-valuemin': props.min,
+          'aria-valuenow': Math.round(clampNumber(props.value, props.min, props.max)),
+          role: attrs.role ?? 'img',
+        }, [
+          h('div', { class: 'tactile-knob-scale', 'aria-hidden': true }, marks),
+          h('span', { class: 'tactile-knob-indicator', 'aria-hidden': true }),
+          h('span', { class: 'tactile-knob-cap', 'aria-hidden': true }),
+        ]),
+        props.showValue ? h('div', { class: 'tactile-knob-value' }, `${Math.round(percentage)}%`) : null,
+        labelContent ? h('div', { class: 'tactile-knob-label' }, labelContent) : null,
+      ]);
+    };
+  },
+});
+
+export const TactileMeter = defineComponent({
+  name: 'TactileMeter',
+  inheritAttrs: false,
+  props: {
+    fillClass: { type: String, default: '' },
+    label: { type: [String, Number, Boolean, Object, Array], default: null },
+    max: { type: Number, default: 100 },
+    showValue: { type: Boolean, default: true },
+    trackClass: { type: String, default: '' },
+    value: { type: Number, default: 0 },
+  },
+  setup(props, { attrs, slots }) {
+    return () => {
+      const percentage = clampPercentage(props.value, props.max);
+      const labelContent = renderSlot(slots, 'label', props.label);
+
+      return h('div', mergeProps(attrs, {
+        class: 'tactile-meter',
+      }), [
+        h('div', { class: cx('tactile-meter-track', props.trackClass) }, [
+          h('div', {
+            class: cx('tactile-meter-fill', props.fillClass),
+            style: { '--tactile-meter-fill': `${percentage}%` },
+            'aria-hidden': true,
+          }),
+        ]),
+        props.showValue ? h('div', { class: 'tactile-meter-value' }, `${Math.round(percentage)}%`) : null,
+        labelContent ? h('div', { class: 'tactile-meter-label' }, labelContent) : null,
+      ]);
+    };
+  },
+});
+
 export const TactileDateInput = defineComponent({
   name: 'TactileDateInput',
   inheritAttrs: false,
@@ -1623,6 +1776,12 @@ export default {
   TactileAIComposerRow,
   TactileAIPrompt,
   TactileAIStatus,
+  TactileDisplay,
+  TactileDisplayLabel,
+  TactileDisplayValue,
+  TactileDisplayMeta,
+  TactileKnob,
+  TactileMeter,
   TactileDateInput,
   TactileTimeInput,
   TactileCalendar,

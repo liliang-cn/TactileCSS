@@ -1,6 +1,6 @@
 {
   "name": "tactile-css",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A minimal neumorphic CSS library with outer, inner, and clay shadow styles",
   "main": "dist/tactile.css",
   "style": "dist/tactile.min.css",

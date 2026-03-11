@@ -104,6 +104,29 @@ export declare const TactileAIComposer: PrimitiveComponent<PolyProps>;
 export declare const TactileAIComposerRow: PrimitiveComponent<PolyProps>;
 export declare const TactileAIPrompt: PrimitiveComponent<{ modelValue?: string }>;
 export declare const TactileAIStatus: PrimitiveComponent<PolyProps<{ state?: AIStatusState }>>;
+export declare const TactileDisplay: PrimitiveComponent<
+  PolyProps<{ label?: unknown; meta?: unknown; screenClass?: string; value?: unknown }>
+>;
+export declare const TactileDisplayLabel: PrimitiveComponent<PolyProps>;
+export declare const TactileDisplayValue: PrimitiveComponent<PolyProps>;
+export declare const TactileDisplayMeta: PrimitiveComponent<PolyProps>;
+export declare const TactileKnob: PrimitiveComponent<{
+  dialClass?: string;
+  label?: unknown;
+  max?: number;
+  min?: number;
+  showValue?: boolean;
+  size?: number | string;
+  value?: number;
+}>;
+export declare const TactileMeter: PrimitiveComponent<{
+  fillClass?: string;
+  label?: unknown;
+  max?: number;
+  showValue?: boolean;
+  trackClass?: string;
+  value?: number;
+}>;
 export declare const TactileDateInput: PrimitiveComponent<{ modelValue?: string; type?: string }>;
 export declare const TactileTimeInput: PrimitiveComponent<{ modelValue?: string; type?: string }>;
 export declare const TactileCalendar: PrimitiveComponent<PolyProps>;
@@ -183,6 +206,12 @@ declare const _default: {
   TactileAIComposerRow: typeof TactileAIComposerRow;
   TactileAIPrompt: typeof TactileAIPrompt;
   TactileAIStatus: typeof TactileAIStatus;
+  TactileDisplay: typeof TactileDisplay;
+  TactileDisplayLabel: typeof TactileDisplayLabel;
+  TactileDisplayValue: typeof TactileDisplayValue;
+  TactileDisplayMeta: typeof TactileDisplayMeta;
+  TactileKnob: typeof TactileKnob;
+  TactileMeter: typeof TactileMeter;
   TactileDateInput: typeof TactileDateInput;
   TactileTimeInput: typeof TactileTimeInput;
   TactileCalendar: typeof TactileCalendar;

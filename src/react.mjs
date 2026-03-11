@@ -28,6 +28,12 @@ function calculateRangePercentage(value, min = 0, max = 100) {
   return ((clampNumber(value, min, max) - min) / (max - min)) * 100;
 }
 
+function calculateKnobAngle(value, min = 0, max = 100, start = -140, end = 140) {
+  const percentage = calculateRangePercentage(value, min, max);
+
+  return start + ((end - start) * percentage) / 100;
+}
+
 function getClockAngles(hour = 0, minute = 0, second = 0) {
   const normalizedHour = ((hour % 12) + 12) % 12;
   const normalizedMinute = ((minute % 60) + 60) % 60;
@@ -1037,6 +1043,135 @@ export const TactileAIStatus = forwardRef(function TactileAIStatus(
   });
 });
 
+export const TactileDisplay = forwardRef(function TactileDisplay(
+  { as: Component = 'div', label, value, meta, screenClassName, className, children, ...props },
+  ref
+) {
+  const screenContent = value != null ? value : children;
+
+  return React.createElement(
+    Component,
+    {
+      ref,
+      className: cx('tactile-display', className),
+      ...props,
+    },
+    React.createElement(
+      'div',
+      { className: cx('tactile-display-screen', screenClassName) },
+      label != null ? React.createElement('div', { className: 'tactile-display-label' }, label) : null,
+      screenContent != null ? React.createElement('div', { className: 'tactile-display-value' }, screenContent) : null,
+      meta != null ? React.createElement('div', { className: 'tactile-display-meta' }, meta) : null
+    )
+  );
+});
+
+export const TactileDisplayLabel = forwardRef(function TactileDisplayLabel(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-display-label', className),
+    ...props,
+  });
+});
+
+export const TactileDisplayValue = forwardRef(function TactileDisplayValue(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-display-value', className),
+    ...props,
+  });
+});
+
+export const TactileDisplayMeta = forwardRef(function TactileDisplayMeta(
+  { as: Component = 'div', className, ...props },
+  ref
+) {
+  return React.createElement(Component, {
+    ref,
+    className: cx('tactile-display-meta', className),
+    ...props,
+  });
+});
+
+export const TactileKnob = forwardRef(function TactileKnob(
+  { value = 0, min = 0, max = 100, size = 152, label, showValue = true, className, dialClassName, style, ...props },
+  ref
+) {
+  const angle = calculateKnobAngle(value, min, max);
+  const percentage = calculateRangePercentage(value, min, max);
+  const marks = Array.from({ length: 11 }, (_, index) =>
+    React.createElement('span', {
+      key: index,
+      className: cx('tactile-knob-tick', (index === 0 || index === 5 || index === 10) && 'tactile-knob-tick-major'),
+      style: { '--tactile-knob-tick-angle': `${-140 + index * 28}deg` },
+      'aria-hidden': true,
+    })
+  );
+
+  return React.createElement(
+    'div',
+    {
+      ref,
+      className: cx('tactile-knob', className),
+      style,
+      ...props,
+    },
+    React.createElement(
+      'div',
+      {
+        className: cx('tactile-knob-dial', dialClassName),
+        style: {
+          '--tactile-knob-size': typeof size === 'number' ? `${size}px` : size,
+          '--tactile-knob-angle': `${angle}deg`,
+        },
+        'aria-valuemax': max,
+        'aria-valuemin': min,
+        'aria-valuenow': Math.round(clampNumber(value, min, max)),
+        role: props.role ?? 'img',
+      },
+      React.createElement('div', { className: 'tactile-knob-scale', 'aria-hidden': true }, marks),
+      React.createElement('span', { className: 'tactile-knob-indicator', 'aria-hidden': true }),
+      React.createElement('span', { className: 'tactile-knob-cap', 'aria-hidden': true })
+    ),
+    showValue ? React.createElement('div', { className: 'tactile-knob-value' }, `${Math.round(percentage)}%`) : null,
+    label ? React.createElement('div', { className: 'tactile-knob-label' }, label) : null
+  );
+});
+
+export const TactileMeter = forwardRef(function TactileMeter(
+  { value = 0, max = 100, label, showValue = true, className, trackClassName, fillClassName, style, ...props },
+  ref
+) {
+  const percentage = clampPercentage(value, max);
+
+  return React.createElement(
+    'div',
+    {
+      ref,
+      className: cx('tactile-meter', className),
+      style,
+      ...props,
+    },
+    React.createElement(
+      'div',
+      { className: cx('tactile-meter-track', trackClassName) },
+      React.createElement('div', {
+        className: cx('tactile-meter-fill', fillClassName),
+        style: { '--tactile-meter-fill': `${percentage}%` },
+        'aria-hidden': true,
+      })
+    ),
+    showValue ? React.createElement('div', { className: 'tactile-meter-value' }, `${Math.round(percentage)}%`) : null,
+    label ? React.createElement('div', { className: 'tactile-meter-label' }, label) : null
+  );
+});
+
 export const TactileDateInput = forwardRef(function TactileDateInput(
   { className, ...props },
   ref
@@ -1314,6 +1449,12 @@ export default {
   TactileAIComposerRow,
   TactileAIPrompt,
   TactileAIStatus,
+  TactileDisplay,
+  TactileDisplayLabel,
+  TactileDisplayValue,
+  TactileDisplayMeta,
+  TactileKnob,
+  TactileMeter,
   TactileDateInput,
   TactileTimeInput,
   TactileCalendar,

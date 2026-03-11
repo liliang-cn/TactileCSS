@@ -36,6 +36,7 @@ Use this skill when the task is about consuming `tactile-css`, not maintaining t
 Use [references/usage-map.md](references/usage-map.md) for concrete imports and examples.
 
 - General UI: buttons, cards, inputs, fields, segmented controls, tabs, badges, avatars, divider, modal, toast, accordion.
+- Control objects: `TactileDisplay`, `TactileKnob`, `TactileMeter`.
 - Input-heavy UI: `TactileInput`, `TactileSelect`, `TactileTextarea`, `TactileCheckbox`, `TactileSwitch`, `TactileSlider`.
 - AI/chat UI: `TactileAIChat`, `TactileAIMessage`, `TactileAIToolbar`, `TactileAISuggestions`, `TactileAIComposer`, `TactileAIStatus`.
 - Date/time UI: `TactileDateInput`, `TactileTimeInput`, `TactileCalendar*`, `TactileTimeCard*`, `TactileClock`.

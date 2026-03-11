@@ -89,6 +89,12 @@ or:
 - Navigation: `TactileSegmented`, `TactileTabs`, `TactileAccordion`
 - Feedback: `TactileBadge`, `TactileModal`, `TactileToast`
 
+### Control Objects
+
+- Embedded display: `TactileDisplay`, `TactileDisplayLabel`, `TactileDisplayValue`, `TactileDisplayMeta`
+- Rotary control: `TactileKnob`
+- Level / VU style meter: `TactileMeter`
+
 ### AI UI
 
 - Chat shell: `TactileAIChat`
