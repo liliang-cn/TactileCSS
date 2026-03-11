@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tactile Release Flow"
+  short_description: "Version and release Tactile safely"
+  default_prompt: "Use $tactile-release-workflow to bump, validate, tag, and push a Tactile CSS release."

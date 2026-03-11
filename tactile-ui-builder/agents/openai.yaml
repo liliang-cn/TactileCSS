@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tactile UI Builder"
+  short_description: "Use Tactile CSS in apps and sites"
+  default_prompt: "Use $tactile-ui-builder to build a neumorphic interface with tactile-css in HTML, React, Vue, or Tailwind."

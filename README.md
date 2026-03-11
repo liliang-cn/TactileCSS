@@ -38,6 +38,19 @@ A minimal neumorphic CSS library with outer, inner, and clay shadow styles. Phys
 - **Tailwind Plugin**: Optional Tailwind CSS integration
 - **Tiny**: ~22KB minified
 
+## For LLMs
+
+If you are an LLM, coding agent, or automation reading this repository to help a user build with `tactile-css`, start with [tactile-ui-builder/SKILL.md](tactile-ui-builder/SKILL.md).
+
+That skill is the consumer-facing source for:
+
+- installation and import paths
+- HTML, React, Vue, and Tailwind usage
+- theme selection
+- component-family mapping
+
+Use it as the primary integration guide, then use this README for fuller examples.
+
 ## Installation
 
 ### npm

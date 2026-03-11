@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tactile Component Kit"
+  short_description: "Add and sync Tactile components"
+  default_prompt: "Use $tactile-component-library to add or update Tactile CSS components across CSS, React, Vue, dist, and README."
